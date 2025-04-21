@@ -1,19 +1,31 @@
 
 * { box-sizing: border-box; }
-body { margin: 0; font-family: Arial, sans-serif; background: #f4f4f4; color: #333; }
+body { margin: 0; font-family: Arial, sans-serif; background: #f0f4f8; color: #333; }
 header { background: #003366; color: white; padding: 1rem; }
 .logo { font-size: 1.5rem; font-weight: bold; }
 .nav { margin-top: 10px; }
 .nav-links { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 15px; }
 .nav-links > li { position: relative; }
 .nav-links a { color: white; text-decoration: none; padding: 8px; display: block; }
-.nav-links li:hover .dropdown { display: block; }
-.dropdown { display: none; position: absolute; top: 100%; left: 0; background: #005599; min-width: 180px; z-index: 10; }
-.dropdown li { border-bottom: 1px solid #ccc; }
-main { padding: 2rem; background: white; max-width: 960px; margin: auto; }
+main { padding: 2rem; max-width: 960px; margin: auto; background: white; }
 footer { background: #003366; color: white; text-align: center; padding: 1rem; margin-top: 2rem; }
-
 @media (max-width: 768px) {
   .nav-links { flex-direction: column; }
-  .dropdown { position: static; }
+}
+
+.form-section { background: white; margin: 20px 0; padding: 20px; border-radius: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
+.form-section h2 { margin-top: 0; color: #003366; }
+input, textarea, button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 1rem;
+}
+button {
+  background: #0066cc;
+  color: white;
+  border: none;
+  margin-top: 15px;
+  cursor: pointer;
+  border-radius: 4px;
 }
