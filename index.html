@@ -1,1 +1,23 @@
-<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><title>台灣醫療救護學會</title></head><body><h1>首頁（中文版）</h1><p><a href='en/index.html'>English Version</a></p></body></html>
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>台灣醫療救護學會</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header><h1>台灣醫療救護學會</h1><nav><a href="en/index.html">English</a></nav></header>
+  <section><h2>會員登入</h2>
+    <form><input type="email" placeholder="電子郵件"><br><input type="password" placeholder="密碼"><br><button>登入</button></form>
+    <p><a href="#register">尚未加入會員？點此註冊</a></p>
+  </section>
+  <section id="register"><h2>會員註冊</h2>
+    <form><input type="text" placeholder="姓名"><br><input type="email" placeholder="電子郵件"><br><input type="password" placeholder="密碼"><br><button>註冊</button></form>
+  </section>
+  <section id="payment"><h2>付款 Payment</h2>
+    <form><select><option>會員年費 NT$500</option><option>研討會報名費 NT$1000</option></select><br><input type="email" placeholder="Email"><br>
+    <button class="pay-linepay">以 LINE Pay 付款</button><button class="pay-ecpay">以綠界付款</button></form>
+  </section>
+  <section id="dashboard"><h2>會員後台</h2><ul><li>付款紀錄</li><li>我的活動</li></ul></section>
+</body>
+</html>
