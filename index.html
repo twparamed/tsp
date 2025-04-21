@@ -20,6 +20,19 @@
       padding-left: 10px;
       margin-top: 40px;
     }
+    .logo-img {
+      height: 40px;
+      margin-right: 10px;
+    }
+    .lang-switch {
+      margin-left: 10px;
+    }
+    .spinner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
   </style>
 </head>
 <body>
@@ -27,18 +40,27 @@
 <!-- 導覽列 -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-danger sticky-top">
   <div class="container">
-    <a class="navbar-brand" href="#">台灣醫療救護學會</a>
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Star_of_life2.svg/1200px-Star_of_life2.svg.png" alt="Logo" class="logo-img">
+      台灣醫療救護學會
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link" href="#about">關於我們</a></li>
-        <li class="nav-item"><a class="nav-link" href="#news">學會動態</a></li>
-        <li class="nav-item"><a class="nav-link" href="#membership">會員服務</a></li>
+        <li class="nav-item"><a class="nav-link" href="#news">最新消息</a></li>
         <li class="nav-item"><a class="nav-link" href="#education">繼續教育</a></li>
+        <li class="nav-item"><a class="nav-link" href="#courses">課程頁</a></li>
         <li class="nav-item"><a class="nav-link" href="#international">國際連結</a></li>
         <li class="nav-item"><a class="nav-link" href="#contact">聯絡我們</a></li>
+        <li class="nav-item">
+          <select class="form-select form-select-sm lang-switch" onchange="switchLanguage(this.value)">
+            <option value="zh">中文</option>
+            <option value="en">English</option>
+          </select>
+        </li>
       </ul>
     </div>
   </div>
@@ -52,32 +74,40 @@
   </div>
 </header>
 
+<!-- 最新消息 快訊區塊 -->
+<section class="bg-light py-4" id="news">
+  <div class="container">
+    <h2 class="section-title">最新消息</h2>
+    <div id="rss-home">
+      <div class="spinner" id="rss-loading">
+        <div class="spinner-border text-danger" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- 關於我們 -->
 <section id="about" class="container py-5">
   <h2 class="section-title">關於我們</h2>
   <p>台灣醫療救護學會致力於推廣急救醫療教育、提升救護品質，促進國內外救護技術交流與研究發展。</p>
 </section>
 
-<!-- 學會動態 -->
-<section id="news" class="container py-5">
-  <h2 class="section-title">學會動態</h2>
-  <ul>
-    <li>【2025 PERIC 國際研討會】即將開放報名</li>
-    <li>2024 救護教育種子講師招募中</li>
-    <li>會員專屬線上課程上線</li>
-  </ul>
-</section>
-
-<!-- 會員服務 -->
-<section id="membership" class="container py-5">
-  <h2 class="section-title">會員服務</h2>
-  <p>提供會員註冊、會費繳納、證書查詢等多項功能。</p>
-</section>
-
 <!-- 繼續教育 -->
 <section id="education" class="container py-5">
   <h2 class="section-title">繼續教育</h2>
   <p>提供PHTLS、AHA等國際證照課程資訊，並推廣救護相關研究。</p>
+</section>
+
+<!-- 課程頁 -->
+<section id="courses" class="container py-5">
+  <h2 class="section-title">課程頁</h2>
+  <ul>
+    <li>【基礎救護技術】6小時實體課程</li>
+    <li>【高級外傷處置課程 PHTLS】每月開班</li>
+    <li>【BLS/AHA/AED 合作課程】線上+實體整合</li>
+  </ul>
 </section>
 
 <!-- 國際連結 -->
@@ -98,5 +128,26 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function switchLanguage(lang) {
+    alert('語言切換功能尚在開發中：' + lang);
+  }
+
+  async function loadRSS() {
+    const proxyUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://rss.app/feeds/VRR4YadUK3VgyBlu.xml';
+    try {
+      const res = await fetch(proxyUrl);
+      const data = await res.json();
+
+      const listHtml = data.items.slice(0, 5).map(item => `<li><a href="${item.link}" target="_blank">${item.title}</a></li>`).join('');
+      const list = `<ul>${listHtml}</ul>`;
+
+      document.getElementById('rss-home').innerHTML = list;
+    } catch (e) {
+      document.getElementById('rss-home').innerText = '載入失敗';
+    }
+  }
+  loadRSS();
+</script>
 </body>
 </html>
