@@ -1,8 +1,7 @@
-<!DOCTYPE html><html><head><meta charset='UTF-8'><title>styles.css</title><link rel='stylesheet' href='../styles.css' if '/' in 'styles.css' else 'styles.css'></head><body>
-body { font-family: Arial; margin: 0; padding: 20px; background: #f9f9f9; }
+
+body { font-family: Arial, sans-serif; margin: 0; background: #f9f9f9; padding: 20px; }
 h1, h2 { color: #003366; }
-a { display: inline-block; margin: 10px 0; color: #0066cc; text-decoration: none; }
-ul { list-style: none; padding-left: 0; }
-form input, form textarea { width: 100%; margin: 10px 0; padding: 10px; }
-form button { background: #003366; color: #fff; padding: 10px 20px; border: none; }
-</body></html>
+form { background: white; padding: 20px; border-radius: 8px; max-width: 500px; margin: auto; }
+input, button { width: 100%; padding: 10px; margin-top: 10px; }
+button { background: #0066cc; color: white; border: none; }
+a { text-decoration: none; color: #0066cc; }
