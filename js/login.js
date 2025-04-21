@@ -1,16 +1,1 @@
-
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('loginForm');
-  form?.addEventListener('submit', function (e) {
-    e.preventDefault();
-    const email = document.getElementById('email').value.trim();
-    const pw = document.getElementById('password').value.trim();
-    const msg = document.getElementById('message');
-
-    if (email === "test@paramed.org" && pw === "tsp123") {
-      window.location.href = "dashboard.html";
-    } else {
-      msg.textContent = "Invalid credentials. Please try again.";
-    }
-  });
-});
+<!DOCTYPE html><html><head><meta charset='utf-8'><title>js/login.js</title><link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css' rel='stylesheet'></head><body class='p-4'>// login 模擬驗證</body></html>
