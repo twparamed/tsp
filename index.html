@@ -1,157 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Journal of Paramedicine and Emergency Response</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>台灣醫療救護學會 Taiwan Society of Paramedicine</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Georgia', serif;
-    }
-    .navbar {
-      background-color: #8B0000;
-    }
-    .navbar-brand, .nav-link, .footer-text {
-      color: #fff !important;
-    }
-    .hero-section {
-      background-color: #f8f9fa;
-      padding: 4rem 2rem;
-      text-align: center;
-    }
-    .hero-section h1 {
-      color: #8B0000;
-    }
-    .footer {
-      background-color: #8B0000;
-      padding: 1rem;
-      text-align: center;
+    header {
+      background: url('https://images.unsplash.com/photo-1588776814546-ec3c101d5bfa') center/cover no-repeat;
       color: white;
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
     }
-    .article-card {
-      border-left: 5px solid #8B0000;
-      margin-bottom: 1.5rem;
+    .section-title {
+      border-left: 5px solid #B30000;
+      padding-left: 10px;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg">
-    <div class="container">
-      <a class="navbar-brand" href="#">JPER</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#articles">Articles</a></li>
-          <li class="nav-item"><a class="nav-link" href="#submit">Submission</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-        </ul>
-      </div>
+
+<!-- 導覽列 -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">台灣醫療救護學會</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#about">關於我們</a></li>
+        <li class="nav-item"><a class="nav-link" href="#news">學會動態</a></li>
+        <li class="nav-item"><a class="nav-link" href="#membership">會員服務</a></li>
+        <li class="nav-item"><a class="nav-link" href="#education">繼續教育</a></li>
+        <li class="nav-item"><a class="nav-link" href="#international">國際連結</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">聯絡我們</a></li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
 
-  <section class="hero-section">
-    <div class="container">
-      <h1>Journal of Paramedicine and Emergency Response</h1>
-      <p class="lead">An academic platform for advancing emergency medical sciences and paramedicine research.</p>
-    </div>
-  </section>
+<!-- 首頁橫幅 -->
+<header>
+  <div class="text-center">
+    <h1 class="display-4 fw-bold">Taiwan Society of Paramedicine</h1>
+    <p class="lead">專業・行動・責任｜守護生命的第一線</p>
+  </div>
+</header>
 
-  <section class="container py-4" id="articles">
-    <h2 class="mb-4">Latest Articles</h2>
-    <div class="row mb-3">
-      <div class="col-md-8">
-        <input type="text" id="searchInput" class="form-control" placeholder="Search by keyword or author...">
-      </div>
-      <div class="col-md-4">
-        <select id="issueFilter" class="form-select">
-          <option value="">All Issues</option>
-        </select>
-      </div>
-    </div>
-    <div id="article-list"></div>
-  </section>
+<!-- 關於我們 -->
+<section id="about" class="container py-5">
+  <h2 class="section-title">關於我們</h2>
+  <p>台灣醫療救護學會致力於推廣急救醫療教育、提升救護品質，促進國內外救護技術交流與研究發展。</p>
+</section>
 
-  <footer class="footer">
-    <div class="container">
-      <p class="footer-text mb-0">&copy; 2025 Journal of Paramedicine and Emergency Response. All rights reserved.</p>
-    </div>
-  </footer>
+<!-- 學會動態 -->
+<section id="news" class="container py-5">
+  <h2 class="section-title">學會動態</h2>
+  <ul>
+    <li>【2025 PERIC 國際研討會】即將開放報名</li>
+    <li>2024 救護教育種子講師招募中</li>
+    <li>會員專屬線上課程上線</li>
+  </ul>
+</section>
 
-  <script>
-    let articles = [
-      {
-        title: "Test Article One",
-        link: "https://doi.org/10.1234/emergency.001",
-        description: "This is a test article to verify site functionality.",
-        pubDate: "2025-04-01",
-        issue: "Vol.12, No.1"
-      },
-      {
-        title: "Simulation-Based Training",
-        link: "https://doi.org/10.1234/emergency.002",
-        description: "A test article on simulation in emergency training.",
-        pubDate: "2025-03-15",
-        issue: "Vol.12, No.1"
-      },
-      {
-        title: "AI in EMS Dispatch",
-        link: "https://doi.org/10.1234/emergency.003",
-        description: "How artificial intelligence is changing emergency dispatch.",
-        pubDate: "2025-02-10",
-        issue: "Vol.11, No.4"
-      }
-    ];
+<!-- 會員服務 -->
+<section id="membership" class="container py-5">
+  <h2 class="section-title">會員服務</h2>
+  <p>提供會員註冊、會費繳納、證書查詢等多項功能。</p>
+</section>
 
-    function populateIssueFilter(issues) {
-      const select = document.getElementById('issueFilter');
-      issues.forEach(issue => {
-        const option = document.createElement('option');
-        option.value = issue;
-        option.textContent = issue;
-        select.appendChild(option);
-      });
-    }
+<!-- 繼續教育 -->
+<section id="education" class="container py-5">
+  <h2 class="section-title">繼續教育</h2>
+  <p>提供PHTLS、AHA等國際證照課程資訊，並推廣救護相關研究。</p>
+</section>
 
-    function displayArticles() {
-      const listContainer = document.getElementById('article-list');
-      const keyword = document.getElementById('searchInput').value.toLowerCase();
-      const selectedIssue = document.getElementById('issueFilter').value;
-      let filtered = articles;
+<!-- 國際連結 -->
+<section id="international" class="container py-5">
+  <h2 class="section-title">國際連結</h2>
+  <p>本會與澳洲、美國、日本、東南亞多個醫療與救護機構合作交流。</p>
+</section>
 
-      if (keyword) {
-        filtered = filtered.filter(article =>
-          article.title.toLowerCase().includes(keyword) ||
-          article.description.toLowerCase().includes(keyword)
-        );
-      }
-      if (selectedIssue) {
-        filtered = filtered.filter(article => article.issue === selectedIssue);
-      }
+<!-- 聯絡我們 -->
+<section id="contact" class="container py-5">
+  <h2 class="section-title">聯絡我們</h2>
+  <p>Email: contact@paramedic.tw<br>地址：台北市○○區○○路○○號</p>
+</section>
 
-      listContainer.innerHTML = filtered.map(article => `
-        <div class="card article-card p-3">
-          <h5><a href="${article.link}" target="_blank" class="text-decoration-none text-dark">${article.title}</a></h5>
-          <p>${article.description}</p>
-          <a href="${article.link}" target="_blank" class="btn btn-outline-danger btn-sm">Read Full Article (DOI)</a>
-          <small class="text-muted d-block mt-1">If the page is restricted, please log in via the publisher's platform.</small>
-        </div>
-      `).join('');
-    }
+<!-- Footer -->
+<footer class="bg-dark text-light text-center py-3">
+  <p class="mb-0">&copy; 2025 Taiwan Society of Paramedicine. All rights reserved.</p>
+</footer>
 
-    document.getElementById('searchInput').addEventListener('input', displayArticles);
-    document.getElementById('issueFilter').addEventListener('change', displayArticles);
-
-    window.onload = () => {
-      const allIssues = [...new Set(articles.map(a => a.issue))];
-      populateIssueFilter(allIssues);
-      displayArticles();
-    }
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
