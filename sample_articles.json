@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Emergency Medical Services and Trauma Care",
+    "link": "https://doi.org/10.1234/emergency.001",
+    "description": "This article explores the latest innovations in EMS and trauma treatment protocols.",
+    "pubDate": "2025-04-01",
+    "issue": "Vol.12, No.1"
+  },
+  {
+    "title": "Simulation-Based Training for Paramedics",
+    "link": "https://doi.org/10.1234/emergency.002",
+    "description": "A review of simulation methods to enhance critical thinking in field emergencies.",
+    "pubDate": "2025-03-21",
+    "issue": "Vol.12, No.1"
+  },
+  {
+    "title": "Telemedicine in Rural Emergency Response",
+    "link": "https://doi.org/10.1234/emergency.003",
+    "description": "Evaluating the effectiveness of remote consultations in remote EMS interventions.",
+    "pubDate": "2025-02-15",
+    "issue": "Vol.11, No.4"
+  },
+  {
+    "title": "Occupational Risk Factors for EMTs",
+    "link": "https://doi.org/10.1234/emergency.004",
+    "description": "An observational study on injuries and stress factors among EMT personnel.",
+    "pubDate": "2025-01-10",
+    "issue": "Vol.11, No.4"
+  },
+  {
+    "title": "AI-Powered Dispatch Systems",
+    "link": "https://doi.org/10.1234/emergency.005",
+    "description": "Case studies on the integration of AI in emergency dispatch and response routing.",
+    "pubDate": "2024-12-05",
+    "issue": "Vol.11, No.3"
+  }
+]
