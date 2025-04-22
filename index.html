@@ -51,8 +51,8 @@
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link" href="#about">關於我們</a></li>
         <li class="nav-item"><a class="nav-link" href="#news">最新消息</a></li>
-        <li class="nav-item"><a class="nav-link" href="#education">繼續教育</a></li>
-        <li class="nav-item"><a class="nav-link" href="#courses">課程頁</a></li>
+        <li class="nav-item"><a class="nav-link" href="education.html">繼續教育</a></li>
+        <li class="nav-item"><a class="nav-link" href="#academic">學術活動</a></li>
         <li class="nav-item"><a class="nav-link" href="#international">國際連結</a></li>
         <li class="nav-item"><a class="nav-link" href="#contact">聯絡我們</a></li>
         <li class="nav-item">
@@ -94,19 +94,13 @@
   <p>台灣醫療救護學會致力於推廣急救醫療教育、提升救護品質，促進國內外救護技術交流與研究發展。</p>
 </section>
 
-<!-- 繼續教育 -->
-<section id="education" class="container py-5">
-  <h2 class="section-title">繼續教育</h2>
-  <p>提供PHTLS、AHA等國際證照課程資訊，並推廣救護相關研究。</p>
-</section>
-
-<!-- 課程頁 -->
-<section id="courses" class="container py-5">
-  <h2 class="section-title">課程頁</h2>
+<!-- 學術活動 -->
+<section id="academic" class="container py-5">
+  <h2 class="section-title">學術活動</h2>
   <ul>
-    <li>【基礎救護技術】6小時實體課程</li>
-    <li>【高級外傷處置課程 PHTLS】每月開班</li>
-    <li>【BLS/AHA/AED 合作課程】線上+實體整合</li>
+    <li>2024 年救護與災難醫療年會</li>
+    <li>急救教育創新論壇（每年七月）</li>
+    <li>PERIC 國際研討會：Paramedicine and Emergency Response International Conference</li>
   </ul>
 </section>
 
@@ -139,10 +133,20 @@
       const res = await fetch(proxyUrl);
       const data = await res.json();
 
-      const listHtml = data.items.slice(0, 5).map(item => `<li><a href="${item.link}" target="_blank">${item.title}</a></li>`).join('');
-      const list = `<ul>${listHtml}</ul>`;
+      const listHtml = data.items.slice(0, 5).map(item => {
+        const date = new Date(item.pubDate).toLocaleDateString();
+        const summary = item.description ? item.description.substring(0, 50) + '...' : '';
+        return `
+          <li class="mb-4 border-bottom pb-3">
+            <div><strong>${date}</strong></div>
+            <div><a href="${item.link}" target="_blank" class="h5 d-block">${item.title}</a></div>
+            <div class="text-muted small mb-2">${summary}</div>
+            <a href="${item.link}" target="_blank" class="btn btn-sm btn-outline-danger">閱讀更多</a>
+          </li>
+        `;
+      }).join('');
 
-      document.getElementById('rss-home').innerHTML = list;
+      document.getElementById('rss-home').innerHTML = `<ul class="list-unstyled">${listHtml}</ul>`;
     } catch (e) {
       document.getElementById('rss-home').innerText = '載入失敗';
     }
