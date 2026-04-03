@@ -30,13 +30,11 @@
         /* 英雄區背景設定 */
         .hero-section {
             background-image: 
-                /* 漸層遮罩：左上深藍到右下深黑，確保文字清晰 */
                 linear-gradient(to right bottom, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.7)),
-                /* 老師提供的背景圖 */
                 url('https://scontent.ftpe3-1.fna.fbcdn.net/v/t39.30808-6/603759548_1164150469203863_460906377141768944_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=111&ccb=1-7&_nc_sid=2a1932&_nc_ohc=DRgd_JIgbJwQ7kNvwHEPaDG&_nc_oc=AdpnYKKrlDJHY4azPiw4HwTnxBGyQmv2TVgdDWn5M_9ym8x0E0E3FLMXUpqWZ2giOtLabkiK7Dcd3d7WbVBqhVoS&_nc_zt=23&_nc_ht=scontent.ftpe3-1.fna&_nc_gid=aUULHfhnv4X7ITQjbaynow&_nc_ss=7a3a8&oh=00_Af2hdoFXX_6rihQSniFHHSD8V_CcmxWuO9kKERqMd9erdg&oe=69D5F20B');
             background-size: cover;
             background-position: center 30%;
-            background-attachment: fixed; /* 視差滾動效果 */
+            background-attachment: fixed;
         }
     </style>
 </head>
@@ -69,28 +67,22 @@
         </div>
     </nav>
 
-    <!-- 影像英雄區 (Hero Section) -->
+    <!-- 影像英雄區 -->
     <section class="hero-section pt-32 pb-28 px-6 relative">
         <div class="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
-            
-            <!-- 左側標語 -->
             <div class="md:w-2/3">
                 <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded bg-white/10 backdrop-blur text-white text-[10px] font-bold mb-6 tracking-widest uppercase border border-white/20">
                     <span class="w-1.5 h-1.5 rounded-full bg-ems-orange animate-pulse"></span>
                     Official Website
                 </div>
-                
                 <h2 class="slogan-font text-5xl md:text-7xl font-black mb-6 tracking-tighter text-white leading-tight">
                     Empowering <br>
                     <span class="text-ems-orange">EMS</span> Professionals.
                 </h2>
-                
                 <p id="hero-desc" class="text-lg text-slate-300 font-medium max-w-xl leading-relaxed border-l-2 border-ems-orange pl-4">
                     致力於提升台灣醫療救護專業水平，建立國際接軌的到院前緊急醫療救護體系。
                 </p>
             </div>
-            
-            <!-- 右側快速資訊/數據 -->
             <div class="md:w-1/3 hidden md:flex flex-col gap-4 text-right">
                 <div class="bg-slate-900/60 backdrop-blur-sm p-6 rounded border border-slate-700/50">
                     <p class="text-ems-orange font-black text-3xl slogan-font">2026</p>
@@ -107,12 +99,10 @@
                 <span class="w-2 h-6 bg-blue-800 rounded-sm"></span>
                 最新消息 Latest News
             </h3>
-            <a href="#" class="text-xs font-bold text-ems-blue hover:text-ems-orange transition-colors uppercase tracking-widest">View All →</a>
         </div>
 
         <!-- 卡片自動生成區 -->
         <div id="post-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- 載入中顯示的骨架屏 -->
             <div class="animate-pulse bg-white p-4 rounded-xl shadow-sm h-80 border border-slate-100 flex items-center justify-center">
                 <p class="text-slate-400 font-bold text-sm tracking-widest">Loading Data...</p>
             </div>
@@ -146,16 +136,14 @@
         let posts = [];
         let lang = 'zh';
 
-        // 自動抓取並解析 Google Sheets 資料的函數
         async function loadData() {
             try {
                 const response = await fetch(sheetUrl);
                 const csvText = await response.text();
 
-                // 使用 PapaParse 處理 CSV
                 Papa.parse(csvText, {
-                    header: true,         // 第一列為屬性名稱
-                    skipEmptyLines: true, // 忽略空白行
+                    header: true,
+                    skipEmptyLines: true,
                     complete: function(results) {
                         posts = results.data;
                         render();
@@ -168,18 +156,15 @@
             }
         }
 
-        // 將資料變成卡片印在網頁上
         function render() {
             const container = document.getElementById('post-container');
             
-            // 如果表單沒有資料，顯示提示
             if (!posts || posts.length === 0) {
                 container.innerHTML = '<div class="col-span-full text-center py-10"><p class="text-slate-400 font-bold tracking-widest">尚無最新消息</p></div>';
                 return;
             }
 
             container.innerHTML = posts.map(p => {
-                // 防呆處理：如果某些欄位在試算表中留空，給予預設值
                 const color = p.color || 'bg-blue-800';
                 const tag = p.tag || '公告';
                 const img = p.img || 'https://images.unsplash.com/photo-1516549655169-df83a0774514?w=800';
@@ -188,9 +173,24 @@
                 const title_en = p.title_en || 'Untitled';
                 const desc_zh = p.desc_zh || '';
                 const desc_en = p.desc_en || '';
+                
+                // 檢查是否有填寫網址
+                const link = p.link ? p.link.trim() : '';
+                const isClickable = link !== '';
+                
+                // 如果有網址，就用 <a> 標籤把它包起來，並設定開新分頁 (target="_blank")
+                // 如果沒有網址，就用一般的 <div> 標籤
+                const wrapperTag = isClickable ? 'a' : 'div';
+                const hrefAttr = isClickable ? `href="${link}" target="_blank" rel="noopener noreferrer"` : '';
+                
+                // 動態決定要不要顯示 Read More
+                const readMoreText = lang === 'zh' ? '閱讀全文 →' : 'Read More →';
+                const readMoreHtml = isClickable 
+                    ? `<div class="mt-auto pt-4 border-t border-slate-50 text-xs font-bold text-ems-blue group-hover:text-ems-orange transition-colors">${readMoreText}</div>` 
+                    : '';
 
                 return `
-                <div class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col h-full cursor-pointer">
+                <${wrapperTag} ${hrefAttr} class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col h-full ${isClickable ? 'cursor-pointer' : 'cursor-default'}">
                     <div class="relative overflow-hidden aspect-video bg-slate-100">
                         <img src="${img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="News Image">
                         <div class="absolute top-3 left-3 ${color} text-white px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider shadow-md">
@@ -199,21 +199,18 @@
                     </div>
                     <div class="p-5 flex-grow flex flex-col">
                         <p class="text-slate-400 font-bold text-[11px] mb-2 tracking-widest">${date}</p>
-                        <h4 class="text-lg font-bold mb-3 text-slate-900 group-hover:text-ems-blue transition-colors line-clamp-2">
+                        <h4 class="text-lg font-bold mb-3 text-slate-900 ${isClickable ? 'group-hover:text-ems-blue transition-colors' : ''} line-clamp-2">
                             ${lang === 'zh' ? title_zh : title_en}
                         </h4>
                         <p class="text-slate-500 text-sm font-medium line-clamp-3 mb-4 flex-grow">
                             ${lang === 'zh' ? desc_zh : desc_en}
                         </p>
-                        <div class="mt-auto pt-4 border-t border-slate-50 text-xs font-bold text-ems-blue group-hover:text-ems-orange transition-colors">
-                            Read More →
-                        </div>
+                        ${readMoreHtml}
                     </div>
-                </div>
+                </${wrapperTag}>
                 `;
             }).join('');
 
-            // UI 語言切換邏輯
             const ui = {
                 zh: {
                     nav: "台灣醫療救護學會",
@@ -239,10 +236,9 @@
 
         function toggleLang() {
             lang = lang === 'zh' ? 'en' : 'zh';
-            render(); // 重新渲染卡片文字
+            render(); 
         }
 
-        // 啟動資料抓取
         loadData();
     </script>
 </body>
