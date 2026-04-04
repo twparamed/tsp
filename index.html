@@ -4,30 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TSP 台灣醫療救護學會 | Taiwan Society of Paramedicine</title>
-    <!-- 引入 Tailwind CSS 進行排版 -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 引入 PapaParse 解析 Google Sheets 的 CSV 資料 -->
+    <!-- PapaParse (解析 Google Sheets) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Montserrat:wght@800;900&display=swap');
-        
         body { font-family: 'Noto Sans TC', sans-serif; }
         .slogan-font { font-family: 'Montserrat', sans-serif; }
-        
-        /* 品牌色彩定義 */
         .text-ems-orange { color: #f97316; }
         .bg-ems-orange { background-color: #f97316; }
         .text-ems-blue { color: #1d4ed8; }
         
-        /* 導覽列特效 */
-        .nav-link { @apply text-slate-700 hover:text-ems-blue transition-all duration-300 font-medium text-sm relative; }
-        .nav-link::after {
-            content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0;
-            background-color: #1d4ed8; transition: width 0.3s ease;
-        }
-        .nav-link:hover::after { width: 100%; }
-
-        /* 英雄區背景設定 */
         .hero-section {
             background-image: 
                 linear-gradient(to right bottom, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.7)),
@@ -40,34 +28,10 @@
 </head>
 <body class="bg-slate-50 text-slate-900 leading-relaxed">
 
-    <!-- 導覽列 -->
-    <nav class="sticky top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-            <!-- Logo -->
-            <div class="flex items-center gap-4">
-                <div class="bg-blue-800 text-white w-10 h-10 flex items-center justify-center rounded font-black text-xl">T</div>
-                <div class="hidden sm:block">
-                    <h1 class="text-[15px] font-black text-slate-900 leading-tight tracking-tight" id="nav-title">台灣醫療救護學會</h1>
-                    <p class="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Taiwan Society of Paramedicine</p>
-                </div>
-            </div>
-            
-            <!-- 選單 -->
-            <div class="hidden lg:flex items-center gap-8">
-                <a href="#" class="nav-link" id="m1">最新消息</a>
-                <a href="#" class="nav-link" id="m2">關於學會</a>
-                <a href="#" class="nav-link" id="m3">教育訓練</a>
-                <a href="#" class="nav-link" id="m4">救護資源</a>
-                <a href="#" class="nav-link" id="m5">聯絡我們</a>
-                <a href="#" class="bg-blue-800 text-white px-5 py-2 rounded text-xs font-bold hover:bg-ems-orange transition-colors" id="m6">會員登入</a>
-                <button onclick="toggleLang()" class="text-[11px] font-black text-slate-400 border-l border-slate-300 pl-6 hover:text-slate-900 uppercase transition-colors">
-                    EN / 中文
-                </button>
-            </div>
-        </div>
-    </nav>
+    <!-- 1. Navbar 佔位符 -->
+    <div id="navbar-placeholder"></div>
 
-    <!-- 影像英雄區 -->
+    <!-- 2. 影像英雄區 -->
     <section class="hero-section pt-32 pb-28 px-6 relative">
         <div class="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
             <div class="md:w-2/3">
@@ -77,7 +41,7 @@
                 </div>
                 <h2 class="slogan-font text-5xl md:text-7xl font-black mb-6 tracking-tighter text-white leading-tight">
                     Empowering <br>
-                    <span class="text-ems-orange">EMS</span> Professionals.
+                    <span class="text-ems-orange">EMS</span>
                 </h2>
                 <p id="hero-desc" class="text-lg text-slate-300 font-medium max-w-xl leading-relaxed border-l-2 border-ems-orange pl-4">
                     致力於提升台灣醫療救護專業水平，建立國際接軌的到院前緊急醫療救護體系。
@@ -92,75 +56,76 @@
         </div>
     </section>
 
-    <!-- 最新動態區 -->
-    <main class="max-w-7xl mx-auto px-6 py-24">
+    <!-- 3. 最新動態區 (Google Sheets 資料) -->
+    <main class="max-w-7xl mx-auto px-6 py-24 min-h-[50vh]">
         <div class="flex items-center justify-between mb-12 border-b border-slate-200 pb-4">
             <h3 id="section-news" class="text-2xl font-black text-slate-900 tracking-tight flex items-center gap-3">
                 <span class="w-2 h-6 bg-blue-800 rounded-sm"></span>
                 最新消息 Latest News
             </h3>
         </div>
-
-        <!-- 卡片自動生成區 -->
         <div id="post-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- 載入動畫 -->
             <div class="animate-pulse bg-white p-4 rounded-xl shadow-sm h-80 border border-slate-100 flex items-center justify-center">
                 <p class="text-slate-400 font-bold text-sm tracking-widest">Loading Data...</p>
             </div>
         </div>
     </main>
 
-    <!-- 頁尾 -->
-    <footer class="bg-slate-900 py-16 text-white border-t-4 border-blue-800">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12">
-            <div class="col-span-2">
-                <div class="flex items-center gap-3 mb-6">
-                    <div class="bg-white text-blue-900 w-8 h-8 flex items-center justify-center rounded font-black text-lg">T</div>
-                    <h4 class="text-lg font-black tracking-widest uppercase">Taiwan Society of Paramedicine</h4>
-                </div>
-                <p class="text-slate-400 text-sm max-w-md font-medium leading-relaxed">
-                    台灣醫療救護學會 (TSP) 是一個專業的非營利組織，致力於到院前救護的研究、教育與政策推廣，與世界急救標準接軌。
-                </p>
-            </div>
-            <div class="md:text-right flex flex-col justify-center space-y-3">
-                <p class="text-sm text-slate-300 font-medium">office@twparamedicine.org</p>
-                <p class="text-xs text-slate-500 font-medium">© 2026 TSP. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <!-- 4. Footer 佔位符 -->
+    <div id="footer-placeholder"></div>
 
-    <!-- --- 資料與控制核心 --- -->
+    <!-- --- 核心控制腳本 --- -->
     <script>
-        // 🔗 您的專屬 Google Sheets CSV 連結
-        const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQfiEDEtIn6BJMw1VPnVLOps_mi2fgitOb7B8t9Wx0rEnpnuocIcvKEaGj_5q2M22la4oQPrd-tiE3N/pub?output=csv';
-
-        let posts = [];
+        // 全局語言變數
         let lang = 'zh';
+        
+        // Google Sheets 連結
+        const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQfiEDEtIn6BJMw1VPnVLOps_mi2fgitOb7B8t9Wx0rEnpnuocIcvKEaGj_5q2M22la4oQPrd-tiE3N/pub?output=csv';
+        let posts = [];
 
+        // 載入外部 HTML 檔案 (Navbar & Footer)
+        async function loadComponents() {
+            try {
+                // 同時發送請求載入 navbar 和 footer，提高速度
+                const [navRes, footRes] = await Promise.all([
+                    fetch('components/navbar.html'),
+                    fetch('components/footer.html')
+                ]);
+                
+                if(navRes.ok) document.getElementById('navbar-placeholder').innerHTML = await navRes.text();
+                if(footRes.ok) document.getElementById('footer-placeholder').innerHTML = await footRes.text();
+
+                // 載入完畢後，更新一次語系顯示
+                updateLanguageUI();
+            } catch (error) {
+                console.error("載入導覽列或頁尾失敗", error);
+            }
+        }
+
+        // 載入 Google Sheets 資料
         async function loadData() {
             try {
                 const response = await fetch(sheetUrl);
                 const csvText = await response.text();
-
                 Papa.parse(csvText, {
-                    header: true,
-                    skipEmptyLines: true,
+                    header: true, skipEmptyLines: true,
                     complete: function(results) {
                         posts = results.data;
-                        render();
+                        renderCards();
                     }
                 });
             } catch (error) {
                 console.error('資料讀取失敗:', error);
-                document.getElementById('post-container').innerHTML = 
-                    '<div class="col-span-full text-center py-10"><p class="text-slate-500 font-bold">資料載入失敗，請檢查 Google Sheets 設定或稍後再試。</p></div>';
+                document.getElementById('post-container').innerHTML = '<p class="text-center text-slate-500 py-10">資料載入失敗</p>';
             }
         }
 
-        function render() {
+        // 渲染卡片
+        function renderCards() {
             const container = document.getElementById('post-container');
-            
             if (!posts || posts.length === 0) {
-                container.innerHTML = '<div class="col-span-full text-center py-10"><p class="text-slate-400 font-bold tracking-widest">尚無最新消息</p></div>';
+                container.innerHTML = '<p class="text-center text-slate-400 py-10 w-full col-span-full">尚無最新消息</p>';
                 return;
             }
 
@@ -168,77 +133,61 @@
                 const color = p.color || 'bg-blue-800';
                 const tag = p.tag || '公告';
                 const img = p.img || 'https://images.unsplash.com/photo-1516549655169-df83a0774514?w=800';
-                const date = p.date || '';
-                const title_zh = p.title_zh || '無標題';
-                const title_en = p.title_en || 'Untitled';
-                const desc_zh = p.desc_zh || '';
-                const desc_en = p.desc_en || '';
                 
-                // 檢查是否有填寫網址
-                const link = p.link ? p.link.trim() : '';
+                let link = p.link ? p.link.trim() : '';
+                if (link !== '' && !link.startsWith('http')) link = 'https://' + link;
                 const isClickable = link !== '';
-                
-                // 如果有網址，就用 <a> 標籤把它包起來，並設定開新分頁 (target="_blank")
-                // 如果沒有網址，就用一般的 <div> 標籤
                 const wrapperTag = isClickable ? 'a' : 'div';
-                const hrefAttr = isClickable ? `href="${link}" target="_blank" rel="noopener noreferrer"` : '';
+                const hrefAttr = isClickable ? `href="${link}" target="_blank"` : '';
                 
-                // 動態決定要不要顯示 Read More
                 const readMoreText = lang === 'zh' ? '閱讀全文 →' : 'Read More →';
-                const readMoreHtml = isClickable 
-                    ? `<div class="mt-auto pt-4 border-t border-slate-50 text-xs font-bold text-ems-blue group-hover:text-ems-orange transition-colors">${readMoreText}</div>` 
-                    : '';
+                const readMoreHtml = isClickable ? `<div class="mt-auto pt-4 border-t border-slate-50 text-xs font-bold text-ems-blue">${readMoreText}</div>` : '';
 
                 return `
-                <${wrapperTag} ${hrefAttr} class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col h-full ${isClickable ? 'cursor-pointer' : 'cursor-default'}">
+                <${wrapperTag} ${hrefAttr} class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col h-full ${isClickable ? 'cursor-pointer' : ''}">
                     <div class="relative overflow-hidden aspect-video bg-slate-100">
-                        <img src="${img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="News Image">
-                        <div class="absolute top-3 left-3 ${color} text-white px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider shadow-md">
-                            ${tag}
-                        </div>
+                        <img src="${img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute top-3 left-3 ${color} text-white px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">${tag}</div>
                     </div>
                     <div class="p-5 flex-grow flex flex-col">
-                        <p class="text-slate-400 font-bold text-[11px] mb-2 tracking-widest">${date}</p>
-                        <h4 class="text-lg font-bold mb-3 text-slate-900 ${isClickable ? 'group-hover:text-ems-blue transition-colors' : ''} line-clamp-2">
-                            ${lang === 'zh' ? title_zh : title_en}
-                        </h4>
-                        <p class="text-slate-500 text-sm font-medium line-clamp-3 mb-4 flex-grow">
-                            ${lang === 'zh' ? desc_zh : desc_en}
-                        </p>
+                        <p class="text-slate-400 font-bold text-[11px] mb-2 tracking-widest">${p.date || ''}</p>
+                        <h4 class="text-lg font-bold mb-3 text-slate-900 line-clamp-2">${lang === 'zh' ? (p.title_zh || '') : (p.title_en || '')}</h4>
+                        <p class="text-slate-500 text-sm font-medium line-clamp-3 mb-4 flex-grow">${lang === 'zh' ? (p.desc_zh || '') : (p.desc_en || '')}</p>
                         ${readMoreHtml}
                     </div>
-                </${wrapperTag}>
-                `;
+                </${wrapperTag}>`;
             }).join('');
+        }
 
+        // 切換語言與更新 UI
+        window.toggleLang = function() {
+            lang = lang === 'zh' ? 'en' : 'zh';
+            updateLanguageUI();
+            renderCards(); // 重新渲染卡片文字
+        }
+
+        function updateLanguageUI() {
+            // 切換 Navbar 與 Footer 裡的 class
+            document.querySelectorAll('.lang-zh').forEach(el => el.classList.toggle('hidden', lang !== 'zh'));
+            document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', lang !== 'en'));
+
+            // 更新首頁獨立的文字
             const ui = {
                 zh: {
-                    nav: "台灣醫療救護學會",
-                    m1: "最新消息", m2: "關於學會", m3: "教育訓練", m4: "救護資源", m5: "聯絡我們", m6: "會員登入",
                     desc: "致力於提升台灣醫療救護專業水平，建立國際接軌的到院前緊急醫療救護體系。",
                     news: `<span class="w-2 h-6 bg-blue-800 rounded-sm"></span> 最新消息 Latest News`
                 },
                 en: {
-                    nav: "Taiwan Society of Paramedicine",
-                    m1: "News", m2: "About", m3: "Training", m4: "Resources", m5: "Contact", m6: "Login",
                     desc: "Dedicated to advancing paramedicine in Taiwan and building a world-class EMS system.",
                     news: `<span class="w-2 h-6 bg-blue-800 rounded-sm"></span> Latest Updates`
                 }
             };
-
-            document.getElementById('nav-title').innerText = ui[lang].nav;
-            ['m1', 'm2', 'm3', 'm4', 'm5', 'm6'].forEach(id => {
-                document.getElementById(id).innerText = ui[lang][id];
-            });
             document.getElementById('hero-desc').innerText = ui[lang].desc;
             document.getElementById('section-news').innerHTML = ui[lang].news;
         }
 
-        function toggleLang() {
-            lang = lang === 'zh' ? 'en' : 'zh';
-            render(); 
-        }
-
+        // 啟動程式
+        loadComponents();
         loadData();
     </script>
 </body>
