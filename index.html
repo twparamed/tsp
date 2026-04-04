@@ -28,10 +28,10 @@
 </head>
 <body class="bg-slate-50 text-slate-900 leading-relaxed">
 
-    <!-- 1. Navbar 佔位符 -->
+    <!-- Navbar 佔位符 -->
     <div id="navbar-placeholder"></div>
 
-    <!-- 2. 影像英雄區 -->
+    <!-- 影像英雄區 -->
     <section class="hero-section pt-32 pb-28 px-6 relative">
         <div class="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
             <div class="md:w-2/3">
@@ -56,65 +56,147 @@
         </div>
     </section>
 
-    <!-- 3. 最新動態區 (加入分類切換功能) -->
+    <!-- 🌟 新增：快捷行動區 (Quick Actions) - 使用負邊距 (-mt-16) 產生重疊懸浮效果 -->
+    <div class="max-w-7xl mx-auto px-6 relative z-20 -mt-16 mb-20">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            
+            <!-- Action 1: 會員 -->
+            <a href="https://reurl.cc/DxA9X6" target="_blank" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-blue-800 hover:-translate-y-2 transition-transform duration-300 group">
+                <div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mb-4 group-hover:bg-blue-800 transition-colors">
+                    <svg class="w-6 h-6 text-blue-800 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
+                </div>
+                <h4 class="text-lg font-black text-slate-900 mb-2 lang-zh">加入學會</h4>
+                <h4 class="text-lg font-black text-slate-900 mb-2 lang-en hidden">Join TSP</h4>
+                <p class="text-sm text-slate-500 font-medium lang-zh">成為會員，與全國救護菁英共同成長，享有專屬福利與資源。</p>
+                <p class="text-sm text-slate-500 font-medium lang-en hidden">Become a member and access exclusive benefits and resources.</p>
+            </a>
+
+            <!-- Action 2: 期刊 -->
+            <a href="https://www.ipress.tw/J0233" target="_blank" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-orange-500 hover:-translate-y-2 transition-transform duration-300 group">
+                <div class="w-12 h-12 bg-orange-50 rounded-full flex items-center justify-center mb-4 group-hover:bg-orange-500 transition-colors">
+                    <svg class="w-6 h-6 text-orange-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                </div>
+                <h4 class="text-lg font-black text-slate-900 mb-2 lang-zh">學術期刊</h4>
+                <h4 class="text-lg font-black text-slate-900 mb-2 lang-en hidden">Academic Journal</h4>
+                <p class="text-sm text-slate-500 font-medium lang-zh">閱讀最新發表的到院前救護實證醫學與臨床研究論文。</p>
+                <p class="text-sm text-slate-500 font-medium lang-en hidden">Read the latest publications on pre-hospital evidence-based medicine.</p>
+            </a>
+
+            <!-- Action 3: 教育 -->
+            <a href="#" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-slate-700 hover:-translate-y-2 transition-transform duration-300 group">
+                <div class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-slate-700 transition-colors">
+                    <svg class="w-6 h-6 text-slate-700 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+                </div>
+                <h4 class="text-lg font-black text-slate-900 mb-2 lang-zh">教育訓練</h4>
+                <h4 class="text-lg font-black text-slate-900 mb-2 lang-en hidden">Education</h4>
+                <p class="text-sm text-slate-500 font-medium lang-zh">報名最新 ACLS、持續教育 (CPD) 等各類進階專業救護課程。</p>
+                <p class="text-sm text-slate-500 font-medium lang-en hidden">Register for ACLS, CPD, and advanced paramedic courses.</p>
+            </a>
+
+            <!-- Action 4: PERIC -->
+            <a href="https://perictsp.org" target="_blank" class="bg-slate-900 p-6 rounded-xl shadow-lg border-t-4 border-orange-400 hover:-translate-y-2 transition-transform duration-300 group">
+                <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-orange-500 transition-colors">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h4 class="text-lg font-black text-white mb-2">PERIC</h4>
+                <p class="text-sm text-slate-400 font-medium lang-zh">探索急重症救護復甦與加護專案，掌握最新臨床數據與指引。</p>
+                <p class="text-sm text-slate-400 font-medium lang-en hidden">Explore critical care, resuscitation projects and latest clinical data.</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- 🌟 新增：關於學會簡介 (About Snippet) -->
+    <section class="max-w-7xl mx-auto px-6 py-12 mb-10">
+        <div class="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-slate-100 flex flex-col md:flex-row items-center gap-10">
+            <!-- 左側文字 -->
+            <div class="md:w-1/2">
+                <div class="inline-block px-3 py-1 bg-blue-50 text-blue-800 text-[10px] font-black rounded tracking-widest uppercase mb-4">About TSP</div>
+                <h3 class="text-3xl md:text-4xl font-black text-slate-900 mb-6 leading-tight">
+                    <span class="lang-zh">推動台灣 EMS 專業化與國際化的推手</span>
+                    <span class="lang-en hidden">Advancing EMS Professionalism Globally</span>
+                </h3>
+                <p class="text-slate-500 font-medium leading-relaxed mb-8">
+                    <span class="lang-zh">台灣醫療救護學會成立的宗旨在於促進緊急醫療救護之研究與發展。我們透過建立學術平台、推廣高品質的教育訓練，以及積極參與政策倡議，致力於提升第一線救護人員的臨床決策能力與執業環境。</span>
+                    <span class="lang-en hidden">Our mission is to promote the research and development of emergency medical services. Through academic platforms, high-quality education, and policy advocacy, we strive to elevate clinical decision-making capabilities and practice environments for frontline paramedics.</span>
+                </p>
+                <a href="about.html" target="_blank" class="inline-flex items-center gap-2 font-bold text-blue-800 hover:text-orange-600 transition-colors">
+                    <span class="lang-zh">了解更多學會願景</span>
+                    <span class="lang-en hidden">Learn More About Our Vision</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
+            </div>
+            <!-- 右側圖片 -->
+            <div class="md:w-1/2 w-full">
+                <div class="aspect-video md:aspect-square lg:aspect-[4/3] rounded-2xl overflow-hidden shadow-lg relative">
+                    <!-- 預設放一張訓練或會議的圖，之後可以換成您自己的照片 -->
+                    <img src="https://scontent.ftpe3-2.fna.fbcdn.net/v/t39.30808-6/518348165_1036967231922188_3923212033090425750_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=107&ccb=1-7&_nc_sid=7b2446&_nc_ohc=We_2YIEFgM4Q7kNvwGMa802&_nc_oc=AdpvNlqEKj-hpRwptW0QxIjeM5bHjXDrrfPRxzm66QTiAxGfuzBGUZNvj9hGTrAZjEjaU1lfL9xGFdKkJ7N_yY17&_nc_zt=23&_nc_ht=scontent.ftpe3-2.fna&_nc_gid=h_ay8AHTtrWPo7OU3y3fWQ&_nc_ss=7a3a8&oh=00_Af0hiKIeRXeukyBzfz7iXq2p8TY0-6rhJUXP4RPqimxVkA&oe=69D7118D" alt="TSP Meeting" class="w-full h-full object-cover">
+                    <!-- 點綴色塊 -->
+                    <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-blue-800 rounded-2xl -z-10"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 最新動態區 -->
     <main class="max-w-7xl mx-auto px-6 py-24 min-h-[50vh]">
-        
-        <!-- 標題與按鈕區塊 -->
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 border-b border-slate-200 pb-6 gap-6">
             <h3 id="section-news" class="text-2xl font-black text-slate-900 tracking-tight flex items-center gap-3">
                 <span class="w-2 h-6 bg-blue-800 rounded-sm"></span>
                 最新消息 Latest News
             </h3>
             
-            <!-- 分類切換按鈕 (Filters) -->
+            <!-- 分類切換按鈕 -->
             <div class="flex flex-wrap gap-2" id="filter-buttons">
-                <button onclick="setFilter('all')" data-filter="all" class="filter-btn px-4 py-1.5 rounded-full text-sm font-bold bg-blue-800 text-white transition-colors">全部 All</button>
-                <button onclick="setFilter('學會公告')" data-filter="學會公告" class="filter-btn px-4 py-1.5 rounded-full text-sm font-bold bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors">學會公告</button>
-                <button onclick="setFilter('教育訓練')" data-filter="教育訓練" class="filter-btn px-4 py-1.5 rounded-full text-sm font-bold bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors">教育訓練</button>
-                <button onclick="setFilter('PERIC')" data-filter="PERIC" class="filter-btn px-4 py-1.5 rounded-full text-sm font-bold bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors">PERIC</button>
+                <button onclick="setFilter('all')" data-filter="all" class="filter-btn px-4 py-1.5 rounded-full text-sm font-bold bg-blue-800 text-white transition-colors shadow-md">全部 All</button>
+                <button onclick="setFilter('學會公告')" data-filter="學會公告" class="filter-btn px-4 py-1.5 rounded-full text-sm font-bold bg-white border border-slate-200 text-slate-500 hover:bg-slate-50 transition-colors">學會公告</button>
+                <button onclick="setFilter('教育訓練')" data-filter="教育訓練" class="filter-btn px-4 py-1.5 rounded-full text-sm font-bold bg-white border border-slate-200 text-slate-500 hover:bg-slate-50 transition-colors">教育訓練</button>
+                <button onclick="setFilter('PERIC')" data-filter="PERIC" class="filter-btn px-4 py-1.5 rounded-full text-sm font-bold bg-white border border-slate-200 text-slate-500 hover:bg-slate-50 transition-colors">PERIC</button>
             </div>
         </div>
 
-        <!-- 卡片容器 -->
         <div id="post-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- 載入動畫 -->
             <div class="animate-pulse bg-white p-4 rounded-xl shadow-sm h-80 border border-slate-100 flex items-center justify-center">
                 <p class="text-slate-400 font-bold text-sm tracking-widest">Loading Data...</p>
             </div>
         </div>
     </main>
 
-    <!-- 4. Footer 佔位符 -->
+    <!-- Footer 佔位符 -->
     <div id="footer-placeholder"></div>
 
-    <!-- --- 核心控制腳本 --- -->
+    <!-- 核心控制腳本 -->
     <script>
-        // 全局狀態變數
         let lang = 'zh';
-        let currentFilter = 'all'; // 預設顯示全部
+        let currentFilter = 'all';
         let posts = [];
-        
-        // Google Sheets 連結
         const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQfiEDEtIn6BJMw1VPnVLOps_mi2fgitOb7B8t9Wx0rEnpnuocIcvKEaGj_5q2M22la4oQPrd-tiE3N/pub?output=csv';
 
-        // 載入外部 HTML 檔案 (Navbar & Footer)
+        // 🎨 顏色翻譯字典 (讓使用者輸入簡單中文，對應到專業色票)
+        const colorDictionary = {
+            '藍': 'bg-blue-800 text-white',
+            '橘': 'bg-orange-500 text-white',
+            '綠': 'bg-emerald-600 text-white',
+            '紅': 'bg-rose-600 text-white',
+            '黃': 'bg-yellow-400 text-slate-900', // 黃底用黑字最清楚
+            '紫': 'bg-purple-600 text-white',
+            '灰': 'bg-slate-600 text-white',
+            '黑': 'bg-slate-900 text-white'
+        };
+
         async function loadComponents() {
             try {
                 const [navRes, footRes] = await Promise.all([
                     fetch('components/navbar.html'),
                     fetch('components/footer.html')
                 ]);
-                
                 if(navRes.ok) document.getElementById('navbar-placeholder').innerHTML = await navRes.text();
                 if(footRes.ok) document.getElementById('footer-placeholder').innerHTML = await footRes.text();
-
                 updateLanguageUI();
             } catch (error) {
-                console.error("載入導覽列或頁尾失敗", error);
+                console.error("載入失敗", error);
             }
         }
 
-        // 載入 Google Sheets 資料
         async function loadData() {
             try {
                 const response = await fetch(sheetUrl);
@@ -127,52 +209,42 @@
                     }
                 });
             } catch (error) {
-                console.error('資料讀取失敗:', error);
                 document.getElementById('post-container').innerHTML = '<p class="text-center text-slate-500 py-10 w-full col-span-full">資料載入失敗</p>';
             }
         }
 
-        // 設定分類過濾器
         window.setFilter = function(filterValue) {
             currentFilter = filterValue;
-            
-            // 更新按鈕的視覺外觀 (藍底白字 vs 灰底灰字)
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 if(btn.dataset.filter === filterValue) {
-                    btn.className = "filter-btn px-4 py-1.5 rounded-full text-sm font-bold bg-blue-800 text-white transition-colors";
+                    btn.className = "filter-btn px-4 py-1.5 rounded-full text-sm font-bold bg-blue-800 text-white transition-colors shadow-md";
                 } else {
-                    btn.className = "filter-btn px-4 py-1.5 rounded-full text-sm font-bold bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors";
+                    btn.className = "filter-btn px-4 py-1.5 rounded-full text-sm font-bold bg-white border border-slate-200 text-slate-500 hover:bg-slate-50 transition-colors";
                 }
             });
-
-            // 重新渲染卡片
             renderCards();
         }
 
-        // 渲染卡片
         function renderCards() {
             const container = document.getElementById('post-container');
-            
             if (!posts || posts.length === 0) {
                 container.innerHTML = '<p class="text-center text-slate-400 py-10 w-full col-span-full">尚無最新消息</p>';
                 return;
             }
 
-            // --- 執行資料過濾 ---
-            // 如果目前不是選 'all'，就把資料篩選出 'committee' 欄位等於所選分類的卡片
-            const filteredPosts = currentFilter === 'all' 
-                ? posts 
-                : posts.filter(p => p.committee === currentFilter);
+            const filteredPosts = currentFilter === 'all' ? posts : posts.filter(p => p.committee === currentFilter);
 
-            // 如果該分類沒有文章
             if (filteredPosts.length === 0) {
                 container.innerHTML = '<p class="text-center text-slate-400 py-10 w-full col-span-full font-bold">這個分類目前尚無發布資訊</p>';
                 return;
             }
 
-            // 繪製卡片
             container.innerHTML = filteredPosts.map(p => {
-                const color = p.color || 'bg-blue-800';
+                // 🏷️ 顏色防呆處理
+                const rawColor = p.color ? p.color.trim() : '';
+                // 若字典裡有這個中文，就用字典裡的樣式；沒有的話就預設「藍色白字」
+                const tagTheme = colorDictionary[rawColor] || 'bg-blue-800 text-white';
+                
                 const tag = p.tag || '公告';
                 const img = p.img || 'https://images.unsplash.com/photo-1516549655169-df83a0774514?w=800';
                 
@@ -186,10 +258,14 @@
                 const readMoreHtml = isClickable ? `<div class="mt-auto pt-4 border-t border-slate-50 text-xs font-bold text-ems-blue">${readMoreText}</div>` : '';
 
                 return `
-                <${wrapperTag} ${hrefAttr} class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col h-full ${isClickable ? 'cursor-pointer' : ''}">
+                <${wrapperTag} ${hrefAttr} class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-slate-100 flex flex-col h-full ${isClickable ? 'cursor-pointer' : ''}">
                     <div class="relative overflow-hidden aspect-video bg-slate-100">
                         <img src="${img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                        <div class="absolute top-3 left-3 ${color} text-white px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">${tag}</div>
+                        
+                        <!-- ✨ 升級版：大而顯眼的標籤 -->
+                        <div class="absolute top-4 left-4 ${tagTheme} px-3 py-1 rounded shadow-lg shadow-black/20 text-xs font-black uppercase tracking-widest z-10 backdrop-blur-sm">
+                            ${tag}
+                        </div>
                     </div>
                     <div class="p-5 flex-grow flex flex-col">
                         <p class="text-slate-400 font-bold text-[11px] mb-2 tracking-widest">${p.date || ''}</p>
@@ -201,7 +277,6 @@
             }).join('');
         }
 
-        // 切換語言與更新 UI
         window.toggleLang = function() {
             lang = lang === 'zh' ? 'en' : 'zh';
             updateLanguageUI();
@@ -211,22 +286,14 @@
         function updateLanguageUI() {
             document.querySelectorAll('.lang-zh').forEach(el => el.classList.toggle('hidden', lang !== 'zh'));
             document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', lang !== 'en'));
-
             const ui = {
-                zh: {
-                    desc: "致力於提升台灣醫療救護專業水平，建立國際接軌的到院前緊急醫療救護體系。",
-                    news: `<span class="w-2 h-6 bg-blue-800 rounded-sm"></span> 最新消息 Latest News`
-                },
-                en: {
-                    desc: "Dedicated to advancing paramedicine in Taiwan and building a world-class EMS system.",
-                    news: `<span class="w-2 h-6 bg-blue-800 rounded-sm"></span> Latest Updates`
-                }
+                zh: { desc: "致力於提升台灣醫療救護專業水平，建立國際接軌的到院前緊急醫療救護體系。", news: `<span class="w-2 h-6 bg-blue-800 rounded-sm"></span> 最新消息 Latest News` },
+                en: { desc: "Dedicated to advancing paramedicine in Taiwan and building a world-class EMS system.", news: `<span class="w-2 h-6 bg-blue-800 rounded-sm"></span> Latest Updates` }
             };
             document.getElementById('hero-desc').innerText = ui[lang].desc;
             document.getElementById('section-news').innerHTML = ui[lang].news;
         }
 
-        // 啟動程式
         loadComponents();
         loadData();
     </script>
