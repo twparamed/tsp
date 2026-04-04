@@ -1,11 +1,10 @@
-<!-- 導覽列 (Navbar) 區塊開始 -->
 <nav class="sticky top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex justify-between items-center">
         
-        <!-- 左側：Logo 與網站名稱 -->
         <a href="/" class="flex items-center gap-3 md:gap-4 hover:opacity-80 transition-opacity">
-            <!-- T 字 Logo -->
-            <div class="bg-blue-800 text-white w-9 h-9 md:w-10 md:h-10 flex items-center justify-center rounded font-black text-lg md:text-xl flex-shrink-0">T</div>
+            
+            <img src="TSP-LOGO.png" alt="TSP Logo" class="w-auto h-12 md:h-14 flex-shrink-0 object-contain">
+            
             <div>
                 <h1 class="text-[14px] md:text-[15px] font-black text-slate-900 leading-tight tracking-tight lang-zh">台灣醫療救護學會</h1>
                 <h1 class="text-[14px] md:text-[15px] font-black text-slate-900 leading-tight tracking-tight lang-en hidden">Taiwan Society of Paramedicine</h1>
@@ -13,19 +12,15 @@
             </div>
         </a>
         
-        <!-- 右側：電腦版選單 -->
-        <!-- 使用 group 與 relative 達成純 CSS 下拉選單 -->
         <div class="hidden lg:flex items-center gap-6 xl:gap-8">
             
-            <!-- 1. 關於學會 (About Us) - 下拉選單 -->
             <div class="group relative">
-                <button class="nav-link flex items-center gap-1 py-4">
+                <button class="nav-link flex items-center gap-1 py-4 text-slate-700 hover:text-blue-800 transition-colors font-medium text-sm relative">
                     <span class="lang-zh">關於學會</span>
                     <span class="lang-en hidden">About Us</span>
                     <svg class="w-3 h-3 text-slate-400 group-hover:text-blue-800 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
-                <!-- 子選單內容 -->
-                <div class="absolute top-full left-0 w-48 bg-white border border-slate-100 shadow-lg rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+                <div class="absolute top-full left-0 w-48 bg-white border border-slate-100 shadow-lg rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50">
                     <a href="https://twparamedicine.org/about" target="_blank" class="block px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-800">
                         <span class="lang-zh">理事長的話</span><span class="lang-en hidden">President's Message</span>
                     </a>
@@ -44,14 +39,13 @@
                 </div>
             </div>
 
-            <!-- 2. 新聞與活動 (News & Events) - 下拉選單 -->
             <div class="group relative">
-                <button class="nav-link flex items-center gap-1 py-4">
+                <button class="nav-link flex items-center gap-1 py-4 text-slate-700 hover:text-blue-800 transition-colors font-medium text-sm relative">
                     <span class="lang-zh">新聞與活動</span>
                     <span class="lang-en hidden">News & Events</span>
                     <svg class="w-3 h-3 text-slate-400 group-hover:text-blue-800 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
-                <div class="absolute top-full left-0 w-40 bg-white border border-slate-100 shadow-lg rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+                <div class="absolute top-full left-0 w-40 bg-white border border-slate-100 shadow-lg rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50">
                     <a href="#news" class="block px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-800">
                         <span class="lang-zh">學會公告</span><span class="lang-en hidden">News</span>
                     </a>
@@ -61,14 +55,13 @@
                 </div>
             </div>
 
-            <!-- 3. 教育與學術 (Education) - 下拉選單 -->
             <div class="group relative">
-                <button class="nav-link flex items-center gap-1 py-4">
+                <button class="nav-link flex items-center gap-1 py-4 text-slate-700 hover:text-blue-800 transition-colors font-medium text-sm relative">
                     <span class="lang-zh">教育與學術</span>
                     <span class="lang-en hidden">Education</span>
                     <svg class="w-3 h-3 text-slate-400 group-hover:text-blue-800 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
-                <div class="absolute top-full left-0 w-48 bg-white border border-slate-100 shadow-lg rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+                <div class="absolute top-full left-0 w-48 bg-white border border-slate-100 shadow-lg rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50">
                     <a href="https://www.ipress.tw/J0233" target="_blank" class="block px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-800">
                         <span class="lang-zh">學術期刊</span><span class="lang-en hidden">Academic Journal</span>
                     </a>
@@ -78,14 +71,13 @@
                 </div>
             </div>
 
-            <!-- 4. 公開資料 (Publications) - 下拉選單 -->
             <div class="group relative">
-                <button class="nav-link flex items-center gap-1 py-4">
+                <button class="nav-link flex items-center gap-1 py-4 text-slate-700 hover:text-blue-800 transition-colors font-medium text-sm relative">
                     <span class="lang-zh">公開資料</span>
                     <span class="lang-en hidden">Publications</span>
                     <svg class="w-3 h-3 text-slate-400 group-hover:text-blue-800 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
-                <div class="absolute top-full left-0 w-40 bg-white border border-slate-100 shadow-lg rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+                <div class="absolute top-full left-0 w-40 bg-white border border-slate-100 shadow-lg rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50">
                     <a href="#" class="block px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-800">
                         <span class="lang-zh">年度報告</span><span class="lang-en hidden">Annual Reports</span>
                     </a>
@@ -95,19 +87,17 @@
                 </div>
             </div>
 
-            <!-- 5. PERIC (直接連結) -->
-            <a href="https://perictsp.org" target="_blank" class="nav-link font-bold text-orange-600 hover:text-orange-700 py-4">
+            <a href="https://perictsp.org" target="_blank" class="text-orange-600 hover:text-orange-700 transition-colors font-bold text-sm">
                 PERIC
             </a>
 
-            <!-- 6. 會員專區 (Membership) - 下拉選單改為重點按鈕形式 -->
             <div class="group relative ml-2">
-                <button class="bg-blue-800 text-white px-5 py-2 rounded text-xs font-bold hover:bg-orange-500 transition-colors flex items-center gap-2">
+                <button class="bg-blue-800 text-white px-5 py-2 rounded text-xs font-bold hover:bg-orange-500 transition-colors flex items-center gap-2 shadow-sm">
                     <span class="lang-zh">會員專區</span>
                     <span class="lang-en hidden">Membership</span>
                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
-                <div class="absolute top-full right-0 w-40 bg-white border border-slate-100 shadow-lg rounded-md py-2 mt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+                <div class="absolute top-full right-0 w-40 bg-white border border-slate-100 shadow-lg rounded-md py-2 mt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50">
                     <a href="https://reurl.cc/DxA9X6" target="_blank" class="block px-4 py-2 text-sm font-bold text-blue-800 hover:bg-slate-50">
                         <span class="lang-zh">會員登入</span><span class="lang-en hidden">Member Login</span>
                     </a>
@@ -117,15 +107,13 @@
                 </div>
             </div>
 
-            <!-- 語系切換按鈕 -->
-            <button onclick="toggleLang()" class="text-[11px] font-black text-slate-400 border-l border-slate-300 pl-4 lg:pl-6 hover:text-slate-900 uppercase transition-colors">
+            <button onclick="window.toggleLang()" class="text-[11px] font-black text-slate-400 border-l border-slate-300 pl-4 lg:pl-6 hover:text-slate-900 uppercase transition-colors">
                 EN / 中文
             </button>
         </div>
 
-        <!-- 手機版選單按鈕 (漢堡條) -->
-        <div class="lg:hidden flex items-center gap-4">
-            <button onclick="toggleLang()" class="text-[10px] font-black text-slate-400 hover:text-slate-900 uppercase transition-colors">
+        <div class="lg:hidden flex items-center gap-3">
+            <button onclick="window.toggleLang()" class="text-[10px] font-black text-slate-400 hover:text-slate-900 uppercase transition-colors">
                 EN/中
             </button>
             <button class="text-slate-600 hover:text-blue-800 focus:outline-none">
@@ -136,30 +124,3 @@
         </div>
     </div>
 </nav>
-
-<!-- 雙語切換邏輯 (需放在 body 結尾前) -->
-<script>
-    let currentLang = 'zh'; // 預設中文
-
-    function toggleLang() {
-        currentLang = currentLang === 'zh' ? 'en' : 'zh';
-        
-        // 切換所有帶有 lang-zh 和 lang-en class 的元素
-        document.querySelectorAll('.lang-zh').forEach(el => {
-            if(currentLang === 'zh') {
-                el.classList.remove('hidden');
-            } else {
-                el.classList.add('hidden');
-            }
-        });
-        
-        document.querySelectorAll('.lang-en').forEach(el => {
-            if(currentLang === 'en') {
-                el.classList.remove('hidden');
-            } else {
-                el.classList.add('hidden');
-            }
-        });
-    }
-</script>
-<!-- 導覽列區塊結束 -->
