@@ -41,7 +41,7 @@
                 </div>
                 <h2 class="slogan-font text-5xl md:text-7xl font-black mb-6 tracking-tighter text-white leading-tight">
                     Empowering <br>
-                    <span class="text-ems-orange">EMS</span>
+                    <span class="text-ems-orange">EMS</span> Professionals.
                 </h2>
                 <p id="hero-desc" class="text-lg text-slate-300 font-medium max-w-xl leading-relaxed border-l-2 border-ems-orange pl-4">
                     致力於提升台灣醫療救護專業水平，建立國際接軌的到院前緊急醫療救護體系。
@@ -56,14 +56,26 @@
         </div>
     </section>
 
-    <!-- 3. 最新動態區 (Google Sheets 資料) -->
+    <!-- 3. 最新動態區 (加入分類切換功能) -->
     <main class="max-w-7xl mx-auto px-6 py-24 min-h-[50vh]">
-        <div class="flex items-center justify-between mb-12 border-b border-slate-200 pb-4">
+        
+        <!-- 標題與按鈕區塊 -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 border-b border-slate-200 pb-6 gap-6">
             <h3 id="section-news" class="text-2xl font-black text-slate-900 tracking-tight flex items-center gap-3">
                 <span class="w-2 h-6 bg-blue-800 rounded-sm"></span>
                 最新消息 Latest News
             </h3>
+            
+            <!-- 分類切換按鈕 (Filters) -->
+            <div class="flex flex-wrap gap-2" id="filter-buttons">
+                <button onclick="setFilter('all')" data-filter="all" class="filter-btn px-4 py-1.5 rounded-full text-sm font-bold bg-blue-800 text-white transition-colors">全部 All</button>
+                <button onclick="setFilter('學會公告')" data-filter="學會公告" class="filter-btn px-4 py-1.5 rounded-full text-sm font-bold bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors">學會公告</button>
+                <button onclick="setFilter('教育訓練')" data-filter="教育訓練" class="filter-btn px-4 py-1.5 rounded-full text-sm font-bold bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors">教育訓練</button>
+                <button onclick="setFilter('PERIC')" data-filter="PERIC" class="filter-btn px-4 py-1.5 rounded-full text-sm font-bold bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors">PERIC</button>
+            </div>
         </div>
+
+        <!-- 卡片容器 -->
         <div id="post-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- 載入動畫 -->
             <div class="animate-pulse bg-white p-4 rounded-xl shadow-sm h-80 border border-slate-100 flex items-center justify-center">
@@ -77,17 +89,17 @@
 
     <!-- --- 核心控制腳本 --- -->
     <script>
-        // 全局語言變數
+        // 全局狀態變數
         let lang = 'zh';
+        let currentFilter = 'all'; // 預設顯示全部
+        let posts = [];
         
         // Google Sheets 連結
         const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQfiEDEtIn6BJMw1VPnVLOps_mi2fgitOb7B8t9Wx0rEnpnuocIcvKEaGj_5q2M22la4oQPrd-tiE3N/pub?output=csv';
-        let posts = [];
 
         // 載入外部 HTML 檔案 (Navbar & Footer)
         async function loadComponents() {
             try {
-                // 同時發送請求載入 navbar 和 footer，提高速度
                 const [navRes, footRes] = await Promise.all([
                     fetch('components/navbar.html'),
                     fetch('components/footer.html')
@@ -96,7 +108,6 @@
                 if(navRes.ok) document.getElementById('navbar-placeholder').innerHTML = await navRes.text();
                 if(footRes.ok) document.getElementById('footer-placeholder').innerHTML = await footRes.text();
 
-                // 載入完畢後，更新一次語系顯示
                 updateLanguageUI();
             } catch (error) {
                 console.error("載入導覽列或頁尾失敗", error);
@@ -117,19 +128,50 @@
                 });
             } catch (error) {
                 console.error('資料讀取失敗:', error);
-                document.getElementById('post-container').innerHTML = '<p class="text-center text-slate-500 py-10">資料載入失敗</p>';
+                document.getElementById('post-container').innerHTML = '<p class="text-center text-slate-500 py-10 w-full col-span-full">資料載入失敗</p>';
             }
+        }
+
+        // 設定分類過濾器
+        window.setFilter = function(filterValue) {
+            currentFilter = filterValue;
+            
+            // 更新按鈕的視覺外觀 (藍底白字 vs 灰底灰字)
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if(btn.dataset.filter === filterValue) {
+                    btn.className = "filter-btn px-4 py-1.5 rounded-full text-sm font-bold bg-blue-800 text-white transition-colors";
+                } else {
+                    btn.className = "filter-btn px-4 py-1.5 rounded-full text-sm font-bold bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors";
+                }
+            });
+
+            // 重新渲染卡片
+            renderCards();
         }
 
         // 渲染卡片
         function renderCards() {
             const container = document.getElementById('post-container');
+            
             if (!posts || posts.length === 0) {
                 container.innerHTML = '<p class="text-center text-slate-400 py-10 w-full col-span-full">尚無最新消息</p>';
                 return;
             }
 
-            container.innerHTML = posts.map(p => {
+            // --- 執行資料過濾 ---
+            // 如果目前不是選 'all'，就把資料篩選出 'committee' 欄位等於所選分類的卡片
+            const filteredPosts = currentFilter === 'all' 
+                ? posts 
+                : posts.filter(p => p.committee === currentFilter);
+
+            // 如果該分類沒有文章
+            if (filteredPosts.length === 0) {
+                container.innerHTML = '<p class="text-center text-slate-400 py-10 w-full col-span-full font-bold">這個分類目前尚無發布資訊</p>';
+                return;
+            }
+
+            // 繪製卡片
+            container.innerHTML = filteredPosts.map(p => {
                 const color = p.color || 'bg-blue-800';
                 const tag = p.tag || '公告';
                 const img = p.img || 'https://images.unsplash.com/photo-1516549655169-df83a0774514?w=800';
@@ -163,15 +205,13 @@
         window.toggleLang = function() {
             lang = lang === 'zh' ? 'en' : 'zh';
             updateLanguageUI();
-            renderCards(); // 重新渲染卡片文字
+            renderCards(); 
         }
 
         function updateLanguageUI() {
-            // 切換 Navbar 與 Footer 裡的 class
             document.querySelectorAll('.lang-zh').forEach(el => el.classList.toggle('hidden', lang !== 'zh'));
             document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', lang !== 'en'));
 
-            // 更新首頁獨立的文字
             const ui = {
                 zh: {
                     desc: "致力於提升台灣醫療救護專業水平，建立國際接軌的到院前緊急醫療救護體系。",
