@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教育訓練課程 | TSP 台灣醫療救護學會</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 PapaParse 解析 Google Sheets -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Montserrat:wght@800;900&display=swap');
+        body { font-family: 'Noto Sans TC', sans-serif; }
+        .slogan-font { font-family: 'Montserrat', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 leading-relaxed flex flex-col min-h-screen">
+
+    <!-- Navbar 佔位符 -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- 頁面標頭 -->
+    <header class="bg-slate-900 pt-32 pb-20 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=1200')] bg-cover bg-center"></div>
+        <div class="max-w-5xl mx-auto relative z-10 text-center">
+            <div class="inline-block px-3 py-1 bg-orange-500/20 border border-orange-500/50 text-orange-400 text-[10px] font-black rounded tracking-widest uppercase mb-4">Training & Education</div>
+            <h1 class="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight lang-zh">教育訓練課程</h1>
+            <h1 class="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight lang-en hidden">Training Courses</h1>
+            <div class="w-16 h-1.5 bg-orange-500 mx-auto rounded-full"></div>
+            <p class="text-slate-300 mt-6 max-w-2xl mx-auto font-medium lang-zh">提供與國際接軌的專業緊急醫療救護課程，全面提升第一線人員的臨床決策與急救技術。</p>
+            <p class="text-slate-300 mt-6 max-w-2xl mx-auto font-medium lang-en hidden">Providing internationally aligned emergency medical courses to comprehensively elevate clinical decision-making and lifesaving skills for frontline personnel.</p>
+        </div>
+    </header>
+
+    <!-- 內容區 -->
+    <main class="flex-grow max-w-6xl mx-auto px-6 py-16 w-full relative -mt-10 z-20">
+        
+        <!-- 上半部：課程總覽 (靜態型錄) -->
+        <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-8 md:p-12 mb-16">
+            <h3 class="text-2xl font-black text-slate-900 mb-8 border-b border-slate-100 pb-4 flex items-center gap-3">
+                <span class="w-2 h-6 bg-orange-500 rounded-sm"></span>
+                <span class="lang-zh">核心訓練模組</span>
+                <span class="lang-en hidden">Core Training Modules</span>
+            </h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 課程卡片 1 -->
+                <div class="border border-slate-200 rounded-xl p-6 hover:border-orange-500 transition-colors group">
+                    <h4 class="text-xl font-black text-blue-900 mb-2 group-hover:text-orange-600 transition-colors lang-zh">高級救護員繼續教育 (CME)</h4>
+                    <h4 class="text-xl font-black text-blue-900 mb-2 group-hover:text-orange-600 transition-colors lang-en hidden">Paramedic CME</h4>
+                    <p class="text-sm text-slate-500 font-medium leading-relaxed lang-zh">專為 EMT-P 設計的進階持續教育課程，涵蓋最新實證醫學指引、特殊急重症處置與困難案例研討，滿足展延所需學分。</p>
+                    <p class="text-sm text-slate-500 font-medium leading-relaxed lang-en hidden">Advanced continuing education designed for EMT-P, covering the latest evidence-based guidelines, critical care management, and complex case studies.</p>
+                </div>
+                <!-- 課程卡片 2 -->
+                <div class="border border-slate-200 rounded-xl p-6 hover:border-orange-500 transition-colors group">
+                    <h4 class="text-xl font-black text-blue-900 mb-2 group-hover:text-orange-600 transition-colors lang-zh">到院前創傷生命救援 (PHTLS)</h4>
+                    <h4 class="text-xl font-black text-blue-900 mb-2 group-hover:text-orange-600 transition-colors lang-en hidden">PHTLS Course</h4>
+                    <p class="text-sm text-slate-500 font-medium leading-relaxed lang-zh">引進 NAEMT 國際標準課程，強調創傷機轉評估與黃金時間內的關鍵處置，提升重大創傷病患的存活率。</p>
+                    <p class="text-sm text-slate-500 font-medium leading-relaxed lang-en hidden">NAEMT standard course focusing on trauma kinematics and critical interventions within the golden hour to improve survival rates.</p>
+                </div>
+                <!-- 課程卡片 3 -->
+                <div class="border border-slate-200 rounded-xl p-6 hover:border-orange-500 transition-colors group">
+                    <h4 class="text-xl font-black text-blue-900 mb-2 group-hover:text-orange-600 transition-colors lang-zh">戰術與戰傷救護 (TCCC/TECC)</h4>
+                    <h4 class="text-xl font-black text-blue-900 mb-2 group-hover:text-orange-600 transition-colors lang-en hidden">TCCC / TECC</h4>
+                    <p class="text-sm text-slate-500 font-medium leading-relaxed lang-zh">針對高風險與敵意環境下的急救訓練，包含大量傷患處置、止血帶應用與安全撤離策略。</p>
+                    <p class="text-sm text-slate-500 font-medium leading-relaxed lang-en hidden">Training for high-risk and hostile environments, including mass casualty management, tourniquet application, and safe evacuation.</p>
+                </div>
+                <!-- 課程卡片 4 -->
+                <div class="border border-slate-200 rounded-xl p-6 hover:border-orange-500 transition-colors group">
+                    <h4 class="text-xl font-black text-blue-900 mb-2 group-hover:text-orange-600 transition-colors lang-zh">臨床指導員訓練 (Preceptor)</h4>
+                    <h4 class="text-xl font-black text-blue-900 mb-2 group-hover:text-orange-600 transition-colors lang-en hidden">Clinical Preceptor Training</h4>
+                    <p class="text-sm text-slate-500 font-medium leading-relaxed lang-zh">培育優秀的救護教學人才，學習成人教育理論、臨床帶教技巧與客觀評估方法，傳承救護專業。</p>
+                    <p class="text-sm text-slate-500 font-medium leading-relaxed lang-en hidden">Cultivating EMS educators by teaching adult learning theories, clinical mentoring skills, and objective evaluation methods.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 下半部：近期開課 (自動抓取 Google Sheet) -->
+        <div class="mb-16">
+            <div class="flex items-center justify-between mb-8">
+                <h3 class="text-2xl font-black text-slate-900 tracking-tight flex items-center gap-3">
+                    <span class="w-2 h-6 bg-blue-800 rounded-sm"></span>
+                    <span class="lang-zh">近期開課與報名</span>
+                    <span class="lang-en hidden">Upcoming Classes & Registration</span>
+                </h3>
+            </div>
+            
+            <div id="training-post-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 載入動畫 -->
+                <div class="animate-pulse bg-white p-4 rounded-xl shadow-sm h-80 border border-slate-100 flex items-center justify-center col-span-full">
+                    <p class="text-slate-400 font-bold text-sm tracking-widest">Loading Classes...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 報名須知 -->
+        <div class="bg-blue-50 rounded-2xl p-8 border border-blue-100">
+            <h4 class="text-lg font-black text-blue-900 mb-4 lang-zh">📝 報名與退費須知</h4>
+            <h4 class="text-lg font-black text-blue-900 mb-4 lang-en hidden">📝 Registration & Refund Policy</h4>
+            <ul class="list-disc list-inside text-slate-600 text-sm space-y-2 font-medium lang-zh">
+                <li>所有課程均採網路報名，請點擊上方課程卡片進入專屬報名表單填寫。</li>
+                <li>會員享有課程報名費折扣優惠，請於報名時提供有效之會員編號。</li>
+                <li>完成繳費後始保留上課名額。若因故無法出席，請於開課前 14 日來信秘書處申請退費（將扣除行政手續費）。</li>
+                <li>學會保留課程異動、師資調整與最終開課與否之權利。</li>
+            </ul>
+            <ul class="list-disc list-inside text-slate-600 text-sm space-y-2 font-medium lang-en hidden">
+                <li>All registrations are strictly online via the specific course links above.</li>
+                <li>TSP members enjoy discounted rates. Please provide your member ID during registration.</li>
+                <li>Spots are only secured upon full payment. Cancellations made 14 days prior to the course are eligible for a refund (minus admin fees).</li>
+                <li>The Society reserves the right to modify course schedules and instructors.</li>
+            </ul>
+        </div>
+
+    </main>
+
+    <!-- Footer 佔位符 -->
+    <div id="footer-placeholder"></div>
+
+    <!-- 腳本 -->
+    <script>
+        let lang = 'zh';
+        let posts = [];
+        
+        // Google Sheets 連結
+        const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQfiEDEtIn6BJMw1VPnVLOps_mi2fgitOb7B8t9Wx0rEnpnuocIcvKEaGj_5q2M22la4oQPrd-tiE3N/pub?output=csv';
+
+        const colorDictionary = {
+            '藍': 'bg-blue-800 text-white', '橘': 'bg-orange-500 text-white',
+            '綠': 'bg-emerald-600 text-white', '紅': 'bg-rose-600 text-white',
+            '黃': 'bg-yellow-400 text-slate-900', '紫': 'bg-purple-600 text-white',
+            '灰': 'bg-slate-600 text-white', '黑': 'bg-slate-900 text-white'
+        };
+
+        async function loadComponents() {
+            try {
+                const [navRes, footRes] = await Promise.all([
+                    fetch('components/navbar.html'),
+                    fetch('components/footer.html')
+                ]);
+                if(navRes.ok) document.getElementById('navbar-placeholder').innerHTML = await navRes.text();
+                if(footRes.ok) document.getElementById('footer-placeholder').innerHTML = await footRes.text();
+                updateLanguageUI();
+            } catch (error) {
+                console.error("載入失敗", error);
+            }
+        }
+
+        async function loadData() {
+            try {
+                const response = await fetch(sheetUrl);
+                const csvText = await response.text();
+                Papa.parse(csvText, {
+                    header: true, skipEmptyLines: true,
+                    complete: function(results) {
+                        // 🌟 精準打擊：只抓取 committee 欄位是「教育訓練」的資料！
+                        posts = results.data.filter(p => p.committee && p.committee.trim() === '教育訓練');
+                        renderCards();
+                    }
+                });
+            } catch (error) {
+                document.getElementById('training-post-container').innerHTML = '<p class="text-center text-slate-500 py-10 w-full col-span-full">資料載入失敗</p>';
+            }
+        }
+
+        function renderCards() {
+            const container = document.getElementById('training-post-container');
+            if (!posts || posts.length === 0) {
+                container.innerHTML = '<div class="col-span-full bg-white border border-slate-100 rounded-xl p-10 text-center shadow-sm"><p class="text-slate-500 font-bold text-lg mb-2">近期尚無新開課程</p><p class="text-slate-400 text-sm">請持續關注學會官網，或追蹤我們的社群平台獲取第一手開課資訊！</p></div>';
+                return;
+            }
+
+            container.innerHTML = posts.map(p => {
+                const rawColor = p.color ? p.color.trim() : '';
+                const tagTheme = colorDictionary[rawColor] || 'bg-orange-500 text-white'; // 預設用橘色代表教育
+                const tag = p.tag || '報名中';
+                const img = p.img || 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800';
+                
+                let link = p.link ? p.link.trim() : '';
+                if (link !== '' && !link.startsWith('http')) link = 'https://' + link;
+                const isClickable = link !== '';
+                const wrapperTag = isClickable ? 'a' : 'div';
+                const hrefAttr = isClickable ? `href="${link}" target="_blank"` : '';
+                
+                const readMoreText = lang === 'zh' ? '前往報名 / 簡章 →' : 'Register Now →';
+                const readMoreHtml = isClickable ? `<div class="mt-auto pt-4 border-t border-slate-50 text-xs font-bold text-orange-600">${readMoreText}</div>` : '';
+
+                return `
+                <${wrapperTag} ${hrefAttr} class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-slate-200 flex flex-col h-full ${isClickable ? 'cursor-pointer' : ''}">
+                    <div class="relative overflow-hidden aspect-video bg-slate-100">
+                        <img src="${img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute top-4 left-4 ${tagTheme} px-3 py-1 rounded shadow-lg shadow-black/20 text-xs font-black uppercase tracking-widest z-10 backdrop-blur-sm">
+                            ${tag}
+                        </div>
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <p class="text-slate-400 font-bold text-[11px] mb-2 tracking-widest">${p.date || ''}</p>
+                        <h4 class="text-lg font-bold mb-3 text-slate-900 line-clamp-2 leading-snug">${lang === 'zh' ? (p.title_zh || '') : (p.title_en || '')}</h4>
+                        <p class="text-slate-500 text-sm font-medium line-clamp-3 mb-4 flex-grow">${lang === 'zh' ? (p.desc_zh || '') : (p.desc_en || '')}</p>
+                        ${readMoreHtml}
+                    </div>
+                </${wrapperTag}>`;
+            }).join('');
+        }
+
+        window.toggleLang = function() {
+            lang = lang === 'zh' ? 'en' : 'zh';
+            updateLanguageUI();
+            renderCards(); 
+        }
+
+        function updateLanguageUI() {
+            document.querySelectorAll('.lang-zh').forEach(el => el.classList.toggle('hidden', lang !== 'zh'));
+            document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', lang !== 'en'));
+        }
+
+        loadComponents();
+        loadData();
+    </script>
+</body>
+</html>
