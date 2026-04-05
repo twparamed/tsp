@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>理監事名單 | TSP 台灣醫療救護學會</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Montserrat:wght@800;900&display=swap');
+        body { font-family: 'Noto Sans TC', sans-serif; }
+        .slogan-font { font-family: 'Montserrat', sans-serif; }
+        
+        /* 標籤頁啟動時的底線動畫 */
+        .tab-active {
+            border-bottom: 3px solid #f97316; /* 橘色底線 */
+            color: #1e3a8a; /* 深藍色文字 */
+            font-weight: 900;
+        }
+        .tab-inactive {
+            border-bottom: 3px solid transparent;
+            color: #64748b;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 leading-relaxed flex flex-col min-h-screen">
+
+    <!-- Navbar 佔位符 -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- 頁面標頭 -->
+    <header class="bg-slate-900 pt-32 pb-20 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1551076805-e18690c5e53b?w=1200')] bg-cover bg-center"></div>
+        <div class="max-w-5xl mx-auto relative z-10 text-center">
+            <h1 class="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight lang-zh">理監事名單</h1>
+            <h1 class="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight lang-en hidden">Board of Directors</h1>
+            <div class="w-16 h-1.5 bg-orange-500 mx-auto rounded-full"></div>
+        </div>
+    </header>
+
+    <!-- 內容區 -->
+    <main class="flex-grow max-w-5xl mx-auto px-6 py-16 w-full relative -mt-10 z-20">
+        <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-8 md:p-14">
+            
+            <!-- 屆別切換標籤 (Tabs) -->
+            <div class="flex flex-wrap border-b border-slate-200 mb-10 gap-2 md:gap-8">
+                <!-- 預設啟動第三屆 -->
+                <button onclick="switchTerm('term3')" id="btn-term3" class="tab-btn tab-active pb-3 px-2 text-lg transition-colors hover:text-blue-800 focus:outline-none">
+                    <span class="lang-zh">第三屆 (現任)</span>
+                    <span class="lang-en hidden">3rd Term (Current)</span>
+                </button>
+                <button onclick="switchTerm('term2')" id="btn-term2" class="tab-btn tab-inactive pb-3 px-2 text-lg transition-colors hover:text-blue-800 focus:outline-none">
+                    <span class="lang-zh">第二屆</span>
+                    <span class="lang-en hidden">2nd Term</span>
+                </button>
+                <button onclick="switchTerm('term1')" id="btn-term1" class="tab-btn tab-inactive pb-3 px-2 text-lg transition-colors hover:text-blue-800 focus:outline-none">
+                    <span class="lang-zh">第一屆</span>
+                    <span class="lang-en hidden">1st Term</span>
+                </button>
+            </div>
+
+            <!-- ============================== -->
+            <!-- 第三屆名單區塊 (預設顯示) -->
+            <!-- ============================== -->
+            <div id="term3" class="term-content block animate-[fadeIn_0.5s_ease-in-out]">
+                
+                <!-- 核心幹部 (理事長/副理事長) -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                    <div class="bg-blue-50 rounded-xl p-6 text-center border border-blue-100 shadow-sm md:col-start-2">
+                        <p class="text-blue-800 font-bold text-sm mb-1 lang-zh">理事長</p>
+                        <p class="text-blue-800 font-bold text-sm mb-1 lang-en hidden">President</p>
+                        <h3 class="text-2xl font-black text-slate-900 lang-zh">范傑閔</h3>
+                        <h3 class="text-2xl font-black text-slate-900 lang-en hidden">Chieh-Min Fan</h3>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                    <div class="bg-slate-50 rounded-xl p-6 text-center border border-slate-100">
+                        <p class="text-slate-500 font-bold text-sm mb-1 lang-zh">副理事長</p>
+                        <p class="text-slate-500 font-bold text-sm mb-1 lang-en hidden">Vice President</p>
+                        <h3 class="text-xl font-black text-slate-900">陳玉龍</h3>
+                        <h3 class="text-2xl font-black text-slate-900 lang-en hidden">Yu-Long Chen</h3>
+                    </div>
+                    <div class="bg-slate-50 rounded-xl p-6 text-center border border-slate-100">
+                        <p class="text-slate-500 font-bold text-sm mb-1 lang-zh">副理事長</p>
+                        <p class="text-slate-500 font-bold text-sm mb-1 lang-en hidden">Vice President</p>
+                        <h3 class="text-xl font-black text-slate-900">王為德</h3>
+                        <h3 class="text-2xl font-black text-slate-900 lang-en hidden">Wei-Te Wang</h3>
+                    </div>
+                </div>
+
+                <!-- 常務理事 & 理事 -->
+                <div class="mb-12">
+                    <h4 class="text-lg font-black text-blue-900 border-l-4 border-orange-500 pl-3 mb-6 lang-zh">理事會</h4>
+                    <h4 class="text-lg font-black text-blue-900 border-l-4 border-orange-500 pl-3 mb-6 lang-en hidden">Board of Directors</h4>
+                    
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-zh">常務理事</p>
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-en hidden">Standing Directors</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-bold text-slate-700">陳玉龍</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-bold text-slate-700">王為德</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-bold text-slate-700">唐貞綾</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-bold text-slate-700">蕭力愷</div>
+                    </div>
+
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-zh">理事</p>
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-en hidden">Directors</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">唐健清</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">柳育漢</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">潘師典</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">黃建華</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">陳暉翰</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">蔡奕緯</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">吳坤哲</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">蘇韋禎</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">楊尚樵</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">楊翔文</div>
+                     </div>
+                </div>
+
+                <!-- 監事會 -->
+                <div class="mb-12">
+                    <h4 class="text-lg font-black text-blue-900 border-l-4 border-orange-500 pl-3 mb-6 lang-zh">監事會</h4>
+                    <h4 class="text-lg font-black text-blue-900 border-l-4 border-orange-500 pl-3 mb-6 lang-en hidden">Board of Supervisors</h4>
+                    
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-zh">常務監事</p>
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-en hidden">Standing Supervisors</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-bold text-slate-700">黃志鴻</div>
+                     </div>
+
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-zh">監事</p>
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-en hidden">Supervisors</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">劉貴香</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">柳育澤</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">郭淑娟</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">沈茂村</div>
+                     </div>
+                </div>
+
+                <!-- 秘書處 -->
+                <div class="mb-12">
+                    <h4 class="text-lg font-black text-blue-900 border-l-4 border-orange-500 pl-3 mb-6 lang-zh">秘書組</h4>
+                    <h4 class="text-lg font-black text-blue-900 border-l-4 border-orange-500 pl-3 mb-6 lang-en hidden">Secretary Team</h4>
+                    
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-zh">秘書長</p>
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-en hidden">Secretary General</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-bold text-slate-700">張育通</div>
+                     </div>
+
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-zh">秘書</p>
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-en hidden">Secretaries</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">周昌生</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">何憲欽</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">邱慧雯</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">劉麗琴</div>
+                     </div>
+                </div>
+            </div> <!-- 第三屆結束 -->
+
+            <!-- ============================== -->
+            <!-- 第二屆名單區塊 (預設隱藏) -->
+            <!-- ============================== -->
+            <div id="term2" class="term-content hidden animate-[fadeIn_0.5s_ease-in-out]">
+                
+                <!-- 核心幹部 (理事長/副理事長) -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                    <div class="bg-blue-50 rounded-xl p-6 text-center border border-blue-100 shadow-sm md:col-start-2">
+                        <p class="text-blue-800 font-bold text-sm mb-1 lang-zh">理事長</p>
+                        <p class="text-blue-800 font-bold text-sm mb-1 lang-en hidden">President</p>
+                        <h3 class="text-2xl font-black text-slate-900 lang-zh">范傑閔</h3>
+                        <h3 class="text-2xl font-black text-slate-900 lang-en hidden">Chieh-Min Fan</h3>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                    <div class="bg-slate-50 rounded-xl p-6 text-center border border-slate-100">
+                        <p class="text-slate-500 font-bold text-sm mb-1 lang-zh">副理事長</p>
+                        <p class="text-slate-500 font-bold text-sm mb-1 lang-en hidden">Vice President</p>
+                        <h3 class="text-xl font-black text-slate-900">陳玉龍</h3>
+                        <h3 class="text-2xl font-black text-slate-900 lang-en hidden">Yu-Long Chen</h3>
+                    </div>
+                    <div class="bg-slate-50 rounded-xl p-6 text-center border border-slate-100">
+                        <p class="text-slate-500 font-bold text-sm mb-1 lang-zh">副理事長</p>
+                        <p class="text-slate-500 font-bold text-sm mb-1 lang-en hidden">Vice President</p>
+                        <h3 class="text-xl font-black text-slate-900">王為德</h3>
+                        <h3 class="text-2xl font-black text-slate-900 lang-en hidden">Wei-Te Wang</h3>
+                    </div>
+                </div>
+
+                <!-- 常務理事 & 理事 -->
+                <div class="mb-12">
+                    <h4 class="text-lg font-black text-blue-900 border-l-4 border-orange-500 pl-3 mb-6 lang-zh">理事會</h4>
+                    <h4 class="text-lg font-black text-blue-900 border-l-4 border-orange-500 pl-3 mb-6 lang-en hidden">Board of Directors</h4>
+                    
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-zh">常務理事</p>
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-en hidden">Standing Directors</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-bold text-slate-700">陳玉龍</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-bold text-slate-700">王為德</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-bold text-slate-700">唐健清</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-bold text-slate-700">蕭力愷</div>
+                    </div>
+
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-zh">理事</p>
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-en hidden">Directors</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">柳育漢</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">潘師典</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">謝婉華</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">黃建華</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">陳暉翰</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">蔡奕緯</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">吳坤哲</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">蘇韋禎</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">楊尚樵</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">蕭雅文(台災)</div>
+                     </div>
+                </div>
+
+                <!-- 監事會 -->
+                <div class="mb-12">
+                    <h4 class="text-lg font-black text-blue-900 border-l-4 border-orange-500 pl-3 mb-6 lang-zh">監事會</h4>
+                    <h4 class="text-lg font-black text-blue-900 border-l-4 border-orange-500 pl-3 mb-6 lang-en hidden">Board of Supervisors</h4>
+                    
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-zh">常務監事</p>
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-en hidden">Standing Supervisors</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-bold text-slate-700">劉貴香</div>
+                     </div>
+
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-zh">監事</p>
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-en hidden">Supervisors</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">黃志鴻</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">張家瑋</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">陳家和</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">柳育澤</div>
+                     </div>
+                </div>
+
+                <!-- 秘書處 -->
+                <div class="mb-12">
+                    <h4 class="text-lg font-black text-blue-900 border-l-4 border-orange-500 pl-3 mb-6 lang-zh">秘書組</h4>
+                    <h4 class="text-lg font-black text-blue-900 border-l-4 border-orange-500 pl-3 mb-6 lang-en hidden">Secretary Team</h4>
+                    
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-zh">秘書長</p>
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-en hidden">Secretary General</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-bold text-slate-700">張育通</div>
+                     </div>
+
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-zh">秘書</p>
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-en hidden">Secretaries</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">周昌生</div>
+                       
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">邱慧雯</div>
+                        
+                     </div>
+                </div>
+            </div> <!-- 第二屆結束 -->
+
+            <!-- ============================== -->
+            <!-- 第一屆名單區塊 (預設隱藏) -->
+            <!-- ============================== -->
+            <div id="term1" class="term-content hidden animate-[fadeIn_0.5s_ease-in-out]">
+                
+                <!-- 核心幹部 (理事長/副理事長) -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                    <div class="bg-blue-50 rounded-xl p-6 text-center border border-blue-100 shadow-sm md:col-start-2">
+                        <p class="text-blue-800 font-bold text-sm mb-1 lang-zh">理事長</p>
+                        <p class="text-blue-800 font-bold text-sm mb-1 lang-en hidden">President</p>
+                        <h3 class="text-2xl font-black text-slate-900 lang-zh">蔡光超</h3>
+                        <h3 class="text-2xl font-black text-slate-900 lang-en hidden">Kuan-Chau Tsai</h3>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                    <div class="bg-slate-50 rounded-xl p-6 text-center border border-slate-100">
+                        <p class="text-slate-500 font-bold text-sm mb-1 lang-zh">副理事長</p>
+                        <p class="text-slate-500 font-bold text-sm mb-1 lang-en hidden">Vice President</p>
+                        <h3 class="text-xl font-black text-slate-900">范傑閔</h3>
+                        
+                    </div>
+                    <div class="bg-slate-50 rounded-xl p-6 text-center border border-slate-100">
+                        <p class="text-slate-500 font-bold text-sm mb-1 lang-zh">副理事長</p>
+                        <p class="text-slate-500 font-bold text-sm mb-1 lang-en hidden">Vice President</p>
+                        <h3 class="text-xl font-black text-slate-900">柳育漢</h3>
+                   
+                    </div>
+                </div>
+
+                <!-- 常務理事 & 理事 -->
+                <div class="mb-12">
+                    <h4 class="text-lg font-black text-blue-900 border-l-4 border-orange-500 pl-3 mb-6 lang-zh">理事會</h4>
+                    <h4 class="text-lg font-black text-blue-900 border-l-4 border-orange-500 pl-3 mb-6 lang-en hidden">Board of Directors</h4>
+                    
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-zh">常務理事</p>
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-en hidden">Standing Directors</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-bold text-slate-700">范傑閔</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-bold text-slate-700">柳育漢</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-bold text-slate-700">吳坤哲</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-bold text-slate-700">唐健清</div>
+                    </div>
+
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-zh">理事</p>
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-en hidden">Directors</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">陳玉龍</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">潘師典</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">蕭力愷</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">謝婉華</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">黃建華</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">顏一加</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">陳暉翰</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">蔡奕緯</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">王為德</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">鄭印翔</div>
+                     </div>
+                </div>
+
+                <!-- 監事會 -->
+                <div class="mb-12">
+                    <h4 class="text-lg font-black text-blue-900 border-l-4 border-orange-500 pl-3 mb-6 lang-zh">監事會</h4>
+                    <h4 class="text-lg font-black text-blue-900 border-l-4 border-orange-500 pl-3 mb-6 lang-en hidden">Board of Supervisors</h4>
+                    
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-zh">常務監事</p>
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-en hidden">Standing Supervisors</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-bold text-slate-700">劉貴香</div>
+                     </div>
+
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-zh">監事</p>
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-en hidden">Supervisors</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">黃志鴻</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">陳俊憲</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600">張家瑋</div>
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-medium text-slate-600"></div>
+                     </div>
+                </div>
+
+                <!-- 秘書處 -->
+                <div class="mb-12">
+                    <h4 class="text-lg font-black text-blue-900 border-l-4 border-orange-500 pl-3 mb-6 lang-zh">秘書組</h4>
+                    <h4 class="text-lg font-black text-blue-900 border-l-4 border-orange-500 pl-3 mb-6 lang-en hidden">Secretary Team</h4>
+                    
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-zh">秘書長</p>
+                    <p class="text-sm font-bold text-slate-400 mb-3 lang-en hidden">Secretary General</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                        <div class="bg-white border border-slate-200 rounded p-3 text-center font-bold text-slate-700">張育通</div>
+                     </div>
+
+            </div>
+            </div> <!-- 第一屆結束 -->
+
+        </div> <!-- 修正：這是唯一的 bg-white 關閉標籤 -->
+    </main>
+
+    <!-- Footer 佔位符 -->
+    <div id="footer-placeholder"></div>
+
+    <!-- 腳本 -->
+    <script>
+        let lang = 'zh';
+
+        // 載入 Navbar & Footer
+        async function loadComponents() {
+            try {
+                const [navRes, footRes] = await Promise.all([
+                    fetch('components/navbar.html'),
+                    fetch('components/footer.html')
+                ]);
+                if(navRes.ok) document.getElementById('navbar-placeholder').innerHTML = await navRes.text();
+                if(footRes.ok) document.getElementById('footer-placeholder').innerHTML = await footRes.text();
+                updateLanguageUI();
+            } catch (error) {
+                console.error("載入導覽列或頁尾失敗", error);
+            }
+        }
+
+        // 語系切換
+        window.toggleLang = function() {
+            lang = lang === 'zh' ? 'en' : 'zh';
+            updateLanguageUI();
+        }
+
+        function updateLanguageUI() {
+            document.querySelectorAll('.lang-zh').forEach(el => el.classList.toggle('hidden', lang !== 'zh'));
+            document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', lang !== 'en'));
+        }
+
+        // 屆別切換邏輯 (Tabs)
+        window.switchTerm = function(termId) {
+            // 1. 隱藏所有屆別內容
+            document.querySelectorAll('.term-content').forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('block');
+            });
+            
+            // 2. 將所有按鈕設為「未啟動」樣式
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('tab-active');
+                btn.classList.add('tab-inactive');
+            });
+
+            // 3. 顯示被點擊的屆別內容
+            const targetContent = document.getElementById(termId);
+            targetContent.classList.remove('hidden');
+            targetContent.classList.add('block');
+
+            // 4. 將被點擊的按鈕設為「已啟動」樣式
+            const targetBtn = document.getElementById('btn-' + termId);
+            targetBtn.classList.remove('tab-inactive');
+            targetBtn.classList.add('tab-active');
+        }
+
+        // 啟動程式
+        loadComponents();
+    </script>
+</body>
+</html>
