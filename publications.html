@@ -86,7 +86,7 @@
             } catch (error) { console.error("資料載入失敗"); }
         }
 
-        // 渲染年度報告 (橫向列表)
+       // 渲染年度報告 (橫向列表)
         function renderReports(data) {
             const container = document.getElementById('annual-report-container');
             if (data.length === 0) {
@@ -95,14 +95,19 @@
             }
             container.innerHTML = data.map(p => `
                 <a href="${p.link}" target="_blank" class="flex items-center justify-between p-4 bg-slate-50 hover:bg-blue-50 rounded-xl border border-slate-100 transition-colors group">
-                    <div class="flex items-center gap-4">
-                        <div class="bg-blue-800 text-white w-10 h-10 flex items-center justify-center rounded-lg font-black text-xs">${p.date.split('/')[0] || 'DOC'}</div>
+                    <div class="flex items-center gap-4 md:gap-5">
+                        
+                        <!-- 🚀 修改這裡：把 w-10 改成 w-16 (加寬)，字體放大為 text-sm，加入 tracking-wider(字距加寬)，以及 flex-shrink-0 防止變形 -->
+                        <div class="bg-blue-800 text-white w-16 h-10 flex-shrink-0 flex items-center justify-center rounded-lg font-black text-sm tracking-wider shadow-sm">
+                            ${p.date.split('/')[0] || 'DOC'}
+                        </div>
+                        
                         <div>
                             <h4 class="font-bold text-slate-900 group-hover:text-blue-800 transition-colors">${p.title_zh}</h4>
-                            <p class="text-xs text-slate-500 font-medium">${p.desc_zh}</p>
+                            <p class="text-xs text-slate-500 font-medium mt-0.5">${p.desc_zh}</p>
                         </div>
                     </div>
-                    <div class="text-blue-800 font-bold text-sm">Download ↓</div>
+                    <div class="text-blue-800 font-bold text-sm hidden md:block flex-shrink-0">Download ↓</div>
                 </a>
             `).join('');
         }
