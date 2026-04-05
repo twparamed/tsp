@@ -86,6 +86,7 @@
             } catch (error) { console.error("資料載入失敗"); }
         }
 
+       
        // 渲染年度報告 (橫向列表)
         function renderReports(data) {
             const container = document.getElementById('annual-report-container');
@@ -94,20 +95,23 @@
                 return;
             }
             container.innerHTML = data.map(p => `
-                <a href="${p.link}" target="_blank" class="flex items-center justify-between p-4 bg-slate-50 hover:bg-blue-50 rounded-xl border border-slate-100 transition-colors group">
-                    <div class="flex items-center gap-4 md:gap-5">
+                <a href="${p.link}" target="_blank" class="flex flex-col md:flex-row md:items-center justify-between p-4 md:p-5 bg-slate-50 hover:bg-blue-50 rounded-xl border border-slate-100 transition-colors group gap-4 md:gap-0">
+                    <div class="flex flex-col md:flex-row md:items-center gap-3 md:gap-5 w-full">
                         
-                        <!-- 🚀 修改這裡：把 w-10 改成 w-16 (加寬)，字體放大為 text-sm，加入 tracking-wider(字距加寬)，以及 flex-shrink-0 防止變形 -->
-                        <div class="bg-blue-800 text-white w-16 h-10 flex-shrink-0 flex items-center justify-center rounded-lg font-black text-sm tracking-wider shadow-sm">
-                            ${p.date.split('/')[0] || 'DOC'}
+                        <!-- 🚀 完美修正版：改用 px-4 左右留白，並移除固定寬度 w-16，讓它隨文字長度自動延伸 -->
+                        <div class="bg-blue-800 text-white h-8 px-4 inline-flex items-center justify-center rounded-lg font-black text-sm tracking-wider shadow-sm flex-shrink-0 self-start md:self-auto">
+                            ${p.date || 'DOC'}
                         </div>
                         
-                        <div>
-                            <h4 class="font-bold text-slate-900 group-hover:text-blue-800 transition-colors">${p.title_zh}</h4>
-                            <p class="text-xs text-slate-500 font-medium mt-0.5">${p.desc_zh}</p>
+                        <div class="flex-grow">
+                            <h4 class="font-bold text-slate-900 group-hover:text-blue-800 transition-colors text-base md:text-lg">${p.title_zh}</h4>
+                            <p class="text-xs md:text-sm text-slate-500 font-medium mt-1 line-clamp-2">${p.desc_zh}</p>
                         </div>
                     </div>
-                    <div class="text-blue-800 font-bold text-sm hidden md:block flex-shrink-0">Download ↓</div>
+                    <div class="text-blue-800 font-bold text-sm hidden md:flex items-center flex-shrink-0 ml-4 group-hover:translate-y-1 transition-transform">
+                        Download 
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    </div>
                 </a>
             `).join('');
         }
