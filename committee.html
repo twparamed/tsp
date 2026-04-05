@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>委員會介紹 | TSP 台灣醫療救護學會</title>
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <!-- 引入 PapaParse 來解析 Google Sheets -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Montserrat:wght@800;900&display=swap');
+        body { font-family: 'Noto Sans TC', sans-serif; }
+        .slogan-font { font-family: 'Montserrat', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 leading-relaxed flex flex-col min-h-screen">
+
+    <!-- Navbar 佔位符 -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- 頁面標頭 -->
+    <header class="bg-slate-900 pt-32 pb-20 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=1200')] bg-cover bg-center"></div>
+        <div class="max-w-5xl mx-auto relative z-10 text-center">
+            <h1 class="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight lang-zh">委員會介紹</h1>
+            <h1 class="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight lang-en hidden">Committees</h1>
+            <div class="w-16 h-1.5 bg-orange-500 mx-auto rounded-full"></div>
+            <p class="text-slate-300 mt-6 max-w-2xl mx-auto font-medium lang-zh">台灣醫療救護學會透過三大核心委員會的專業分工，致力於推動到院前救護的實證研究、精進教育訓練品質，並全方位守護第一線救護人員的職業安全與身心健康。</p>
+            <p class="text-slate-300 mt-6 max-w-2xl mx-auto font-medium lang-en hidden">TSP is dedicated to advancing pre-hospital evidence-based research, refining training quality, and comprehensively safeguarding the occupational health and safety of frontline paramedics through our three core committees.</p>
+        </div>
+    </header>
+
+    <!-- 內容區 -->
+    <main class="flex-grow max-w-6xl mx-auto px-6 py-16 w-full relative -mt-10 z-20">
+        
+        <!-- 上半部：三個委員會的靜態介紹 -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+            
+            <!-- 1. 學術與出版委員會 -->
+            <div class="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden flex flex-col hover:-translate-y-2 transition-transform duration-300">
+                <div class="h-3 bg-blue-800 w-full"></div>
+                <div class="p-8 flex-grow">
+                    <div class="w-14 h-14 bg-blue-50 text-blue-800 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-black text-slate-900 mb-4 lang-zh">學術與出版委員會</h3>
+                    <h3 class="text-2xl font-black text-slate-900 mb-4 lang-en hidden">Academic & Publication</h3>
+                    
+                    <p class="text-slate-500 mb-6 font-medium leading-relaxed lang-zh">致力於建立台灣緊急醫療救護的實證醫學基礎，推動國內外救護學術交流，並將最新的臨床研究成果轉化為實際的救護指引。</p>
+                    <p class="text-slate-500 mb-6 font-medium leading-relaxed lang-en hidden">Dedicated to building the foundation of evidence-based medicine for Taiwan's EMS, promoting international academic exchange, and translating clinical research into practical guidelines.</p>
+                    
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-orange-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span class="text-slate-700 font-bold lang-zh">學術期刊發行與徵稿</span>
+                            <span class="text-slate-700 font-bold lang-en hidden">TSP Journal Publication</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-orange-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span class="text-slate-700 font-bold lang-zh">策辦學術研討會與活動</span>
+                            <span class="text-slate-700 font-bold lang-en hidden">Academic Conferences & Events</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-orange-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span class="text-slate-700 font-bold lang-zh">PERIC 專案推動與數據分析</span>
+                            <span class="text-slate-700 font-bold lang-en hidden">PERIC Project & Data Analysis</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 2. 教育委員會 -->
+            <div class="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden flex flex-col hover:-translate-y-2 transition-transform duration-300">
+                <div class="h-3 bg-orange-500 w-full"></div>
+                <div class="p-8 flex-grow">
+                    <div class="w-14 h-14 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-black text-slate-900 mb-4 lang-zh">教育委員會</h3>
+                    <h3 class="text-2xl font-black text-slate-900 mb-4 lang-en hidden">Education Committee</h3>
+                    
+                    <p class="text-slate-500 mb-6 font-medium leading-relaxed lang-zh">核心目標在於提升各級救護人員的專業知能與臨床決策能力，引進國際標準化課程，並培育優秀的本土臨床指導員。</p>
+                    <p class="text-slate-500 mb-6 font-medium leading-relaxed lang-en hidden">Focuses on enhancing the professional skills and clinical decision-making of paramedics, introducing international standardized courses, and cultivating excellent local clinical preceptors.</p>
+                    
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-orange-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span class="text-slate-700 font-bold lang-zh">高階救護員繼續教育 (CME)</span>
+                            <span class="text-slate-700 font-bold lang-en hidden">Paramedic Continuing Medical Education</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-orange-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span class="text-slate-700 font-bold lang-zh">到院前創傷生命救援 (PHTLS)</span>
+                            <span class="text-slate-700 font-bold lang-en hidden">PHTLS Certification Courses</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-orange-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span class="text-slate-700 font-bold lang-zh">戰術/戰傷救護 (TCCC/TECC)</span>
+                            <span class="text-slate-700 font-bold lang-en hidden">TCCC / TECC Training</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-orange-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span class="text-slate-700 font-bold lang-zh">臨床指導員訓練機制建立</span>
+                            <span class="text-slate-700 font-bold lang-en hidden">Clinical Preceptor Training</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 3. 安全與衛生委員會 -->
+            <div class="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden flex flex-col hover:-translate-y-2 transition-transform duration-300">
+                <div class="h-3 bg-emerald-600 w-full"></div>
+                <div class="p-8 flex-grow">
+                    <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-black text-slate-900 mb-4 lang-zh">職業安全與衛生委員會</h3>
+                    <h3 class="text-2xl font-black text-slate-900 mb-4 lang-en hidden">OH&S Committee</h3>
+                    
+                    <p class="text-slate-500 mb-6 font-medium leading-relaxed lang-zh">唯有健康的救護員，才能提供高品質的救護。本委員會致力於政策倡議與實務計畫，全方位守護同仁的生理與心理健康。</p>
+                    <p class="text-slate-500 mb-6 font-medium leading-relaxed lang-en hidden">Healthy paramedics are the foundation of high-quality care. This committee focuses on policy advocacy and practical programs to protect both the physical and mental well-being of our peers.</p>
+                    
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-orange-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span class="text-slate-700 font-bold lang-zh">友善執業環境與政策倡議</span>
+                            <span class="text-slate-700 font-bold lang-en hidden">Policy Advocacy for Safe Practice</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-orange-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span class="text-slate-700 font-bold lang-zh">推動「保背計畫」<br><span class="text-xs text-slate-400 font-medium">優化 EMT 安全徒手搬負 (Manual Handling)</span></span>
+                            <span class="text-slate-700 font-bold lang-en hidden">Save-the-Back Project <br><span class="text-xs text-slate-400 font-medium">Safe Manual Handling for EMTs</span></span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-orange-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span class="text-slate-700 font-bold lang-zh">心理健康與同儕支持 (Peer Support)<br><span class="text-xs text-slate-400 font-medium">關注創傷後壓力與復原力</span></span>
+                            <span class="text-slate-700 font-bold lang-en hidden">Mental Health & Peer Support <br><span class="text-xs text-slate-400 font-medium">Addressing PTSD and Resilience</span></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 下半部：各委員會動態消息 (連接 Google Sheets) -->
+        <div class="border-t border-slate-200 pt-16">
+            <div class="flex items-center justify-between mb-10">
+                <h3 class="text-2xl font-black text-slate-900 tracking-tight flex items-center gap-3">
+                    <span class="w-2 h-6 bg-blue-800 rounded-sm"></span>
+                    <span class="lang-zh">委員會最新動態</span>
+                    <span class="lang-en hidden">Latest Committee Updates</span>
+                </h3>
+                <a href="/" class="text-sm font-bold text-orange-500 hover:text-orange-600 transition-colors lang-zh">查看全部消息 →</a>
+                <a href="/" class="text-sm font-bold text-orange-500 hover:text-orange-600 transition-colors lang-en hidden">View All News →</a>
+            </div>
+            
+            <div id="committee-post-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 載入動畫 -->
+                <div class="animate-pulse bg-white p-4 rounded-xl shadow-sm h-80 border border-slate-100 flex items-center justify-center col-span-full">
+                    <p class="text-slate-400 font-bold text-sm tracking-widest">Loading Data...</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer 佔位符 -->
+    <div id="footer-placeholder"></div>
+
+    <!-- 腳本 -->
+    <script>
+        let lang = 'zh';
+        let posts = [];
+        
+        // 您的 Google Sheets 連結
+        const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQfiEDEtIn6BJMw1VPnVLOps_mi2fgitOb7B8t9Wx0rEnpnuocIcvKEaGj_5q2M22la4oQPrd-tiE3N/pub?output=csv';
+
+        // 顏色字典
+        const colorDictionary = {
+            '藍': 'bg-blue-800 text-white', '橘': 'bg-orange-500 text-white',
+            '綠': 'bg-emerald-600 text-white', '紅': 'bg-rose-600 text-white',
+            '黃': 'bg-yellow-400 text-slate-900', '紫': 'bg-purple-600 text-white',
+            '灰': 'bg-slate-600 text-white', '黑': 'bg-slate-900 text-white'
+        };
+
+        // 1. 載入共用組件
+        async function loadComponents() {
+            try {
+                const [navRes, footRes] = await Promise.all([
+                    fetch('components/navbar.html'),
+                    fetch('components/footer.html')
+                ]);
+                if(navRes.ok) document.getElementById('navbar-placeholder').innerHTML = await navRes.text();
+                if(footRes.ok) document.getElementById('footer-placeholder').innerHTML = await footRes.text();
+                updateLanguageUI();
+            } catch (error) {
+                console.error("載入失敗", error);
+            }
+        }
+
+        // 2. 載入 Google Sheets 資料
+        async function loadData() {
+            try {
+                const response = await fetch(sheetUrl);
+                const csvText = await response.text();
+                Papa.parse(csvText, {
+                    header: true, skipEmptyLines: true,
+                    complete: function(results) {
+                        // 🌟 智慧過濾：只抓有填寫 committee，且不是「學會公告」的文章，並只顯示最新的 3 篇
+                        posts = results.data.filter(p => p.committee && p.committee.trim() !== '學會公告').slice(0, 3);
+                        
+                        // 如果過濾完發現沒有半篇，那就退而求其次抓最新的 3 篇文章墊檔
+                        if(posts.length === 0) posts = results.data.slice(0, 3);
+                        
+                        renderCards();
+                    }
+                });
+            } catch (error) {
+                document.getElementById('committee-post-container').innerHTML = '<p class="text-center text-slate-500 py-10 w-full col-span-full">資料載入失敗</p>';
+            }
+        }
+
+        // 3. 渲染卡片
+        function renderCards() {
+            const container = document.getElementById('committee-post-container');
+            if (!posts || posts.length === 0) {
+                container.innerHTML = '<p class="text-center text-slate-400 py-10 w-full col-span-full">目前尚無活動資料</p>';
+                return;
+            }
+
+            container.innerHTML = posts.map(p => {
+                const rawColor = p.color ? p.color.trim() : '';
+                const tagTheme = colorDictionary[rawColor] || 'bg-blue-800 text-white';
+                const tag = p.tag || '活動';
+                const img = p.img || 'https://images.unsplash.com/photo-1516549655169-df83a0774514?w=800';
+                
+                let link = p.link ? p.link.trim() : '';
+                if (link !== '' && !link.startsWith('http')) link = 'https://' + link;
+                const isClickable = link !== '';
+                const wrapperTag = isClickable ? 'a' : 'div';
+                const hrefAttr = isClickable ? `href="${link}" target="_blank"` : '';
+                
+                const readMoreText = lang === 'zh' ? '查看詳情 →' : 'View Details →';
+                const readMoreHtml = isClickable ? `<div class="mt-auto pt-4 border-t border-slate-50 text-xs font-bold text-orange-500">${readMoreText}</div>` : '';
+
+                return `
+                <${wrapperTag} ${hrefAttr} class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-slate-100 flex flex-col h-full ${isClickable ? 'cursor-pointer' : ''}">
+                    <div class="relative overflow-hidden aspect-video bg-slate-100">
+                        <img src="${img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute top-4 left-4 ${tagTheme} px-3 py-1 rounded shadow-lg shadow-black/20 text-xs font-black uppercase tracking-widest z-10 backdrop-blur-sm">
+                            ${tag}
+                        </div>
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <p class="text-slate-400 font-bold text-[11px] mb-2 tracking-widest">${p.date || ''}</p>
+                        <h4 class="text-lg font-bold mb-3 text-slate-900 line-clamp-2">${lang === 'zh' ? (p.title_zh || '') : (p.title_en || '')}</h4>
+                        <p class="text-slate-500 text-sm font-medium line-clamp-3 mb-4 flex-grow">${lang === 'zh' ? (p.desc_zh || '') : (p.desc_en || '')}</p>
+                        ${readMoreHtml}
+                    </div>
+                </${wrapperTag}>`;
+            }).join('');
+        }
+
+        // 切換語言
+        window.toggleLang = function() {
+            lang = lang === 'zh' ? 'en' : 'zh';
+            updateLanguageUI();
+            renderCards(); 
+        }
+
+        function updateLanguageUI() {
+            document.querySelectorAll('.lang-zh').forEach(el => el.classList.toggle('hidden', lang !== 'zh'));
+            document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', lang !== 'en'));
+        }
+
+        // 啟動
+        loadComponents();
+        loadData();
+    </script>
+</body>
+</html>
