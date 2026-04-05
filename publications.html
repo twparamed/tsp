@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公開資料 | TSP 台灣醫療救護學會</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Montserrat:wght@800;900&display=swap');
+        body { font-family: 'Noto Sans TC', sans-serif; }
+        .slogan-font { font-family: 'Montserrat', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 leading-relaxed flex flex-col min-h-screen">
+
+    <div id="navbar-placeholder"></div>
+
+    <header class="bg-slate-900 pt-32 pb-20 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200')] bg-cover bg-center"></div>
+        <div class="max-w-5xl mx-auto relative z-10 text-center">
+            <h1 class="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight lang-zh">公開資料</h1>
+            <h1 class="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight lang-en hidden">Publications</h1>
+            <div class="w-16 h-1.5 bg-orange-500 mx-auto rounded-full"></div>
+            <p class="text-slate-300 mt-6 max-w-2xl mx-auto font-medium lang-zh">秉持專業透明原則，定期發布學會年度報告與學術相關出版品，推動資訊開放與學術共享。</p>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-6xl mx-auto px-6 py-16 w-full relative -mt-10 z-20">
+        
+        <section class="bg-white rounded-2xl shadow-xl border border-slate-100 p-8 md:p-12 mb-12">
+            <h3 class="text-2xl font-black text-slate-900 mb-8 border-b border-slate-100 pb-4 flex items-center gap-3">
+                <span class="w-2 h-6 bg-blue-800 rounded-sm"></span>
+                <span class="lang-zh">年度報告 (Annual Reports)</span>
+            </h3>
+            
+            <div id="annual-report-container" class="space-y-4">
+                <div class="animate-pulse flex space-x-4 bg-slate-50 p-4 rounded-lg">
+                    <div class="flex-1 space-y-4 py-1"><div class="h-4 bg-slate-200 rounded"></div></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow-xl border border-slate-100 p-8 md:p-12">
+            <h3 class="text-2xl font-black text-slate-900 mb-8 border-b border-slate-100 pb-4 flex items-center gap-3">
+                <span class="w-2 h-6 bg-orange-500 rounded-sm"></span>
+                <span class="lang-zh">出版品與刊物 (Publications)</span>
+            </h3>
+            
+            <div id="publication-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="animate-pulse h-64 bg-slate-100 rounded-xl col-span-full"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        let lang = 'zh';
+        const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQfiEDEtIn6BJMw1VPnVLOps_mi2fgitOb7B8t9Wx0rEnpnuocIcvKEaGj_5q2M22la4oQPrd-tiE3N/pub?output=csv';
+
+        async function loadComponents() {
+            try {
+                const [navRes, footRes] = await Promise.all([
+                    fetch('components/navbar.html'), fetch('components/footer.html')
+                ]);
+                if(navRes.ok) document.getElementById('navbar-placeholder').innerHTML = await navRes.text();
+                if(footRes.ok) document.getElementById('footer-placeholder').innerHTML = await footRes.text();
+                updateLanguageUI();
+            } catch (error) { console.error("載入失敗", error); }
+        }
+
+        async function loadData() {
+            try {
+                const response = await fetch(sheetUrl);
+                const csvText = await response.text();
+                Papa.parse(csvText, {
+                    header: true, skipEmptyLines: true,
+                    complete: function(results) {
+                        const allData = results.data;
+                        renderReports(allData.filter(p => p.committee === '年度報告'));
+                        renderPubs(allData.filter(p => p.committee === '出版品'));
+                    }
+                });
+            } catch (error) { console.error("資料載入失敗"); }
+        }
+
+        // 渲染年度報告 (橫向列表)
+        function renderReports(data) {
+            const container = document.getElementById('annual-report-container');
+            if (data.length === 0) {
+                container.innerHTML = '<p class="text-slate-400 font-medium">尚無報告資料</p>';
+                return;
+            }
+            container.innerHTML = data.map(p => `
+                <a href="${p.link}" target="_blank" class="flex items-center justify-between p-4 bg-slate-50 hover:bg-blue-50 rounded-xl border border-slate-100 transition-colors group">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-blue-800 text-white w-10 h-10 flex items-center justify-center rounded-lg font-black text-xs">${p.date.split('/')[0] || 'DOC'}</div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 group-hover:text-blue-800 transition-colors">${p.title_zh}</h4>
+                            <p class="text-xs text-slate-500 font-medium">${p.desc_zh}</p>
+                        </div>
+                    </div>
+                    <div class="text-blue-800 font-bold text-sm">Download ↓</div>
+                </a>
+            `).join('');
+        }
+
+        // 渲染出版品 (卡片)
+        function renderPubs(data) {
+            const container = document.getElementById('publication-container');
+            if (data.length === 0) {
+                container.innerHTML = '<p class="text-slate-400 font-medium col-span-full">尚無出版品資料</p>';
+                return;
+            }
+            container.innerHTML = data.map(p => `
+                <div class="flex flex-col bg-white border border-slate-100 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
+                    <img src="${p.img || 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=800'}" class="aspect-[4/3] object-cover">
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h4 class="font-black text-slate-900 mb-2">${p.title_zh}</h4>
+                        <p class="text-sm text-slate-500 font-medium mb-4 line-clamp-2">${p.desc_zh}</p>
+                        <a href="${p.link}" target="_blank" class="mt-auto inline-block text-center bg-slate-900 text-white py-2 rounded text-xs font-bold hover:bg-orange-500 transition-colors">閱讀全文 / 購買</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        window.toggleLang = function() {
+            lang = lang === 'zh' ? 'en' : 'zh';
+            updateLanguageUI();
+            loadData(); // 重新載入以更新文字
+        }
+
+        function updateLanguageUI() {
+            document.querySelectorAll('.lang-zh').forEach(el => el.classList.toggle('hidden', lang !== 'zh'));
+            document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', lang !== 'en'));
+        }
+
+        loadComponents();
+        loadData();
+    </script>
+</body>
+</html>
