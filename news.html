@@ -152,7 +152,24 @@
             renderCards();
         }
 
-        // 為了讓彈出視窗抓得到資料，我們設一個全域變數記錄當前顯示的卡片
+        
+
+
+        function updateLanguageUI() {
+            document.querySelectorAll('.lang-zh').forEach(el => el.classList.toggle('hidden', lang !== 'zh'));
+            document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', lang !== 'en'));
+        }
+
+        // 🌟 新增：打開彈出視窗
+        function openModal(index) {
+            const p = currentRenderedPosts[index];
+            const modal = document.getElementById('news-modal');
+            const content = document.getElementById('news-modal-content');
+            
+            const rawColor = p.color ? p.color.trim() : '';
+            const tagTheme = colorDictionary[rawColor] || 'bg-slate-600 text-white';
+            const img = p.img || 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800';
+            const title = lang === 'zh' ? (p.title_zh || '') : (p.title_en        // 為了讓彈出視窗抓得到資料，我們設一個全域變數記錄當前顯示的卡片
         let currentRenderedPosts = [];
 
         function renderCards() {
@@ -207,23 +224,7 @@
                 `;
             }).join('');
         }
-
-
-        function updateLanguageUI() {
-            document.querySelectorAll('.lang-zh').forEach(el => el.classList.toggle('hidden', lang !== 'zh'));
-            document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', lang !== 'en'));
-        }
-
-        // 🌟 新增：打開彈出視窗
-        function openModal(index) {
-            const p = currentRenderedPosts[index];
-            const modal = document.getElementById('news-modal');
-            const content = document.getElementById('news-modal-content');
-            
-            const rawColor = p.color ? p.color.trim() : '';
-            const tagTheme = colorDictionary[rawColor] || 'bg-slate-600 text-white';
-            const img = p.img || 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800';
-            const title = lang === 'zh' ? (p.title_zh || '') : (p.title_en || '');
+ || '');
             const desc = lang === 'zh' ? (p.desc_zh || '') : (p.desc_en || '');
 
             // 組合彈出視窗的 HTML 內容
