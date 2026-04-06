@@ -75,6 +75,7 @@
         let lang = 'zh';
         let currentFilter = 'all';
         let posts = [];
+        let filteredData = [];
         
         // Google Sheets 連結
         const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQfiEDEtIn6BJMw1VPnVLOps_mi2fgitOb7B8t9Wx0rEnpnuocIcvKEaGj_5q2M22la4oQPrd-tiE3N/pub?output=csv';
@@ -86,7 +87,7 @@
             '灰': 'bg-slate-600 text-white', '黑': 'bg-slate-900 text-white'
         };
 
-// 載入 Navbar & Footer
+        // 載入 Navbar & Footer
         async function loadComponents() {
             try {
                 const [navRes, footRes] = await Promise.all([
@@ -97,18 +98,15 @@
                 if(navRes.ok) {
                     const navHtml = await navRes.text();
                     document.getElementById('navbar-placeholder').innerHTML = navHtml;
-                    
-                    // 🚀 【關鍵修復】載入 HTML 後，立即啟動手機版按鈕功能
                     initMobileMenu(); 
                 }
                 
                 if(footRes.ok) {
                     document.getElementById('footer-placeholder').innerHTML = await footRes.text();
                 }
-                
                 updateLanguageUI();
             } catch (error) {
-                console.error("載入組件失敗", error);
+                console.error("組件載入失敗:", error);
             }
         }
 
@@ -119,72 +117,71 @@
             
             if (btn && menu) {
                 btn.addEventListener('click', () => {
-                    // 切換 hidden 類別來顯示/隱藏選單
                     menu.classList.toggle('hidden');
                 });
             }
         }
+
+        // 載入試算表資料
         async function loadData() {
             try {
                 const response = await fetch(sheetUrl);
                 const csvText = await response.text();
+                
                 Papa.parse(csvText, {
-                    header: true, skipEmptyLines: true,
+                    header: true,
+                    skipEmptyLines: true,
                     complete: function(results) {
                         posts = results.data;
-                        renderCards();
+                        setFilter('all'); // 預設顯示全部並渲染
                     }
                 });
             } catch (error) {
-                document.getElementById('post-container').innerHTML = '<p class="text-center text-slate-500 py-10 w-full col-span-full">資料載入失敗</p>';
+                document.getElementById('post-container').innerHTML = '<p class="text-red-500 text-center font-bold col-span-full">資料載入失敗，請稍後再試。</p>';
+                console.error("資料載入錯誤:", error);
             }
         }
 
-        window.setFilter = function(filterValue) {
-            currentFilter = filterValue;
+        // 處理分類按鈕點擊與資料篩選
+        window.setFilter = function(filter) {
+            currentFilter = filter;
+            
+            // 更新按鈕樣式
             document.querySelectorAll('.filter-btn').forEach(btn => {
-                if(btn.dataset.filter === filterValue) {
-                    btn.className = "filter-btn px-5 py-2 rounded-full text-sm font-bold bg-blue-800 text-white transition-colors shadow-md";
+                if (btn.dataset.filter === filter) {
+                    btn.classList.add('bg-blue-800', 'text-white', 'shadow-md');
+                    btn.classList.remove('bg-slate-50', 'text-slate-600', 'hover:bg-slate-100');
                 } else {
-                    btn.className = "filter-btn px-5 py-2 rounded-full text-sm font-bold bg-slate-50 border border-slate-200 text-slate-600 hover:bg-slate-100 transition-colors";
+                    btn.classList.remove('bg-blue-800', 'text-white', 'shadow-md');
+                    btn.classList.add('bg-slate-50', 'text-slate-600', 'hover:bg-slate-100');
                 }
             });
+
+            // 篩選資料 (過濾掉空標題，以及針對 currentFilter 篩選)
+            filteredData = posts.filter(p => {
+                if (!p.title_zh && !p.title_en) return false;
+                if (filter === 'all') return true;
+                return p.committee === filter || p.tag === filter;
+            });
+
             renderCards();
         }
 
-        
-
-
-        function updateLanguageUI() {
-            document.querySelectorAll('.lang-zh').forEach(el => el.classList.toggle('hidden', lang !== 'zh'));
-            document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', lang !== 'en'));
-        }
-
-        // 🌟 新增：打開彈出視窗
-        function openModal(index) {
-            const p = currentRenderedPosts[index];
-            const modal = document.getElementById('news-modal');
-            const content = document.getElementById('news-modal-content');
-            
-            const rawColor = p.color ? p.color.trim() : '';
-            const tagTheme = colorDictionary[rawColor] || 'bg-slate-600 text-white';
-            const img = p.img || 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800';
-            const title = lang === 'zh' ? (p.title_zh || '') : (p.title_en        // 為了讓彈出視窗抓得到資料，我們設一個全域變數記錄當前顯示的卡片
+        // 為了讓彈出視窗抓得到資料，我們設一個全域變數記錄當前顯示的卡片
         let currentRenderedPosts = [];
 
         function renderCards() {
-            const container = document.getElementById('news-container');
+            const container = document.getElementById('post-container');
             
-            // 🚀 修復點：把 filteredData 改回 posts
-            if (!posts || posts.length === 0) {
+            if (filteredData.length === 0) {
                 container.innerHTML = '<p class="text-slate-400 font-medium col-span-full text-center py-10">目前沒有相關分類的新聞或活動。</p>';
                 return;
             }
 
-            // 將當前資料存起來，給彈出視窗使用
-            currentRenderedPosts = posts;
+            // 將當前篩選後的資料存起來，給彈出視窗使用
+            currentRenderedPosts = filteredData;
 
-            container.innerHTML = posts.map((p, index) => {
+            container.innerHTML = filteredData.map((p, index) => {
                 const rawColor = p.color ? p.color.trim() : '';
                 const tagTheme = colorDictionary[rawColor] || 'bg-slate-600 text-white';
                 const tag = p.tag || '公告';
@@ -223,8 +220,20 @@
                 ${endTag}
                 `;
             }).join('');
+            
+            updateLanguageUI();
         }
- || '');
+
+        // 🌟 新增：打開彈出視窗
+        window.openModal = function(index) {
+            const p = currentRenderedPosts[index];
+            const modal = document.getElementById('news-modal');
+            const content = document.getElementById('news-modal-content');
+            
+            const rawColor = p.color ? p.color.trim() : '';
+            const tagTheme = colorDictionary[rawColor] || 'bg-slate-600 text-white';
+            const img = p.img || 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800';
+            const title = lang === 'zh' ? (p.title_zh || '') : (p.title_en || '');
             const desc = lang === 'zh' ? (p.desc_zh || '') : (p.desc_en || '');
 
             // 組合彈出視窗的 HTML 內容
@@ -241,14 +250,11 @@
                         <span class="text-slate-400 font-bold text-sm tracking-widest">${p.date || ''}</span>
                     </div>
                     <h3 class="text-2xl md:text-3xl font-black text-slate-900 mb-6 leading-snug">${title}</h3>
-                    <!-- 加上 whitespace-pre-wrap 讓 Google Sheet 裡的換行能正確顯示 -->
                     <div class="text-slate-600 font-medium leading-relaxed whitespace-pre-wrap text-[15px]">${desc}</div>
                 </div>
             `;
             
-            // 顯示視窗並觸發動畫
             modal.classList.remove('hidden');
-            // 鎖定背景捲動
             document.body.style.overflow = 'hidden'; 
             
             setTimeout(() => {
@@ -258,13 +264,12 @@
         }
 
         // 🌟 新增：關閉彈出視窗
-        function closeModal() {
+        window.closeModal = function() {
             const modal = document.getElementById('news-modal');
             const content = document.getElementById('news-modal-content');
             
             modal.classList.add('opacity-0');
             content.classList.add('scale-95');
-            // 恢復背景捲動
             document.body.style.overflow = 'auto';
             
             setTimeout(() => {
@@ -272,7 +277,18 @@
             }, 300);
         }
 
-        
+        window.toggleLang = function() {
+            lang = lang === 'zh' ? 'en' : 'zh';
+            updateLanguageUI();
+            renderCards(); 
+        }
+
+        function updateLanguageUI() {
+            document.querySelectorAll('.lang-zh').forEach(el => el.classList.toggle('hidden', lang !== 'zh'));
+            document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', lang !== 'en'));
+        }
+
+        // 啟動程式
         loadComponents();
         loadData();
     </script>
