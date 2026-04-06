@@ -329,20 +329,44 @@
     <script>
         let lang = 'zh';
 
+// 載入 Navbar & Footer
         async function loadComponents() {
             try {
                 const [navRes, footRes] = await Promise.all([
                     fetch('components/navbar.html'),
                     fetch('components/footer.html')
                 ]);
-                if(navRes.ok) document.getElementById('navbar-placeholder').innerHTML = await navRes.text();
-                if(footRes.ok) document.getElementById('footer-placeholder').innerHTML = await footRes.text();
+                
+                if(navRes.ok) {
+                    const navHtml = await navRes.text();
+                    document.getElementById('navbar-placeholder').innerHTML = navHtml;
+                    
+                    // 🚀 【關鍵修復】載入 HTML 後，立即啟動手機版按鈕功能
+                    initMobileMenu(); 
+                }
+                
+                if(footRes.ok) {
+                    document.getElementById('footer-placeholder').innerHTML = await footRes.text();
+                }
+                
                 updateLanguageUI();
             } catch (error) {
-                console.error("載入導覽列或頁尾失敗", error);
+                console.error("載入組件失敗", error);
             }
         }
 
+        // 📱 手機版選單開關邏輯
+        function initMobileMenu() {
+            const btn = document.getElementById('mobile-menu-button');
+            const menu = document.getElementById('mobile-menu');
+            
+            if (btn && menu) {
+                btn.addEventListener('click', () => {
+                    // 切換 hidden 類別來顯示/隱藏選單
+                    menu.classList.toggle('hidden');
+                });
+            }
+        }
         window.toggleLang = function() {
             lang = lang === 'zh' ? 'en' : 'zh';
             updateLanguageUI();
