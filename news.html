@@ -55,6 +55,18 @@
         </div>
     </main>
 
+        <!-- 🌟 新增：彈出視窗 (Modal) 的隱藏結構 -->
+    <div id="news-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-slate-900/80 backdrop-blur-sm p-4 opacity-0 transition-opacity duration-300">
+        <!-- 點擊背景關閉 -->
+        <div class="absolute inset-0 cursor-pointer" onclick="closeModal()"></div>
+        
+        <!-- 視窗內容區塊 -->
+        <div class="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl transform scale-95 transition-transform duration-300 relative z-10" id="news-modal-content">
+            <!-- JavaScript 會把詳細內容塞進這裡 -->
+        </div>
+    </div>
+
+
     <!-- Footer 佔位符 -->
     <div id="footer-placeholder"></div>
 
