@@ -152,37 +152,41 @@
             renderCards();
         }
 
+                // 為了讓彈出視窗抓得到資料，我們設一個全域變數記錄當前顯示的卡片
+        let currentRenderedPosts = [];
+
         function renderCards() {
-            const container = document.getElementById('post-container');
-            if (!posts || posts.length === 0) {
-                container.innerHTML = '<p class="text-center text-slate-400 py-20 w-full col-span-full font-bold">目前尚無資料</p>';
+            const container = document.getElementById('news-container');
+            if (filteredData.length === 0) {
+                container.innerHTML = '<p class="text-slate-400 font-medium col-span-full text-center py-10">目前沒有相關分類的新聞或活動。</p>';
                 return;
             }
 
-            const filteredPosts = currentFilter === 'all' ? posts : posts.filter(p => p.committee === currentFilter);
+            // 將當前篩選後的資料存起來，給彈出視窗使用
+            currentRenderedPosts = filteredData;
 
-            if (filteredPosts.length === 0) {
-                container.innerHTML = '<div class="text-center py-20 w-full col-span-full"><p class="text-slate-400 font-bold text-lg mb-2">這個分類目前尚無發布資訊</p><p class="text-slate-400 text-sm">請點擊其他分類查看最新消息。</p></div>';
-                return;
-            }
-
-            container.innerHTML = filteredPosts.map(p => {
+            container.innerHTML = filteredData.map((p, index) => {
                 const rawColor = p.color ? p.color.trim() : '';
-                const tagTheme = colorDictionary[rawColor] || 'bg-blue-800 text-white';
+                const tagTheme = colorDictionary[rawColor] || 'bg-slate-600 text-white';
                 const tag = p.tag || '公告';
-                const img = p.img || 'https://images.unsplash.com/photo-1516549655169-df83a0774514?w=800';
+                const img = p.img || 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800';
                 
                 let link = p.link ? p.link.trim() : '';
                 if (link !== '' && !link.startsWith('http')) link = 'https://' + link;
-                const isClickable = link !== '';
-                const wrapperTag = isClickable ? 'a' : 'div';
-                const hrefAttr = isClickable ? `href="${link}" target="_blank"` : '';
+                const hasLink = link !== '';
                 
-                const readMoreText = lang === 'zh' ? '閱讀全文 →' : 'Read More →';
-                const readMoreHtml = isClickable ? `<div class="mt-auto pt-4 border-t border-slate-50 text-xs font-bold text-orange-500">${readMoreText}</div>` : '';
+                const title = lang === 'zh' ? (p.title_zh || '') : (p.title_en || '');
+                const desc = lang === 'zh' ? (p.desc_zh || '') : (p.desc_en || '');
+                const readMoreText = lang === 'zh' ? '閱讀完整內容 →' : 'Read More →';
+
+                // 🚀 核心邏輯：判斷是外部連結，還是觸發彈出視窗 (openModal)
+                const actionHtml = hasLink 
+                    ? `<a href="${link}" target="_blank" class="block h-full group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-slate-200 flex flex-col cursor-pointer">`
+                    : `<div onclick="openModal(${index})" class="h-full group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-slate-200 flex flex-col cursor-pointer">`;
+                const endTag = hasLink ? `</a>` : `</div>`;
 
                 return `
-                <${wrapperTag} ${hrefAttr} class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-200 flex flex-col h-full ${isClickable ? 'cursor-pointer' : ''}">
+                ${actionHtml}
                     <div class="relative overflow-hidden aspect-video bg-slate-100">
                         <img src="${img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                         <div class="absolute top-4 left-4 ${tagTheme} px-3 py-1 rounded shadow-lg shadow-black/20 text-xs font-black uppercase tracking-widest z-10 backdrop-blur-sm">
@@ -191,13 +195,17 @@
                     </div>
                     <div class="p-5 flex-grow flex flex-col">
                         <p class="text-slate-400 font-bold text-[11px] mb-2 tracking-widest">${p.date || ''}</p>
-                        <h4 class="text-lg font-bold mb-3 text-slate-900 line-clamp-2 leading-snug">${lang === 'zh' ? (p.title_zh || '') : (p.title_en || '')}</h4>
-                        <p class="text-slate-500 text-sm font-medium line-clamp-3 mb-4 flex-grow">${lang === 'zh' ? (p.desc_zh || '') : (p.desc_en || '')}</p>
-                        ${readMoreHtml}
+                        <h4 class="text-lg font-bold mb-3 text-slate-900 line-clamp-2 leading-snug">${title}</h4>
+                        <p class="text-slate-500 text-sm font-medium line-clamp-3 mb-4 flex-grow">${desc}</p>
+                        <div class="mt-auto pt-4 border-t border-slate-50 text-xs font-bold text-blue-800 group-hover:text-orange-500 transition-colors">
+                            ${hasLink ? (lang === 'zh' ? '前往外部連結 ↗' : 'External Link ↗') : readMoreText}
+                        </div>
                     </div>
-                </${wrapperTag}>`;
+                ${endTag}
+                `;
             }).join('');
         }
+
 
         window.toggleLang = function() {
             lang = lang === 'zh' ? 'en' : 'zh';
@@ -210,6 +218,64 @@
             document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', lang !== 'en'));
         }
 
+        // 🌟 新增：打開彈出視窗
+        function openModal(index) {
+            const p = currentRenderedPosts[index];
+            const modal = document.getElementById('news-modal');
+            const content = document.getElementById('news-modal-content');
+            
+            const rawColor = p.color ? p.color.trim() : '';
+            const tagTheme = colorDictionary[rawColor] || 'bg-slate-600 text-white';
+            const img = p.img || 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800';
+            const title = lang === 'zh' ? (p.title_zh || '') : (p.title_en || '');
+            const desc = lang === 'zh' ? (p.desc_zh || '') : (p.desc_en || '');
+
+            // 組合彈出視窗的 HTML 內容
+            content.innerHTML = `
+                <div class="relative bg-slate-100 aspect-video md:aspect-[21/9]">
+                    <button onclick="closeModal()" class="absolute top-4 right-4 w-10 h-10 bg-black/50 text-white rounded-full flex items-center justify-center hover:bg-black/80 z-20 backdrop-blur-sm transition-colors shadow-lg">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                    <img src="${img}" class="w-full h-full object-cover">
+                </div>
+                <div class="p-8 md:p-10">
+                    <div class="flex flex-wrap items-center gap-3 mb-6">
+                        <span class="${tagTheme} px-3 py-1 rounded text-xs font-black uppercase tracking-widest shadow-sm">${p.tag || '公告'}</span>
+                        <span class="text-slate-400 font-bold text-sm tracking-widest">${p.date || ''}</span>
+                    </div>
+                    <h3 class="text-2xl md:text-3xl font-black text-slate-900 mb-6 leading-snug">${title}</h3>
+                    <!-- 加上 whitespace-pre-wrap 讓 Google Sheet 裡的換行能正確顯示 -->
+                    <div class="text-slate-600 font-medium leading-relaxed whitespace-pre-wrap text-[15px]">${desc}</div>
+                </div>
+            `;
+            
+            // 顯示視窗並觸發動畫
+            modal.classList.remove('hidden');
+            // 鎖定背景捲動
+            document.body.style.overflow = 'hidden'; 
+            
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                content.classList.remove('scale-95');
+            }, 10);
+        }
+
+        // 🌟 新增：關閉彈出視窗
+        function closeModal() {
+            const modal = document.getElementById('news-modal');
+            const content = document.getElementById('news-modal-content');
+            
+            modal.classList.add('opacity-0');
+            content.classList.add('scale-95');
+            // 恢復背景捲動
+            document.body.style.overflow = 'auto';
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        
         loadComponents();
         loadData();
     </script>
