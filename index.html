@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TSP 台灣醫療救護學會 | Taiwan Society of Paramedicine</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- PapaParse (解析 Google Sheets) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Montserrat:wght@800;900&display=swap');
@@ -28,10 +26,8 @@
 </head>
 <body class="bg-slate-50 text-slate-900 leading-relaxed">
 
-    <!-- Navbar 佔位符 -->
     <div id="navbar-placeholder"></div>
 
-    <!-- 影像英雄區 -->
     <section class="hero-section pt-32 pb-28 px-6 relative">
         <div class="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
             <div class="md:w-2/3">
@@ -56,11 +52,8 @@
         </div>
     </section>
 
-    <!-- 🌟 新增：快捷行動區 (Quick Actions) - 使用負邊距 (-mt-16) 產生重疊懸浮效果 -->
     <div class="max-w-7xl mx-auto px-6 relative z-20 -mt-16 mb-20">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-            
-            <!-- Action 1: 會員 -->
             <a href="https://reurl.cc/DxA9X6" target="_blank" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-blue-800 hover:-translate-y-2 transition-transform duration-300 group">
                 <div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mb-4 group-hover:bg-blue-800 transition-colors">
                     <svg class="w-6 h-6 text-blue-800 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
@@ -70,8 +63,6 @@
                 <p class="text-sm text-slate-500 font-medium lang-zh">成為會員，與全國救護菁英共同成長，享有專屬福利與資源。</p>
                 <p class="text-sm text-slate-500 font-medium lang-en hidden">Become a member and access exclusive benefits and resources.</p>
             </a>
-
-            <!-- Action 2: 期刊 -->
             <a href="https://www.ipress.tw/J0233" target="_blank" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-orange-500 hover:-translate-y-2 transition-transform duration-300 group">
                 <div class="w-12 h-12 bg-orange-50 rounded-full flex items-center justify-center mb-4 group-hover:bg-orange-500 transition-colors">
                     <svg class="w-6 h-6 text-orange-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
@@ -81,8 +72,6 @@
                 <p class="text-sm text-slate-500 font-medium lang-zh">閱讀最新發表的到院前救護實證醫學與臨床研究論文。</p>
                 <p class="text-sm text-slate-500 font-medium lang-en hidden">Read the latest publications on pre-hospital evidence-based medicine.</p>
             </a>
-
-            <!-- Action 3: 教育 -->
             <a href="training.html" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-slate-700 hover:-translate-y-2 transition-transform duration-300 group">
                 <div class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-slate-700 transition-colors">
                     <svg class="w-6 h-6 text-slate-700 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
@@ -92,8 +81,6 @@
                 <p class="text-sm text-slate-500 font-medium lang-zh">報名最新持續教育 (CPD) 等各類進階專業救護課程。</p>
                 <p class="text-sm text-slate-500 font-medium lang-en hidden">Register for ACLS, CPD, and advanced paramedic courses.</p>
             </a>
-
-            <!-- Action 4: PERIC -->
             <a href="https://perictsp.org" target="_blank" class="bg-slate-900 p-6 rounded-xl shadow-lg border-t-4 border-orange-400 hover:-translate-y-2 transition-transform duration-300 group">
                 <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-orange-500 transition-colors">
                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
@@ -105,10 +92,8 @@
         </div>
     </div>
 
-    <!-- 🌟 新增：關於學會簡介 (About Snippet) -->
     <section class="max-w-7xl mx-auto px-6 py-12 mb-10">
         <div class="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-slate-100 flex flex-col md:flex-row items-center gap-10">
-            <!-- 左側文字 -->
             <div class="md:w-1/2">
                 <div class="inline-block px-3 py-1 bg-blue-50 text-blue-800 text-[10px] font-black rounded tracking-widest uppercase mb-4">About TSP</div>
                 <h3 class="text-3xl md:text-4xl font-black text-slate-900 mb-6 leading-tight">
@@ -125,19 +110,15 @@
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </a>
             </div>
-            <!-- 右側圖片 -->
             <div class="md:w-1/2 w-full">
                 <div class="aspect-video md:aspect-square lg:aspect-[4/3] rounded-2xl overflow-hidden shadow-lg relative">
-                    <!-- 預設放一張訓練或會議的圖，之後可以換成您自己的照片 -->
                     <img src="https://scontent.ftpe3-2.fna.fbcdn.net/v/t39.30808-6/518348165_1036967231922188_3923212033090425750_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=107&ccb=1-7&_nc_sid=7b2446&_nc_ohc=We_2YIEFgM4Q7kNvwGMa802&_nc_oc=AdpvNlqEKj-hpRwptW0QxIjeM5bHjXDrrfPRxzm66QTiAxGfuzBGUZNvj9hGTrAZjEjaU1lfL9xGFdKkJ7N_yY17&_nc_zt=23&_nc_ht=scontent.ftpe3-2.fna&_nc_gid=h_ay8AHTtrWPo7OU3y3fWQ&_nc_ss=7a3a8&oh=00_Af0hiKIeRXeukyBzfz7iXq2p8TY0-6rhJUXP4RPqimxVkA&oe=69D7118D" alt="TSP Meeting" class="w-full h-full object-cover">
-                    <!-- 點綴色塊 -->
                     <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-blue-800 rounded-2xl -z-10"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 最新動態區 -->
     <main class="max-w-7xl mx-auto px-6 py-24 min-h-[50vh]">
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 border-b border-slate-200 pb-6 gap-6">
             <h3 id="section-news" class="text-2xl font-black text-slate-900 tracking-tight flex items-center gap-3">
@@ -145,7 +126,6 @@
                 最新消息 Latest News
             </h3>
             
-            <!-- 分類切換按鈕 -->
             <div class="flex flex-wrap gap-2" id="filter-buttons">
                 <button onclick="setFilter('all')" data-filter="all" class="filter-btn px-4 py-1.5 rounded-full text-sm font-bold bg-blue-800 text-white transition-colors shadow-md">全部 All</button>
                 <button onclick="setFilter('學會公告')" data-filter="學會公告" class="filter-btn px-4 py-1.5 rounded-full text-sm font-bold bg-white border border-slate-200 text-slate-500 hover:bg-slate-50 transition-colors">學會公告</button>
@@ -161,29 +141,34 @@
         </div>
     </main>
 
-    <!-- Footer 佔位符 -->
+    <div id="news-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-slate-900/80 backdrop-blur-sm p-4 opacity-0 transition-opacity duration-300">
+        <div class="absolute inset-0 cursor-pointer" onclick="closeModal()"></div>
+        <div class="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl transform scale-95 transition-transform duration-300 relative z-10" id="news-modal-content">
+            </div>
+    </div>
+
     <div id="footer-placeholder"></div>
 
-    <!-- 核心控制腳本 -->
     <script>
         let lang = 'zh';
         let currentFilter = 'all';
         let posts = [];
+        let currentRenderedPosts = []; // 🌟 新增：為了給彈出視窗抓資料用
         const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQfiEDEtIn6BJMw1VPnVLOps_mi2fgitOb7B8t9Wx0rEnpnuocIcvKEaGj_5q2M22la4oQPrd-tiE3N/pub?output=csv';
 
-        // 🎨 顏色翻譯字典 (讓使用者輸入簡單中文，對應到專業色票)
+        // 🎨 顏色翻譯字典
         const colorDictionary = {
             '藍': 'bg-blue-800 text-white',
             '橘': 'bg-orange-500 text-white',
             '綠': 'bg-emerald-600 text-white',
             '紅': 'bg-rose-600 text-white',
-            '黃': 'bg-yellow-400 text-slate-900', // 黃底用黑字最清楚
+            '黃': 'bg-yellow-400 text-slate-900', 
             '紫': 'bg-purple-600 text-white',
             '灰': 'bg-slate-600 text-white',
             '黑': 'bg-slate-900 text-white'
         };
 
-// 載入 Navbar & Footer
+        // 載入 Navbar & Footer
         async function loadComponents() {
             try {
                 const [navRes, footRes] = await Promise.all([
@@ -194,8 +179,6 @@
                 if(navRes.ok) {
                     const navHtml = await navRes.text();
                     document.getElementById('navbar-placeholder').innerHTML = navHtml;
-                    
-                    // 🚀 【關鍵修復】載入 HTML 後，立即啟動手機版按鈕功能
                     initMobileMenu(); 
                 }
                 
@@ -216,11 +199,11 @@
             
             if (btn && menu) {
                 btn.addEventListener('click', () => {
-                    // 切換 hidden 類別來顯示/隱藏選單
                     menu.classList.toggle('hidden');
                 });
             }
         }
+
         async function loadData() {
             try {
                 const response = await fetch(sheetUrl);
@@ -257,16 +240,15 @@
             }
 
             const filteredPosts = currentFilter === 'all' ? posts : posts.filter(p => p.committee === currentFilter);
+            currentRenderedPosts = filteredPosts; // 🌟 新增：存入目前顯示的卡片陣列
 
             if (filteredPosts.length === 0) {
                 container.innerHTML = '<p class="text-center text-slate-400 py-10 w-full col-span-full font-bold">這個分類目前尚無發布資訊</p>';
                 return;
             }
 
-            container.innerHTML = filteredPosts.map(p => {
-                // 🏷️ 顏色防呆處理
+            container.innerHTML = filteredPosts.map((p, index) => { // 🌟 新增：加入 index 索引
                 const rawColor = p.color ? p.color.trim() : '';
-                // 若字典裡有這個中文，就用字典裡的樣式；沒有的話就預設「藍色白字」
                 const tagTheme = colorDictionary[rawColor] || 'bg-blue-800 text-white';
                 
                 const tag = p.tag || '公告';
@@ -275,30 +257,88 @@
                 let link = p.link ? p.link.trim() : '';
                 if (link !== '' && !link.startsWith('http')) link = 'https://' + link;
                 const isClickable = link !== '';
-                const wrapperTag = isClickable ? 'a' : 'div';
-                const hrefAttr = isClickable ? `href="${link}" target="_blank"` : '';
                 
-                const readMoreText = lang === 'zh' ? '閱讀全文 →' : 'Read More →';
-                const readMoreHtml = isClickable ? `<div class="mt-auto pt-4 border-t border-slate-50 text-xs font-bold text-ems-blue">${readMoreText}</div>` : '';
+                // 🌟 修改：根據是否有網址，決定使用 a 標籤或是觸發 onclick 視窗
+                const actionHtml = isClickable 
+                    ? `<a href="${link}" target="_blank" class="block group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-slate-100 flex flex-col h-full cursor-pointer">`
+                    : `<div onclick="openModal(${index})" class="block group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-slate-100 flex flex-col h-full cursor-pointer">`;
+                const endTag = isClickable ? `</a>` : `</div>`;
+                
+                const title = lang === 'zh' ? (p.title_zh || '') : (p.title_en || '');
+                const desc = lang === 'zh' ? (p.desc_zh || '') : (p.desc_en || '');
+                const readMoreText = lang === 'zh' ? '閱讀完整內容 →' : 'Read More →';
+                const linkHint = isClickable ? (lang === 'zh' ? '前往外部連結 ↗' : 'External Link ↗') : readMoreText;
 
                 return `
-                <${wrapperTag} ${hrefAttr} class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-slate-100 flex flex-col h-full ${isClickable ? 'cursor-pointer' : ''}">
+                ${actionHtml}
                     <div class="relative overflow-hidden aspect-video bg-slate-100">
                         <img src="${img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                        
-                        <!-- ✨ 升級版：大而顯眼的標籤 -->
                         <div class="absolute top-4 left-4 ${tagTheme} px-3 py-1 rounded shadow-lg shadow-black/20 text-xs font-black uppercase tracking-widest z-10 backdrop-blur-sm">
                             ${tag}
                         </div>
                     </div>
                     <div class="p-5 flex-grow flex flex-col">
                         <p class="text-slate-400 font-bold text-[11px] mb-2 tracking-widest">${p.date || ''}</p>
-                        <h4 class="text-lg font-bold mb-3 text-slate-900 line-clamp-2">${lang === 'zh' ? (p.title_zh || '') : (p.title_en || '')}</h4>
-                        <p class="text-slate-500 text-sm font-medium line-clamp-3 mb-4 flex-grow">${lang === 'zh' ? (p.desc_zh || '') : (p.desc_en || '')}</p>
-                        ${readMoreHtml}
+                        <h4 class="text-lg font-bold mb-3 text-slate-900 line-clamp-2">${title}</h4>
+                        <p class="text-slate-500 text-sm font-medium line-clamp-3 mb-4 flex-grow">${desc}</p>
+                        <div class="mt-auto pt-4 border-t border-slate-50 text-xs font-bold text-ems-blue group-hover:text-orange-500 transition-colors">
+                            ${linkHint}
+                        </div>
                     </div>
-                </${wrapperTag}>`;
+                ${endTag}`;
             }).join('');
+        }
+
+        // 🌟 新增：打開彈出視窗
+        window.openModal = function(index) {
+            const p = currentRenderedPosts[index];
+            const modal = document.getElementById('news-modal');
+            const content = document.getElementById('news-modal-content');
+            
+            const rawColor = p.color ? p.color.trim() : '';
+            const tagTheme = colorDictionary[rawColor] || 'bg-blue-800 text-white';
+            const img = p.img || 'https://images.unsplash.com/photo-1516549655169-df83a0774514?w=800';
+            const title = lang === 'zh' ? (p.title_zh || '') : (p.title_en || '');
+            const desc = lang === 'zh' ? (p.desc_zh || '') : (p.desc_en || '');
+
+            content.innerHTML = `
+                <div class="relative bg-slate-100 aspect-video md:aspect-[21/9]">
+                    <button onclick="closeModal()" class="absolute top-4 right-4 w-10 h-10 bg-black/50 text-white rounded-full flex items-center justify-center hover:bg-black/80 z-20 backdrop-blur-sm transition-colors shadow-lg">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                    <img src="${img}" class="w-full h-full object-cover">
+                </div>
+                <div class="p-8 md:p-10">
+                    <div class="flex flex-wrap items-center gap-3 mb-6">
+                        <span class="${tagTheme} px-3 py-1 rounded text-xs font-black uppercase tracking-widest shadow-sm">${p.tag || '公告'}</span>
+                        <span class="text-slate-400 font-bold text-sm tracking-widest">${p.date || ''}</span>
+                    </div>
+                    <h3 class="text-2xl md:text-3xl font-black text-slate-900 mb-6 leading-snug">${title}</h3>
+                    <div class="text-slate-600 font-medium leading-relaxed whitespace-pre-wrap text-[15px]">${desc}</div>
+                </div>
+            `;
+            
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; 
+            
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                content.classList.remove('scale-95');
+            }, 10);
+        }
+
+        // 🌟 新增：關閉彈出視窗
+        window.closeModal = function() {
+            const modal = document.getElementById('news-modal');
+            const content = document.getElementById('news-modal-content');
+            
+            modal.classList.add('opacity-0');
+            content.classList.add('scale-95');
+            document.body.style.overflow = 'auto';
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
         }
 
         window.toggleLang = function() {
