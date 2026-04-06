@@ -152,20 +152,22 @@
             renderCards();
         }
 
-                // 為了讓彈出視窗抓得到資料，我們設一個全域變數記錄當前顯示的卡片
+        // 為了讓彈出視窗抓得到資料，我們設一個全域變數記錄當前顯示的卡片
         let currentRenderedPosts = [];
 
         function renderCards() {
             const container = document.getElementById('news-container');
-            if (filteredData.length === 0) {
+            
+            // 🚀 修復點：把 filteredData 改回 posts
+            if (!posts || posts.length === 0) {
                 container.innerHTML = '<p class="text-slate-400 font-medium col-span-full text-center py-10">目前沒有相關分類的新聞或活動。</p>';
                 return;
             }
 
-            // 將當前篩選後的資料存起來，給彈出視窗使用
-            currentRenderedPosts = filteredData;
+            // 將當前資料存起來，給彈出視窗使用
+            currentRenderedPosts = posts;
 
-            container.innerHTML = filteredData.map((p, index) => {
+            container.innerHTML = posts.map((p, index) => {
                 const rawColor = p.color ? p.color.trim() : '';
                 const tagTheme = colorDictionary[rawColor] || 'bg-slate-600 text-white';
                 const tag = p.tag || '公告';
@@ -179,7 +181,7 @@
                 const desc = lang === 'zh' ? (p.desc_zh || '') : (p.desc_en || '');
                 const readMoreText = lang === 'zh' ? '閱讀完整內容 →' : 'Read More →';
 
-                // 🚀 核心邏輯：判斷是外部連結，還是觸發彈出視窗 (openModal)
+                // 判斷是外部連結，還是觸發彈出視窗 (openModal)
                 const actionHtml = hasLink 
                     ? `<a href="${link}" target="_blank" class="block h-full group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-slate-200 flex flex-col cursor-pointer">`
                     : `<div onclick="openModal(${index})" class="h-full group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-slate-200 flex flex-col cursor-pointer">`;
@@ -206,12 +208,6 @@
             }).join('');
         }
 
-
-        window.toggleLang = function() {
-            lang = lang === 'zh' ? 'en' : 'zh';
-            updateLanguageUI();
-            renderCards(); 
-        }
 
         function updateLanguageUI() {
             document.querySelectorAll('.lang-zh').forEach(el => el.classList.toggle('hidden', lang !== 'zh'));
