@@ -1,97 +1,93 @@
-<nav class="sticky top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex justify-between items-center">
-        
-        <a href="index.html" class="flex items-center gap-3 md:gap-4 hover:opacity-80 transition-opacity">
+<nav class="bg-white/90 backdrop-blur-md fixed w-full z-50 shadow-sm border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="flex justify-between h-20 items-center">
             
-            <img src="TSP-LOGO.png" alt="TSP Logo" class="w-auto h-12 md:h-14 flex-shrink-0 object-contain">
-            
-            <div>
-                <h1 class="text-[14px] md:text-[15px] font-black text-slate-900 leading-tight tracking-tight lang-zh">台灣醫療救護學會</h1>
-                <h1 class="text-[14px] md:text-[15px] font-black text-slate-900 leading-tight tracking-tight lang-en hidden">Taiwan Society of Paramedicine</h1>
-                <p class="text-[8px] md:text-[9px] text-slate-500 font-bold uppercase tracking-widest mt-0.5">Taiwan Society of Paramedicine</p>
-            </div>
-        </a>
-        
-        <div class="hidden lg:flex items-center gap-6 xl:gap-8">
-            
-            <div class="group relative">
-                <button class="nav-link flex items-center gap-1 py-4 text-slate-700 hover:text-blue-800 transition-colors font-medium text-sm relative">
-                    <span class="lang-zh">關於學會</span>
-                    <span class="lang-en hidden">About Us</span>
-                    <svg class="w-3 h-3 text-slate-400 group-hover:text-blue-800 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </button>
-                <div class="absolute top-full left-0 w-48 bg-white border border-slate-100 shadow-lg rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50">
-                    <a href="about.html" target="_self" class="block px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-800">
-                        <span class="lang-zh">理事長的話</span><span class="lang-en hidden">President's Message</span>
-                    </a>
-                    <a href="board.html" target="_self" class="block px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-800">
-                        <span class="lang-zh">理監事名單</span><span class="lang-en hidden">Board of Directors</span>
-                    </a>
-                    <a href="rules.html" target="_self" class="block px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-800">
-                        <span class="lang-zh">組織章程</span><span class="lang-en hidden">Articles of Association</span>
-                    </a>
-                    <a href="history.html" target="_self" class="block px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-800">
-                        <span class="lang-zh">願景與歷史</span><span class="lang-en hidden">Vision & History</span>
-                    </a>
-                    <a href="committee.html" target="_self" class="block px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-800">
-                        <span class="lang-zh">委員會介紹</span><span class="lang-en hidden">Committees</span>
-                    </a>
+            <!-- 左側：Logo 區塊 -->
+            <div class="flex-shrink-0 flex items-center gap-2">
+                <div class="w-10 h-10 bg-blue-900 rounded-lg flex items-center justify-center font-black text-white text-xl shadow-md">
+                    T
+                </div>
+                <div>
+                    <div class="font-black text-slate-900 tracking-tight text-lg leading-none">台灣醫療救護學會</div>
+                    <div class="text-[10px] font-bold text-slate-500 tracking-widest uppercase mt-1">Taiwan Society of Paramedicine</div>
                 </div>
             </div>
 
-            <!-- 2. 新聞與活動 (News & Events) - 改為直接連結 -->
-            <a href="news.html" class="nav-link flex items-center gap-1 py-4 text-slate-700 hover:text-blue-800 transition-colors font-medium text-sm">
-                <span class="lang-zh">新聞與活動</span>
-                <span class="lang-en hidden">News & Events</span>
-            </a>
+            <!-- 右側：電腦版選單 -->
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="index.html" class="text-sm font-bold text-slate-700 hover:text-orange-500 transition-colors lang-zh">首頁</a>
+                <a href="index.html" class="text-sm font-bold text-slate-700 hover:text-orange-500 transition-colors lang-en hidden">Home</a>
 
-            <div class="group relative">
-                <button class="nav-link flex items-center gap-1 py-4 text-slate-700 hover:text-blue-800 transition-colors font-medium text-sm relative">
-                    <span class="lang-zh">教育與學術</span>
-                    <span class="lang-en hidden">Education</span>
-                    <svg class="w-3 h-3 text-slate-400 group-hover:text-blue-800 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                <a href="history.html" class="text-sm font-bold text-slate-700 hover:text-orange-500 transition-colors lang-zh">關於學會</a>
+                <a href="history.html" class="text-sm font-bold text-slate-700 hover:text-orange-500 transition-colors lang-en hidden">About</a>
+
+                <a href="news.html" class="text-sm font-bold text-slate-700 hover:text-orange-500 transition-colors lang-zh">新聞與活動</a>
+                <a href="news.html" class="text-sm font-bold text-slate-700 hover:text-orange-500 transition-colors lang-en hidden">News & Events</a>
+
+                <a href="training.html" class="text-sm font-bold text-slate-700 hover:text-orange-500 transition-colors lang-zh">教育訓練</a>
+                <a href="training.html" class="text-sm font-bold text-slate-700 hover:text-orange-500 transition-colors lang-en hidden">Training</a>
+
+                <a href="committee.html" class="text-sm font-bold text-slate-700 hover:text-orange-500 transition-colors lang-zh">委員會</a>
+                <a href="committee.html" class="text-sm font-bold text-slate-700 hover:text-orange-500 transition-colors lang-en hidden">Committees</a>
+
+                <a href="publication.html" class="text-sm font-bold text-slate-700 hover:text-orange-500 transition-colors lang-zh">公開資料</a>
+                <a href="publication.html" class="text-sm font-bold text-slate-700 hover:text-orange-500 transition-colors lang-en hidden">Publications</a>
+
+                <!-- 會員專區 (單一按鈕直達) -->
+                <a href="https://reurl.cc/DxA9X6" target="_blank" class="ml-2 bg-blue-800 text-white px-5 py-2 rounded text-xs font-bold hover:bg-orange-500 transition-colors flex items-center gap-2 shadow-sm">
+                    <span class="lang-zh">會員專區 / 登入</span>
+                    <span class="lang-en hidden">Member Login</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                </a>
+
+                <!-- 語系切換按鈕 -->
+                <button onclick="toggleLang()" class="ml-4 w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-black text-xs hover:bg-slate-200 transition-colors">
+                    <span class="lang-zh">EN</span>
+                    <span class="lang-en hidden">中</span>
                 </button>
-                <div class="absolute top-full left-0 w-48 bg-white border border-slate-100 shadow-lg rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50">
-                    <a href="https://www.ipress.tw/J0233" target="_blank" class="block px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-800">
-                        <span class="lang-zh">學術期刊</span><span class="lang-en hidden">Academic Journal</span>
-                    </a>
-                    <a href="training.html" class="block px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-800">
-                        <span class="lang-zh">教育訓練課程</span><span class="lang-en hidden">Training Courses</span>
-                    </a>
-                </div>
             </div>
 
-            <a href="publications.html" class="nav-link flex items-center gap-1 py-4 text-slate-700 hover:text-blue-800 transition-colors font-medium text-sm">
-                <span class="lang-zh">公開資料</span>
-                <span class="lang-en hidden">Publications</span>
-            </a>
+            <!-- 右側：手機版漢堡按鈕 (已經加好 id) -->
+            <div class="md:hidden flex items-center gap-4">
+                <button onclick="toggleLang()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-black text-xs">
+                    <span class="lang-zh">EN</span>
+                    <span class="lang-en hidden">中</span>
+                </button>
+                <button id="mobile-menu-button" class="text-slate-600 hover:text-blue-800 focus:outline-none p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
 
-            <a href="https://perictsp.org" target="_blank" class="text-orange-600 hover:text-orange-700 transition-colors font-bold text-sm">
-                PERIC
-            </a>
+    <!-- 手機版下拉選單區塊 (已經加好 id 並且預設隱藏) -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 shadow-inner absolute w-full left-0">
+        <div class="px-6 py-4 flex flex-col space-y-4">
+            <a href="index.html" class="text-slate-700 font-bold lang-zh">首頁</a>
+            <a href="index.html" class="text-slate-700 font-bold lang-en hidden">Home</a>
 
-           <!-- 會員專區 (單一按鈕直達) -->
-            <a href="https://reurl.cc/DxA9X6" target="_blank" class="ml-2 bg-blue-800 text-white px-5 py-2 rounded text-xs font-bold hover:bg-orange-500 transition-colors flex items-center gap-2 shadow-sm">
+            <a href="history.html" class="text-slate-700 font-bold lang-zh">關於學會</a>
+            <a href="history.html" class="text-slate-700 font-bold lang-en hidden">About</a>
+
+            <a href="news.html" class="text-slate-700 font-bold lang-zh">新聞與活動</a>
+            <a href="news.html" class="text-slate-700 font-bold lang-en hidden">News & Events</a>
+
+            <a href="training.html" class="text-slate-700 font-bold lang-zh">教育訓練</a>
+            <a href="training.html" class="text-slate-700 font-bold lang-en hidden">Training</a>
+
+            <a href="committee.html" class="text-slate-700 font-bold lang-zh">委員會</a>
+            <a href="committee.html" class="text-slate-700 font-bold lang-en hidden">Committees</a>
+
+            <a href="publication.html" class="text-slate-700 font-bold lang-zh">公開資料</a>
+            <a href="publication.html" class="text-slate-700 font-bold lang-en hidden">Publications</a>
+
+            <a href="https://reurl.cc/DxA9X6" target="_blank" class="text-blue-800 font-black mt-2 pt-4 border-t border-slate-100 flex items-center gap-2">
                 <span class="lang-zh">會員專區 / 登入</span>
                 <span class="lang-en hidden">Member Login</span>
-                <!-- 會員小圖示 -->
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
             </a>
-
-            <button onclick="window.toggleLang()" class="text-[11px] font-black text-slate-400 border-l border-slate-300 pl-4 lg:pl-6 hover:text-slate-900 uppercase transition-colors">
-                EN / 中文
-            </button>
-        </div>
-
-        <div class="lg:hidden flex items-center gap-3">
-            <button onclick="window.toggleLang()" class="text-[10px] font-black text-slate-400 hover:text-slate-900 uppercase transition-colors">
-                EN/中
-            </button>
-            <button class="text-slate-600 hover:text-blue-800 focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-            </button>
         </div>
     </div>
 </nav>
