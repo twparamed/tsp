@@ -170,14 +170,14 @@
         // 為了讓彈出視窗抓得到資料，我們設一個全域變數記錄當前顯示的卡片
         let currentRenderedPosts = [];
 
-// 讓文字中的網址自動變成可點擊連結的魔法函數
-function linkify(text) {
-    if (!text) return "";
-    const urlPattern = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-    return text.replace(urlPattern, function(url) {
-        return `<a href="${url}" target="_blank" class="text-blue-600 hover:underline break-all">${url}</a>`;
-    });
-}
+// 🌟 魔法函數：讓文字中的網址自動變成可點擊連結，並防止點擊時觸發卡片的彈出視窗
+        function linkify(text) {
+            if (!text) return "";
+            const urlPattern = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+            return text.replace(urlPattern, function(url) {
+                return `<a href="${url}" target="_blank" onclick="event.stopPropagation()" class="text-blue-600 hover:text-blue-800 hover:underline break-all relative z-20 font-bold">${url}</a>`;
+            });
+        }
 
         function renderCards() {
             const container = document.getElementById('post-container');
@@ -201,7 +201,7 @@ function linkify(text) {
                 const hasLink = link !== '';
                 
                 const title = lang === 'zh' ? (p.title_zh || '') : (p.title_en || '');
-                const desc = lang === 'zh' ? (${linkify(p.desc_zh)} || '') : (${linkify(p.desc_en)} || '');
+                const desc = lang === 'zh' ? (p.desc_zh || '') : (p.desc_en || '');
                 const readMoreText = lang === 'zh' ? '閱讀完整內容 →' : 'Read More →';
 
                 // 判斷是外部連結，還是觸發彈出視窗 (openModal)
@@ -221,7 +221,7 @@ function linkify(text) {
                     <div class="p-5 flex-grow flex flex-col">
                         <p class="text-slate-400 font-bold text-[11px] mb-2 tracking-widest">${p.date || ''}</p>
                         <h4 class="text-lg font-bold mb-3 text-slate-900 line-clamp-2 leading-snug">${title}</h4>
-                        <p class="text-slate-500 text-sm font-medium line-clamp-3 mb-4 flex-grow">${desc}</p>
+                        <p class="text-slate-500 text-sm font-medium line-clamp-3 mb-4 flex-grow">${inkify(desc)}</p>
                         <div class="mt-auto pt-4 border-t border-slate-50 text-xs font-bold text-blue-800 group-hover:text-orange-500 transition-colors">
                             ${hasLink ? (lang === 'zh' ? '前往外部連結 ↗' : 'External Link ↗') : readMoreText}
                         </div>
@@ -259,7 +259,7 @@ function linkify(text) {
                         <span class="text-slate-400 font-bold text-sm tracking-widest">${p.date || ''}</span>
                     </div>
                     <h3 class="text-2xl md:text-3xl font-black text-slate-900 mb-6 leading-snug">${title}</h3>
-                    <div class="text-slate-600 font-medium leading-relaxed whitespace-pre-wrap text-[15px]">${desc}</div>
+                    <div class="text-slate-600 font-medium leading-relaxed whitespace-pre-wrap text-[15px]">${inkify(desc)}</div>
                 </div>
             `;
             
