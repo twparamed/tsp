@@ -205,11 +205,11 @@
             const btn = document.getElementById('mobile-menu-button');
             const menu = document.getElementById('mobile-menu');
             
-            if (btn && menu) {
-                btn.addEventListener('click', () => {
-                    menu.classList.toggle('hidden');
-                });
-            }
+        if (btn && menu) {
+        // 先移除舊的監聽器防止重複綁定
+        btn.onclick = () => {
+            menu.classList.toggle('hidden');
+        };
         }
 
         async function loadData() {
