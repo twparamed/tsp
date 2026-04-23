@@ -239,7 +239,14 @@
             });
             renderCards();
         }
-
+// 讓文字中的網址自動變成可點擊連結的魔法函數
+function linkify(text) {
+    if (!text) return "";
+    const urlPattern = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+    return text.replace(urlPattern, function(url) {
+        return `<a href="${url}" target="_blank" class="text-blue-600 hover:underline break-all">${url}</a>`;
+    });
+}
         function renderCards() {
             const container = document.getElementById('post-container');
             if (!posts || posts.length === 0) {
@@ -273,7 +280,7 @@
                 const endTag = isClickable ? `</a>` : `</div>`;
                 
                 const title = lang === 'zh' ? (p.title_zh || '') : (p.title_en || '');
-                const desc = lang === 'zh' ? (p.desc_zh || '') : (p.desc_en || '');
+                const desc = lang === 'zh' ? (${linkify(p.desc_zh)} || '') : (${linkify(p.desc_en)} || '');
                 const readMoreText = lang === 'zh' ? '閱讀完整內容 →' : 'Read More →';
                 const linkHint = isClickable ? (lang === 'zh' ? '前往外部連結 ↗' : 'External Link ↗') : readMoreText;
 

@@ -170,6 +170,15 @@
         // 為了讓彈出視窗抓得到資料，我們設一個全域變數記錄當前顯示的卡片
         let currentRenderedPosts = [];
 
+// 讓文字中的網址自動變成可點擊連結的魔法函數
+function linkify(text) {
+    if (!text) return "";
+    const urlPattern = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+    return text.replace(urlPattern, function(url) {
+        return `<a href="${url}" target="_blank" class="text-blue-600 hover:underline break-all">${url}</a>`;
+    });
+}
+
         function renderCards() {
             const container = document.getElementById('post-container');
             
@@ -192,7 +201,7 @@
                 const hasLink = link !== '';
                 
                 const title = lang === 'zh' ? (p.title_zh || '') : (p.title_en || '');
-                const desc = lang === 'zh' ? (p.desc_zh || '') : (p.desc_en || '');
+                const desc = lang === 'zh' ? (${linkify(p.desc_zh)} || '') : (${linkify(p.desc_en)} || '');
                 const readMoreText = lang === 'zh' ? '閱讀完整內容 →' : 'Read More →';
 
                 // 判斷是外部連結，還是觸發彈出視窗 (openModal)
