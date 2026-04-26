@@ -49,17 +49,24 @@
                 <span class="lang-zh">教育訓練</span><span class="lang-en hidden">Training</span>
             </a>
 
-            <a href="publications.html" class="text-slate-700 hover:text-blue-800 font-bold text-[13px] xl:text-sm transition-colors">
-                <span class="lang-zh">公開資料</span><span class="lang-en hidden">Publications</span>
-            </a>
+            <div class="group relative">
+                <button class="flex items-center gap-1 py-4 text-slate-700 hover:text-blue-800 font-bold text-[13px] xl:text-sm transition-colors whitespace-nowrap">
+                    <span class="lang-zh">學術與出版</span><span class="lang-en hidden">Academic</span>
+                    <svg class="w-3 h-3 text-slate-400 group-hover:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="absolute top-full left-0 w-48 bg-white border border-slate-100 shadow-lg rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                    <a href="https://jper.org" target="_blank" class="block px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-800">
+                        <span class="lang-zh">JPER 國際期刊 ↗</span><span class="lang-en hidden">JPER Journal ↗</span>
+                    </a>
+                    <a href="https://perictsp.org" target="_blank" class="block px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-800">
+                        <span class="lang-zh">PERIC 研討會 ↗</span><span class="lang-en hidden">PERIC Conference ↗</span>
+                    </a>
+                    <a href="publications.html" class="block px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-800">
+                        <span class="lang-zh">公開資料</span><span class="lang-en hidden">Publications</span>
+                    </a>
+                </div>
+            </div>
 
-            <a href="https://perictsp.org" class="text-slate-700 hover:text-blue-800 font-bold text-[13px] xl:text-sm transition-colors">
-                <span class="lang-zh">PERIC國際研討會</span><span class="lang-en hidden">PERIC</span>
-            </a>
-
-            <a href="https://jper.org" class="text-slate-700 hover:text-blue-800 font-bold text-[13px] xl:text-sm transition-colors">
-                <span class="lang-zh">JPER國際期刊</span><span class="lang-en hidden">Journal</span>
-            </a>
             <a href="https://ems-ohs.org" target="_blank" class="flex items-center gap-1.5 px-3 py-1.5 bg-orange-50 text-orange-600 rounded-full hover:bg-orange-600 hover:text-white transition-all duration-300 font-black text-[13px] xl:text-sm border border-orange-200 group">
                 <span class="relative flex h-2 w-2">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
@@ -69,7 +76,7 @@
             </a>
 
             <a href="https://reurl.cc/DxA9X6" target="_blank" class="bg-blue-800 text-white px-4 py-2 rounded text-[12px] xl:text-xs font-bold hover:bg-orange-500 transition-colors flex items-center gap-1.5 shadow-sm ml-1">
-                <span class="lang-zh">會員專區 / 登入</span><span class="lang-en hidden">Login</span>
+                <span class="lang-zh">會員登入</span><span class="lang-en hidden">Login</span>
                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
             </a>
 
@@ -94,10 +101,12 @@
                 <span class="lang-zh">首頁</span><span class="lang-en hidden">Home</span>
             </a>
             
-            <div class="py-2 border-b border-slate-50">
-                <p class="text-xs font-black text-slate-400 uppercase tracking-widest mb-2 mt-1">
+<div class="border-b border-slate-50">
+                <button onclick="document.getElementById('mobile-about-menu').classList.toggle('hidden'); document.getElementById('mobile-about-icon').classList.toggle('rotate-180');" class="w-full flex items-center justify-between py-3 text-sm font-bold text-slate-700 focus:outline-none">
                     <span class="lang-zh">關於學會</span><span class="lang-en hidden">About Us</span>
-                </p>
+                    <svg id="mobile-about-icon" class="w-4 h-4 text-slate-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="mobile-about-menu" class="hidden bg-slate-50/50 rounded-b-lg border-x border-b border-slate-100/50 mb-2"></div>
                 <a href="history.html" class="block py-2 pl-4 text-sm font-bold text-slate-600">
                     <span class="lang-zh">願景與歷史</span><span class="lang-en hidden">History</span>
                 </a>
@@ -122,23 +131,29 @@
             <a href="training.html" class="block py-3 border-b border-slate-50 text-sm font-bold text-slate-700">
                 <span class="lang-zh">教育訓練</span><span class="lang-en hidden">Training</span>
             </a>
-            <a href="publications.html" class="block py-3 border-b border-slate-50 text-sm font-bold text-slate-700">
-                <span class="lang-zh">公開資料</span><span class="lang-en hidden">Publications</span>
-            </a>
-
-            <a href="https://perictsp.org" class="block py-3 border-b border-slate-50 text-sm font-bold text-slate-700">
-                <span class="lang-zh">PERIC國際研討會</span><span class="lang-en hidden">PERIC</span>
-            </a>
-
-            <a href="https://jper.org" class="block py-3 border-b border-slate-50 text-sm font-bold text-slate-700">
-                <span class="lang-zh">JPER國際期刊</span><span class="lang-en hidden">Journal</span>
-            </a>
+            <<div class="border-b border-slate-50">
+                <button onclick="document.getElementById('mobile-academic-menu').classList.toggle('hidden'); document.getElementById('mobile-academic-icon').classList.toggle('rotate-180');" class="w-full flex items-center justify-between py-3 text-sm font-bold text-slate-700 focus:outline-none">
+                    <span class="lang-zh">學術與出版</span><span class="lang-en hidden">Academic</span>
+                    <svg id="mobile-academic-icon" class="w-4 h-4 text-slate-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="mobile-academic-menu" class="hidden bg-slate-50/50 rounded-b-lg border-x border-b border-slate-100/50 mb-2">
+                    <a href="https://jper.org" target="_blank" class="block py-3 pl-6 text-sm font-bold text-slate-600 hover:text-blue-800 border-b border-slate-100/50">
+                        <span class="lang-zh">JPER國際期刊 ↗</span><span class="lang-en hidden">JPER Journal ↗</span>
+                    </a>
+                    <a href="https://perictsp.org" target="_blank" class="block py-3 pl-6 text-sm font-bold text-slate-600 hover:text-blue-800 border-b border-slate-100/50">
+                        <span class="lang-zh">PERIC研討會 ↗</span><span class="lang-en hidden">PERIC Conference ↗</span>
+                    </a>
+                    <a href="publications.html" class="block py-3 pl-6 text-sm font-bold text-slate-600 hover:text-blue-800">
+                        <span class="lang-zh">公開資料</span><span class="lang-en hidden">Publications</span>
+                    </a>
+                </div>
+            </div>
 
             <a href="https://ems-ohs.org" target="_blank" class="block py-3 border-b border-orange-50 text-sm font-black text-orange-600">
-                <span class="lang-zh">EMS 職安平台 ↗</span><span class="lang-en hidden">EMS OH&S ↗</span>
+                <span class="lang-zh">EMS職安平台 ↗</span><span class="lang-en hidden">EMS OH&S ↗</span>
             </a>
             <a href="https://reurl.cc/DxA9X6" target="_blank" class="block py-4 text-sm font-black text-blue-800">
-                <span class="lang-zh">會員專區 / 登入 ↗</span><span class="lang-en hidden">Member Login ↗</span>
+                <span class="lang-zh">會員登入 ↗</span><span class="lang-en hidden">Member Login ↗</span>
             </a>
         </div>
     </div>
