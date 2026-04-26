@@ -327,7 +327,8 @@
 
     <!-- 載入共用組件的腳本 -->
     <script>
-        let lang = 'zh';
+        // 🌟 1. 讀取瀏覽器記憶，若沒有紀錄則預設為 'zh'
+let lang = localStorage.getItem('tsp_lang') || 'zh';
 
 // 載入 Navbar & Footer
         async function loadComponents() {
@@ -343,6 +344,8 @@
                     
                     // 🚀 【關鍵修復】載入 HTML 後，立即啟動手機版按鈕功能
                     initMobileMenu(); 
+                    // 🌟 2. 關鍵：導覽列抓進來後，立刻根據記憶體切換中英文
+            updateLanguageUI();
                 }
                 
                 if(footRes.ok) {
@@ -367,15 +370,36 @@
                 });
             }
         }
-        window.toggleLang = function() {
-            lang = lang === 'zh' ? 'en' : 'zh';
-            updateLanguageUI();
-        }
+        // 🌟 3. 切換語言並寫入記憶體
+window.toggleLang = function() {
+    lang = lang === 'zh' ? 'en' : 'zh';
+    localStorage.setItem('tsp_lang', lang); // 把選擇存進瀏覽器
+    
+    updateLanguageUI();
+    
+    // 防錯機制：如果這個頁面有卡片功能才重新渲染（避免其他頁面當機）
+    if (typeof renderCards === 'function') {
+        renderCards(); 
+    }
+}
 
-        function updateLanguageUI() {
-            document.querySelectorAll('.lang-zh').forEach(el => el.classList.toggle('hidden', lang !== 'zh'));
-            document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', lang !== 'en'));
-        }
+function updateLanguageUI() {
+    // 切換全站標有 lang-zh 和 lang-en 的元素
+    document.querySelectorAll('.lang-zh').forEach(el => el.classList.toggle('hidden', lang !== 'zh'));
+    document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', lang !== 'en'));
+    
+    // (僅首頁 index.html 需要) 替換特定文字
+    const descEl = document.getElementById('hero-desc');
+    const newsEl = document.getElementById('section-news');
+    if (descEl && newsEl) {
+        const ui = {
+            zh: { desc: "致力於提升台灣醫療救護專業水平，建立國際接軌的到院前緊急醫療救護體系。", news: `<span class="w-2 h-6 bg-blue-800 rounded-sm"></span> 最新消息 Latest News` },
+            en: { desc: "Dedicated to advancing paramedicine in Taiwan and building a world-class EMS system.", news: `<span class="w-2 h-6 bg-blue-800 rounded-sm"></span> Latest Updates` }
+        };
+        descEl.innerText = ui[lang].desc;
+        newsEl.innerHTML = ui[lang].news;
+    }
+}
 
         loadComponents();
     </script>

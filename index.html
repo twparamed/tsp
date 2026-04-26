@@ -160,7 +160,6 @@
     <script>
         // 啟動時讀取儲存的語言偏好，預設為 'zh'
         let lang = localStorage.getItem('tsp_lang') || 'zh';
-        //let lang = 'zh';
         let currentFilter = 'all';
         let posts = [];
         let currentRenderedPosts = []; // 🌟 新增：為了給彈出視窗抓資料用
@@ -190,6 +189,8 @@ async function loadComponents() {
                     document.getElementById('navbar-placeholder').innerHTML = await navRes.text();
                     initMobileMenu();
                     updateLanguageUI(); // 🌟 確保載入後套用語言
+                    // 🌟 2. 關鍵：導覽列抓進來後，立刻根據記憶體切換中英文
+            updateLanguageUI();
                 }
                 
                 if(footRes.ok) {
@@ -359,25 +360,37 @@ async function loadComponents() {
             }, 300);
         }
 
-        window.toggleLang = function() {
+        // 🌟 3. 切換語言並寫入記憶體
+window.toggleLang = function() {
     lang = lang === 'zh' ? 'en' : 'zh';
-    // 🌟 關鍵：將選擇儲存起來
-    localStorage.setItem('tsp_lang', lang); 
+    localStorage.setItem('tsp_lang', lang); // 把選擇存進瀏覽器
+    
     updateLanguageUI();
-    if (typeof renderCards === 'function') renderCards(); 
+    
+    // 防錯機制：如果這個頁面有卡片功能才重新渲染（避免其他頁面當機）
+    if (typeof renderCards === 'function') {
+        renderCards(); 
+    }
 }
         
 
-        function updateLanguageUI() {
-            document.querySelectorAll('.lang-zh').forEach(el => el.classList.toggle('hidden', lang !== 'zh'));
-            document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', lang !== 'en'));
-            const ui = {
-                zh: { desc: "致力於提升台灣醫療救護專業水平，建立國際接軌的到院前緊急醫療救護體系。", news: `<span class="w-2 h-6 bg-blue-800 rounded-sm"></span> 最新消息 Latest News` },
-                en: { desc: "Dedicated to advancing paramedicine in Taiwan and building a world-class EMS system.", news: `<span class="w-2 h-6 bg-blue-800 rounded-sm"></span> Latest Updates` }
-            };
-            document.getElementById('hero-desc').innerText = ui[lang].desc;
-            document.getElementById('section-news').innerHTML = ui[lang].news;
-        }
+       function updateLanguageUI() {
+    // 切換全站標有 lang-zh 和 lang-en 的元素
+    document.querySelectorAll('.lang-zh').forEach(el => el.classList.toggle('hidden', lang !== 'zh'));
+    document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', lang !== 'en'));
+    
+    // (僅首頁 index.html 需要) 替換特定文字
+    const descEl = document.getElementById('hero-desc');
+    const newsEl = document.getElementById('section-news');
+    if (descEl && newsEl) {
+        const ui = {
+            zh: { desc: "致力於提升台灣醫療救護專業水平，建立國際接軌的到院前緊急醫療救護體系。", news: `<span class="w-2 h-6 bg-blue-800 rounded-sm"></span> 最新消息 Latest News` },
+            en: { desc: "Dedicated to advancing paramedicine in Taiwan and building a world-class EMS system.", news: `<span class="w-2 h-6 bg-blue-800 rounded-sm"></span> Latest Updates` }
+        };
+        descEl.innerText = ui[lang].desc;
+        newsEl.innerHTML = ui[lang].news;
+    }
+}
 
         loadComponents();
         loadData();
