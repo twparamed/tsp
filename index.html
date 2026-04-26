@@ -158,7 +158,9 @@
     <div id="footer-placeholder"></div>
 
     <script>
-        let lang = 'zh';
+        // 啟動時讀取儲存的語言偏好，預設為 'zh'
+        let lang = localStorage.getItem('tsp_lang') || 'zh';
+        //let lang = 'zh';
         let currentFilter = 'all';
         let posts = [];
         let currentRenderedPosts = []; // 🌟 新增：為了給彈出視窗抓資料用
@@ -184,10 +186,12 @@
                     fetch('components/footer.html')
                 ]);
                 
-                if(navRes.ok) {
-                    const navHtml = await navRes.text();
-                    document.getElementById('navbar-placeholder').innerHTML = navHtml;
-                    initMobileMenu(); 
+        if(navRes.ok) {
+            document.getElementById('navbar-placeholder').innerHTML = await navRes.text();
+            initMobileMenu();
+            // 🌟 關鍵：確保導覽列載入後套用正確語言
+            updateLanguageUI(); 
+        }
                 }
                 
                 if(footRes.ok) {
@@ -359,9 +363,12 @@
         }
 
         window.toggleLang = function() {
-            lang = lang === 'zh' ? 'en' : 'zh';
-            updateLanguageUI();
-            renderCards(); 
+    lang = lang === 'zh' ? 'en' : 'zh';
+    // 🌟 關鍵：將選擇儲存起來
+    localStorage.setItem('tsp_lang', lang); 
+    updateLanguageUI();
+    if (typeof renderCards === 'function') renderCards(); 
+}
         }
 
         function updateLanguageUI() {
