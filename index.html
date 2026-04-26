@@ -179,30 +179,27 @@
         };
 
         // 載入 Navbar & Footer
-        async function loadComponents() {
+async function loadComponents() {
             try {
                 const [navRes, footRes] = await Promise.all([
                     fetch('components/navbar.html'),
                     fetch('components/footer.html')
                 ]);
                 
-        if(navRes.ok) {
-            document.getElementById('navbar-placeholder').innerHTML = await navRes.text();
-            initMobileMenu();
-            // 🌟 關鍵：確保導覽列載入後套用正確語言
-            updateLanguageUI(); 
-        }
+                if(navRes.ok) {
+                    document.getElementById('navbar-placeholder').innerHTML = await navRes.text();
+                    initMobileMenu();
+                    updateLanguageUI(); // 🌟 確保載入後套用語言
                 }
                 
                 if(footRes.ok) {
                     document.getElementById('footer-placeholder').innerHTML = await footRes.text();
                 }
-                
-                updateLanguageUI();
             } catch (error) {
                 console.error("載入組件失敗", error);
             }
         }
+        
 
         // 📱 手機版選單開關邏輯
         function initMobileMenu() {
@@ -369,7 +366,7 @@
     updateLanguageUI();
     if (typeof renderCards === 'function') renderCards(); 
 }
-        }
+        
 
         function updateLanguageUI() {
             document.querySelectorAll('.lang-zh').forEach(el => el.classList.toggle('hidden', lang !== 'zh'));
