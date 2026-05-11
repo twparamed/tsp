@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>緊急服務人員身心健康年報 2026 | 台灣醫療救護學會</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+:root{
+  --teal-dark:#1A4A5A;
+  --teal:#2A7D8F;
+  --teal-light:#4AABBF;
+  --teal-pale:#E8F4F7;
+  --green:#3D8B6E;
+  --green-pale:#E6F4EE;
+  --gold:#C8913A;
+  --gold-pale:#FBF3E4;
+  --red:#C44A3A;
+  --red-pale:#FDECEA;
+  --orange:#D97B3A;
+  --slate:#3D5A6E;
+  --slate-light:#6B8FA3;
+  --warm-gray:#F8F5F0;
+  --text:#2C3E50;
+  --text-light:#5D6D7E;
+  --text-muted:#8FA3B1;
+  --white:#FFFFFF;
+  --border:#D9E4EA;
+  --shadow:rgba(26,74,90,0.10);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--warm-gray);color:var(--text);line-height:1.75;font-size:15px;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:200;background:rgba(26,74,90,0.97);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.1);}
+.nav-inner{max-width:1080px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:52px;}
+.nav-brand{font-family:'Noto Serif TC',serif;font-size:0.9rem;font-weight:700;color:#fff;letter-spacing:0.05em;}
+.nav-links{display:flex;gap:0;list-style:none;}
+.nav-links a{display:block;padding:0.4rem 0.8rem;font-size:0.75rem;color:rgba(255,255,255,0.75);text-decoration:none;letter-spacing:0.04em;transition:color 0.2s;}
+.nav-links a:hover{color:#fff;}
+
+/* COVER */
+.cover{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;}
+.cover-bg{position:absolute;inset:0;background:linear-gradient(160deg,#1A4A5A 0%,#2A6E7A 40%,#3D8B7E 70%,#4A9E88 100%);}
+.cover-pattern{position:absolute;inset:0;opacity:0.06;background-image:radial-gradient(circle at 2px 2px,rgba(255,255,255,0.6) 1px,transparent 0);background-size:28px 28px;}
+.cover-content{position:relative;z-index:2;max-width:1080px;margin:0 auto;padding:4rem 2rem;display:grid;grid-template-columns:1fr 420px;gap:3rem;align-items:center;}
+.cover-text{color:#fff;}
+.cover-org{font-size:0.8rem;letter-spacing:0.15em;color:rgba(255,255,255,0.65);margin-bottom:1.5rem;border-left:3px solid rgba(255,255,255,0.35);padding-left:0.75rem;line-height:1.6;}
+.cover-title-main{font-family:'Noto Serif TC',serif;font-size:clamp(2.2rem,5vw,3.5rem);font-weight:700;line-height:1.2;margin-bottom:0.5rem;letter-spacing:0.02em;}
+.cover-title-year{font-size:2rem;font-weight:400;color:rgba(255,255,255,0.8);margin-bottom:1.5rem;}
+.cover-subtitle{font-size:1.1rem;color:rgba(255,255,255,0.7);margin-bottom:2rem;line-height:1.8;}
+.cover-tagline{display:inline-block;background:rgba(200,145,58,0.85);color:#fff;padding:0.5rem 1.25rem;border-radius:4px;font-family:'Noto Serif TC',serif;font-size:1rem;font-weight:600;letter-spacing:0.08em;}
+.cover-meta{margin-top:2rem;display:flex;gap:2rem;flex-wrap:wrap;}
+.cover-meta-item{}
+.cover-meta-label{font-size:0.7rem;letter-spacing:0.12em;color:rgba(255,255,255,0.5);text-transform:uppercase;}
+.cover-meta-val{font-family:'Noto Serif TC',serif;font-size:1.3rem;font-weight:700;color:#fff;}
+.cover-illustration{position:relative;display:flex;align-items:center;justify-content:center;}
+.cover-illustration img{width:100%;max-width:400px;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,0.25);}
+.cover-badge{position:absolute;top:-12px;right:-12px;background:#fff;color:var(--teal-dark);border-radius:50%;width:80px;height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,0.15);font-family:'Noto Serif TC',serif;text-align:center;}
+.cover-badge .b-num{font-size:1.3rem;font-weight:700;line-height:1;color:var(--teal);}
+.cover-badge .b-text{font-size:0.55rem;line-height:1.2;color:var(--slate);}
+.cover-bottom{position:relative;z-index:2;background:rgba(0,0,0,0.2);border-top:1px solid rgba(255,255,255,0.1);padding:1rem 2rem;}
+.cover-bottom-inner{max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;color:rgba(255,255,255,0.6);font-size:0.78rem;}
+
+/* FOREWORD */
+.foreword{background:var(--white);border-bottom:1px solid var(--border);}
+.foreword-inner{max-width:820px;margin:0 auto;padding:4rem 2rem;}
+.foreword-head{display:flex;align-items:center;gap:1rem;margin-bottom:2rem;}
+.foreword-icon{width:48px;height:48px;background:var(--teal-pale);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;}
+.foreword-label{font-size:0.75rem;letter-spacing:0.12em;color:var(--teal);text-transform:uppercase;margin-bottom:0.2rem;}
+.foreword-title{font-family:'Noto Serif TC',serif;font-size:1.6rem;color:var(--teal-dark);font-weight:700;}
+.foreword-body{font-size:0.95rem;color:var(--text);line-height:2;}
+.foreword-body p{margin-bottom:1.2rem;}
+.foreword-body p:last-child{margin-bottom:0;}
+.foreword-sig{margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--border);text-align:right;}
+.foreword-sig p{font-size:0.88rem;color:var(--text-light);margin-bottom:0.3rem;}
+.foreword-sig .sig-name{font-family:'Noto Serif TC',serif;font-size:1.1rem;font-weight:700;color:var(--teal-dark);}
+
+/* SECTIONS */
+.section{padding:4rem 0;}
+.section.alt{background:var(--white);}
+.container{max-width:1080px;margin:0 auto;padding:0 1.5rem;}
+.section-head{margin-bottom:2.5rem;}
+.section-num{font-size:0.72rem;font-weight:700;letter-spacing:0.2em;color:var(--teal);text-transform:uppercase;margin-bottom:0.3rem;}
+.section-title{font-family:'Noto Serif TC',serif;font-size:1.8rem;color:var(--teal-dark);font-weight:700;margin-bottom:0.5rem;}
+.section-desc{font-size:0.9rem;color:var(--text-light);max-width:600px;line-height:1.8;}
+.section-divider{width:40px;height:3px;background:linear-gradient(90deg,var(--teal),var(--teal-light));border-radius:2px;margin:0.75rem 0 1.25rem;}
+
+/* KPI CARDS */
+.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem;}
+.kpi-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.5rem;position:relative;overflow:hidden;transition:box-shadow 0.2s;}
+.kpi-card:hover{box-shadow:0 6px 24px var(--shadow);}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:12px 12px 0 0;}
+.kpi-card.kpi-danger::before{background:linear-gradient(90deg,#C44A3A,#E8745F);}
+.kpi-card.kpi-warn::before{background:linear-gradient(90deg,#C8913A,#F0B85A);}
+.kpi-card.kpi-ok::before{background:linear-gradient(90deg,#3D8B6E,#5DB89A);}
+.kpi-card.kpi-info::before{background:linear-gradient(90deg,#2A7D8F,#4AABBF);}
+.kpi-num{font-family:'Noto Serif TC',serif;font-size:2.4rem;font-weight:700;line-height:1;}
+.kpi-card.kpi-danger .kpi-num{color:#C44A3A;}
+.kpi-card.kpi-warn .kpi-num{color:#C8913A;}
+.kpi-card.kpi-ok .kpi-num{color:#3D8B6E;}
+.kpi-card.kpi-info .kpi-num{color:#2A7D8F;}
+.kpi-label{font-size:0.82rem;color:var(--text-light);margin-top:0.4rem;line-height:1.5;}
+.kpi-note{font-size:0.7rem;color:var(--text-muted);margin-top:0.6rem;padding-top:0.6rem;border-top:1px solid var(--border);}
+.kpi-compare{font-size:0.7rem;margin-top:0.35rem;}
+.kpi-compare.lower{color:#3D8B6E;}
+.kpi-compare.higher{color:#C44A3A;}
+.kpi-compare.similar{color:var(--text-muted);}
+
+/* BAR CHART */
+.bar-section{margin-bottom:1.5rem;}
+.bar-section-title{font-size:0.82rem;font-weight:700;color:var(--slate);letter-spacing:0.05em;margin-bottom:0.75rem;}
+.bar-chart{display:flex;flex-direction:column;gap:0.5rem;}
+.bar-row{display:flex;align-items:center;gap:0.75rem;}
+.bar-label{font-size:0.8rem;color:var(--text-light);width:140px;flex-shrink:0;text-align:right;}
+.bar-track{flex:1;height:20px;background:#EDF2F5;border-radius:4px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:4px;transition:width 1.2s cubic-bezier(0.16,1,0.3,1);width:0%;}
+.bar-value{font-size:0.76rem;font-weight:600;color:var(--text-light);white-space:nowrap;min-width:100px;}
+.bar-fill.f-teal{background:linear-gradient(90deg,var(--teal-dark),var(--teal));}
+.bar-fill.f-red{background:linear-gradient(90deg,#A33A2C,var(--red));}
+.bar-fill.f-gold{background:linear-gradient(90deg,#A06A1A,var(--gold));}
+.bar-fill.f-green{background:linear-gradient(90deg,#2A6B50,var(--green));}
+.bar-fill.f-slate{background:linear-gradient(90deg,var(--teal-dark),var(--slate-light));}
+
+/* TABLES */
+.data-table{width:100%;border-collapse:collapse;font-size:0.85rem;}
+.data-table th{background:var(--teal-dark);color:#fff;padding:0.65rem 1rem;text-align:left;font-weight:600;font-size:0.78rem;letter-spacing:0.04em;}
+.data-table td{padding:0.6rem 1rem;border-bottom:1px solid var(--border);vertical-align:middle;}
+.data-table tr:nth-child(even) td{background:var(--warm-gray);}
+.data-table tr:hover td{background:var(--teal-pale);}
+.data-table .val-tw{font-family:'Noto Serif TC',serif;font-weight:700;color:var(--teal-dark);}
+.data-table .val-au{color:var(--text-muted);}
+.data-table .val-police{font-family:'Noto Serif TC',serif;font-weight:700;color:#C44A3A;}
+.data-table .val-fire{font-family:'Noto Serif TC',serif;font-weight:700;color:var(--orange);}
+.data-table .val-ems{font-family:'Noto Serif TC',serif;font-weight:700;color:var(--green);}
+.badge-diff{display:inline-block;padding:0.1rem 0.45rem;border-radius:3px;font-size:0.68rem;font-weight:700;}
+.badge-higher{background:#FDECEA;color:#C44A3A;}
+.badge-lower{background:#E6F4EE;color:#2A6B50;}
+.badge-similar{background:#EDF2F5;color:var(--slate-light);}
+.badge-sig{display:inline-block;padding:0.1rem 0.4rem;border-radius:3px;font-size:0.65rem;font-weight:700;background:var(--teal-pale);color:var(--teal-dark);margin-left:0.3rem;}
+
+/* TWO COL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;}
+
+/* UNIT CARDS */
+.unit-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.5rem;border-top-width:4px;}
+.unit-card.u-fire{border-top-color:#D97B3A;}
+.unit-card.u-police{border-top-color:#3B6EA5;}
+.unit-card.u-ems{border-top-color:#3D8B6E;}
+.unit-card-title{font-family:'Noto Serif TC',serif;font-size:1.2rem;font-weight:700;margin-bottom:0.25rem;}
+.u-fire .unit-card-title{color:#D97B3A;}
+.u-police .unit-card-title{color:#3B6EA5;}
+.u-ems .unit-card-title{color:#3D8B6E;}
+.unit-n{font-size:0.72rem;color:var(--text-muted);margin-bottom:1rem;}
+.unit-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;margin-bottom:1rem;}
+.unit-metric{text-align:center;background:var(--warm-gray);border-radius:8px;padding:0.5rem 0.3rem;}
+.unit-metric-val{font-family:'Noto Serif TC',serif;font-size:1.4rem;font-weight:700;line-height:1;}
+.u-fire .unit-metric-val{color:#D97B3A;}
+.u-police .unit-metric-val{color:#3B6EA5;}
+.u-ems .unit-metric-val{color:#3D8B6E;}
+.unit-metric-label{font-size:0.62rem;color:var(--text-muted);margin-top:0.2rem;line-height:1.3;}
+.alert-box{border-radius:8px;padding:0.75rem 1rem;font-size:0.8rem;line-height:1.6;margin-top:0.75rem;}
+.alert-box.danger{background:#FDECEA;color:#9B3020;border-left:3px solid #C44A3A;}
+.alert-box.warn{background:#FBF3E4;color:#7A4E10;border-left:3px solid #C8913A;}
+.alert-box.info{background:var(--teal-pale);color:#1A4A5A;border-left:3px solid var(--teal);}
+
+/* CALLOUT */
+.callout{border-radius:10px;padding:1.25rem 1.5rem;margin:1.5rem 0;font-size:0.9rem;line-height:1.8;}
+.callout.c-teal{background:var(--teal-pale);border-left:4px solid var(--teal);color:var(--teal-dark);}
+.callout.c-gold{background:var(--gold-pale);border-left:4px solid var(--gold);color:#6B4010;}
+.callout.c-red{background:var(--red-pale);border-left:4px solid var(--red);color:#7A2818;}
+.callout.c-green{background:var(--green-pale);border-left:4px solid var(--green);color:#1F4D35;}
+.callout strong{color:inherit;font-weight:700;}
+
+/* STAT ROW */
+.stat-row{display:flex;gap:1.5rem;flex-wrap:wrap;margin:1rem 0;}
+.stat-item{}
+.stat-big{font-family:'Noto Serif TC',serif;font-size:2rem;font-weight:700;color:var(--teal-dark);line-height:1;}
+.stat-label{font-size:0.75rem;color:var(--text-muted);margin-top:0.2rem;}
+
+/* INFERENCE BOX */
+.infer-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:1.5rem 0;}
+.infer-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.25rem;}
+.infer-title{font-size:0.82rem;font-weight:700;color:var(--slate);margin-bottom:0.5rem;display:flex;align-items:center;gap:0.4rem;}
+.infer-result{font-family:'Noto Serif TC',serif;font-size:1.3rem;font-weight:700;color:var(--teal-dark);}
+.infer-desc{font-size:0.78rem;color:var(--text-light);margin-top:0.3rem;line-height:1.6;}
+.infer-sig{display:inline-block;background:var(--teal-pale);color:var(--teal-dark);border-radius:3px;padding:0.1rem 0.4rem;font-size:0.65rem;font-weight:700;margin-left:0.3rem;}
+.infer-ns{display:inline-block;background:#EDF2F5;color:var(--text-muted);border-radius:3px;padding:0.1rem 0.4rem;font-size:0.65rem;margin-left:0.3rem;}
+
+/* RECO */
+.reco-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;}
+.reco-card{border-radius:12px;padding:1.5rem;}
+.reco-card.r1{background:linear-gradient(135deg,#FDECEA,#F9D8D3);border:1px solid #EDADA3;}
+.reco-card.r2{background:linear-gradient(135deg,#FBF3E4,#F5E3C5);border:1px solid #E6C98A;}
+.reco-card.r3{background:linear-gradient(135deg,var(--green-pale),#C9EAD9);border:1px solid #8CC9AC;}
+.reco-card.r4{background:linear-gradient(135deg,var(--teal-pale),#C4DFE8);border:1px solid #8AC0CE;}
+.reco-priority{font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.5rem;}
+.r1 .reco-priority{color:#9B3020;} .r2 .reco-priority{color:#7A4E10;} .r3 .reco-priority{color:#1F4D35;} .r4 .reco-priority{color:#1A4A5A;}
+.reco-title{font-family:'Noto Serif TC',serif;font-size:1.1rem;font-weight:700;margin-bottom:0.5rem;}
+.r1 .reco-title{color:#7A2818;} .r2 .reco-title{color:#5A380A;} .r3 .reco-title{color:#1F4D35;} .r4 .reco-title{color:#1A4A5A;}
+.reco-desc{font-size:0.83rem;color:var(--text);line-height:1.7;}
+
+/* DONUT placeholders */
+.donut-wrap{display:flex;align-items:center;gap:1.5rem;}
+.donut-svg{flex-shrink:0;}
+.donut-legend{display:flex;flex-direction:column;gap:0.4rem;}
+.donut-legend-item{display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:var(--text-light);}
+.donut-legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+
+/* FOOTER */
+footer{background:var(--teal-dark);color:rgba(255,255,255,0.65);padding:2.5rem 0;margin-top:3rem;}
+.footer-inner{max-width:1080px;margin:0 auto;padding:0 1.5rem;}
+.footer-top{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(255,255,255,0.1);}
+.footer-brand{font-family:'Noto Serif TC',serif;font-size:1rem;color:#fff;margin-bottom:0.5rem;}
+.footer-note{font-size:0.78rem;line-height:1.7;}
+.footer-bottom{font-size:0.72rem;text-align:center;}
+
+/* HIGHLIGHT BOX */
+.highlight-box{background:linear-gradient(135deg,var(--teal-dark),var(--teal));color:#fff;border-radius:12px;padding:2rem;margin:1.5rem 0;}
+.highlight-box-title{font-family:'Noto Serif TC',serif;font-size:1.3rem;font-weight:700;margin-bottom:0.5rem;}
+.highlight-box-body{font-size:0.88rem;line-height:1.8;color:rgba(255,255,255,0.85);}
+
+/* PILLAR WARN */
+.pillar-police{background:#EAF0F8;border:1px solid #B8CCDE;border-radius:10px;padding:1.25rem;}
+.pillar-police-title{font-family:'Noto Serif TC',serif;font-size:1rem;font-weight:700;color:#2A4A7A;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.5rem;}
+.pillar-police-body{font-size:0.83rem;color:#3A5070;line-height:1.7;}
+
+/* DEMO GRID */
+.demo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;}
+.demo-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.25rem;text-align:center;}
+.demo-num{font-family:'Noto Serif TC',serif;font-size:1.8rem;font-weight:700;color:var(--teal-dark);}
+.demo-label{font-size:0.75rem;color:var(--text-muted);margin-top:0.25rem;line-height:1.4;}
+
+/* Scroll animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.anim{opacity:0;}
+.anim.visible{animation:fadeUp 0.5s ease both;}
+
+/* Responsive */
+@media(max-width:768px){
+  .cover-content{grid-template-columns:1fr;}
+  .cover-illustration{display:none;}
+  .kpi-row,.three-col,.two-col,.demo-grid,.reco-grid,.infer-grid{grid-template-columns:1fr;}
+  .unit-grid{grid-template-columns:1fr;}
+  .nav-links{display:none;}
+}
+.unit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;}
+
+/* CORRELATION TABLE */
+.corr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;margin:1rem 0;}
+.corr-item{background:#fff;border:1px solid var(--border);border-radius:8px;padding:1rem;text-align:center;}
+.corr-r{font-family:'Noto Serif TC',serif;font-size:1.6rem;font-weight:700;}
+.corr-r.pos{color:#C44A3A;} .corr-r.neg{color:#3D8B6E;}
+.corr-label{font-size:0.75rem;color:var(--text-muted);margin-top:0.2rem;}
+.corr-sig{font-size:0.68rem;color:var(--teal);font-weight:700;}
+
+/* ===== 列印 / PDF 樣式 ===== */
+@media print {
+  /* 隱藏導覽列 */
+  nav { display: none !important; }
+
+  /* 每章節換頁 */
+  section { page-break-before: always; }
+  .foreword { page-break-before: always; }
+
+  /* 封面不換頁、撐滿一頁 */
+  .cover {
+    min-height: 100vh;
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+  .cover-bg, .cover-pattern { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  /* 保留背景色（列印時瀏覽器預設會移除） */
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+  /* 避免卡片、表格在頁面中間斷掉 */
+  .kpi-card, .unit-card, .infer-card, .reco-card,
+  .callout, table, .bar-section { page-break-inside: avoid; }
+
+  /* 移除動畫（PDF 不需要） */
+  .anim { opacity: 1 !important; }
+  .bar-fill { width: var(--print-w, 0%) !important; background-color: #2A7D8F !important; }
+  .bar-fill.f-red { background: #C44A3A !important; background-image: none !important; }
+  .bar-fill.f-gold { background: #C8913A !important; background-image: none !important; }
+  .bar-fill.f-green { background: #3D8B6E !important; background-image: none !important; }
+  .bar-fill.f-teal { background: #2A7D8F !important; background-image: none !important; }
+  .bar-fill.f-slate { background: #3D5A6E !important; background-image: none !important; }
+
+  /* 調整字體大小讓內容更緊湊 */
+  body { font-size: 13px; }
+
+  /* 移除陰影（節省墨水、PDF 更清晰） */
+  * { box-shadow: none !important; }
+
+  /* 連結不顯示 URL */
+  a::after { content: none !important; }
+
+  /* 頁面邊距 */
+  @page {
+    size: A4 portrait;
+    margin: 15mm 12mm 15mm 12mm;
+  }
+
+  /* 頁首頁尾（可選） */
+  @page {
+    @top-center { content: "台灣醫療救護學會 · 緊急服務人員身心健康年報 2026"; font-size: 9pt; color: #666; }
+    @bottom-right { content: counter(page); font-size: 9pt; color: #666; }
+  }
+
+  /* 欄位佈局在列印時改為單欄（避免太擠） */
+  .two-col, .three-col, .demo-grid,
+  .infer-grid, .reco-grid, .unit-grid { grid-template-columns: 1fr 1fr !important; gap: 0.75rem !important; }
+  .demo-grid { grid-template-columns: repeat(4, 1fr) !important; }
+
+  /* 封面圖片大小調整 */
+  .cover-illustration img { max-width: 320px; }
+
+  /* footer 換頁前 */
+  footer { page-break-before: always; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-brand">台灣醫療救護學會 · 身心健康年報 2026</div>
+    <ul class="nav-links">
+      <li><a href="#foreword">前言</a></li>
+      <li><a href="#overview">總覽</a></li>
+      <li><a href="#demo">人口特性</a></li>
+      <li><a href="#mental">心理健康</a></li>
+      <li><a href="#stress">職業壓力</a></li>
+      <li><a href="#units">職類比較</a></li>
+      <li><a href="#support">求助行為</a></li>
+      <li><a href="#inference">推論統計</a></li>
+      <li><a href="#intl">國際比較</a></li>
+      <li><a href="#reco">建議</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-bg"></div>
+  <div class="cover-pattern"></div>
+  <div class="cover-content container">
+    <div class="cover-text">
+      <div class="cover-org">台灣醫療救護學會<br>安全衛生委員會 出版</div>
+      <div class="cover-title-main">緊急服務人員<br>身心健康年報</div>
+      <div class="cover-title-year">2026</div>
+      <div class="cover-subtitle">首份針對台灣消防、警察、民間救護及救難人員的<br>系統性心理健康追蹤調查報告</div>
+      <div class="cover-tagline">關懷敦援，守望前線</div>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <div class="cover-meta-label">有效樣本</div>
+          <div class="cover-meta-val">486 人</div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="cover-meta-label">收案期間</div>
+          <div class="cover-meta-val" style="font-size:1rem;">2026/3/27–5/11</div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="cover-meta-label">覆蓋縣市</div>
+          <div class="cover-meta-val">21 縣市</div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="cover-meta-label">台灣首份</div>
+          <div class="cover-meta-val">年度調查</div>
+        </div>
+      </div>
+    </div>
+    <div class="cover-illustration">
+      <img src="https://res.cloudinary.com/dcflrxcnb/image/upload/v1778486272/Cover_zednbo.png" alt="緊急服務人員插圖">
+      <div class="cover-badge">
+        <div class="b-num">1st</div>
+        <div class="b-text">台灣<br>首份<br>年度<br>調查</div>
+      </div>
+    </div>
+  </div>
+  <div class="cover-bottom">
+    <div class="cover-bottom-inner">
+      <span>調查工具：K6 · BRS · OSLO-3 · PCL-5 改編版</span>
+      <span>比較基準：Beyond Blue Answering the Call, Australia (2018, n=21,014)</span>
+    </div>
+  </div>
+</div>
+
+<!-- FOREWORD -->
+<div class="foreword" id="foreword">
+  <div class="foreword-inner">
+    <div class="foreword-head">
+      <div class="foreword-icon">💚</div>
+      <div>
+        <div class="foreword-label">安全衛生委員會 序言</div>
+        <div class="foreword-title">前言</div>
+      </div>
+    </div>
+    <div class="foreword-body">
+      <p>每一次警報響起，是召喚，也是考驗。台灣的緊急服務人員——無論是衝進火場的消防員、執勤街頭的警察，或是搶在黃金時間馳援的救護員——每日默默承擔著普通人難以想像的壓力與創傷。他們守護著每一個家庭的安全，卻往往在自身最需要關懷的時刻，選擇沉默。</p>
+      <p>台灣醫療救護學會安全衛生委員會深刻認知到，<strong>身體安全與心理健康同等重要</strong>。正因如此，我們啟動了「出勤之後」年度調查計畫，以科學方法系統性地記錄台灣緊急服務人員的心理健康現況，建立本土基準數據，填補長期以來的資料空白。</p>
+      <p>本報告為台灣第一份針對消防、警察、民間救護及救難人員的身心健康年度調查報告，收案期間自 2026 年 3 月 27 日至 5 月 11 日，共收到 491 份問卷，其中 486 份為有效回覆。調查工具採用國際認可量表，並首次提供與澳洲全國性研究的跨國比較。</p>
+      <p>數據背後，是活生生的人。我們希望每一位填寫問卷的前線人員都知道：您的困境被看見了，您的聲音被記錄了，您的需求值得被回應。</p>
+      <p>本報告的出版，是一個起點，而非終點。我們承諾持續追蹤、持續倡議、持續為前線人員的心理健康發聲，直到每一個緊急服務機關都能成為真正照顧人的組織。</p>
+      <p>感謝所有參與調查的前線人員，感謝您們的信任與勇氣。</p>
+    </div>
+    <div class="foreword-sig">
+      <p>謹代表</p>
+      <p class="sig-name">台灣醫療救護學會 安全衛生委員會</p>
+      <p style="color:var(--text-muted);font-size:0.82rem;">2026 年 5 月</p>
+    </div>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<section class="section" id="overview">
+  <div class="container">
+    <div class="section-head anim">
+      <div class="section-num">第一章</div>
+      <h2 class="section-title">關鍵發現一覽</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">486 名台灣緊急服務人員的真實數據，呈現這個行業所承受的心理重量——以及他們所展現的堅韌。</p>
+    </div>
+
+    <div class="kpi-row anim">
+      <div class="kpi-card kpi-danger">
+        <div class="kpi-num">24.1%</div>
+        <div class="kpi-label">嚴重心理困擾<br>（K6 ≥ 13 分）</div>
+        <div class="kpi-compare lower">▼ 澳洲緊急服務員工約 32%</div>
+        <div class="kpi-note">仍為一般民眾的 2–3 倍</div>
+      </div>
+      <div class="kpi-card kpi-warn">
+        <div class="kpi-num">76.9%</div>
+        <div class="kpi-label">中度以上心理困擾<br>（K6 ≥ 5 分）</div>
+        <div class="kpi-compare higher">▲ 超過四分之三受訪者</div>
+        <div class="kpi-note">輕中度困擾極為普遍</div>
+      </div>
+      <div class="kpi-card kpi-danger">
+        <div class="kpi-num">60.5%</div>
+        <div class="kpi-label">PTSD 症狀篩檢陽性<br>（至少 1 項症狀）</div>
+        <div class="kpi-note">嚴重困擾者此比例高達 91.5%</div>
+      </div>
+    </div>
+    <div class="kpi-row anim">
+      <div class="kpi-card kpi-warn">
+        <div class="kpi-num">57.6%</div>
+        <div class="kpi-label">高度工作壓力<br>（≥ 7/10 分）</div>
+        <div class="kpi-note">平均分 6.5，中位數 7</div>
+      </div>
+      <div class="kpi-card kpi-ok">
+        <div class="kpi-num">62.6%</div>
+        <div class="kpi-label">高韌性<br>（BRS ≥ 18 分）</div>
+        <div class="kpi-compare similar">≈ 澳洲研究 &gt;50%</div>
+        <div class="kpi-note">韌性為最強心理保護因子（r = −0.629）</div>
+      </div>
+      <div class="kpi-card kpi-info">
+        <div class="kpi-num">37.9%</div>
+        <div class="kpi-label">睡眠品質不佳<br>（自評 ≤ 4/10）</div>
+        <div class="kpi-note">睡眠均值 5.25，與困擾高度相關（r = −0.493）</div>
+      </div>
+    </div>
+
+    <div class="highlight-box anim">
+      <div class="highlight-box-title">🔑 本研究三大關鍵保護因子</div>
+      <div class="highlight-box-body">
+        心理困擾（K6）與三大因子的相關係數均達統計顯著（p &lt; 0.001）：<br>
+        <strong>韌性（BRS）r = −0.629</strong>　·　<strong>身體健康 r = −0.564</strong>　·　<strong>睡眠品質 r = −0.493</strong>　·　<strong>社會支持（OSLO）r = −0.481</strong><br>
+        強化韌性、改善睡眠、建立社會支持網絡，是目前證據最強的干預方向。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMOGRAPHICS -->
+<section class="section alt" id="demo">
+  <div class="container">
+    <div class="section-head anim">
+      <div class="section-num">第二章</div>
+      <h2 class="section-title">受訪者人口特性</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">本次調查收案期間 2026/3/27–5/11，共發送 491 份，有效回覆 486 份（拒答 5 份）。</p>
+    </div>
+
+    <div class="demo-grid anim">
+      <div class="demo-card">
+        <div class="demo-num">486</div>
+        <div class="demo-label">有效樣本<br>（回覆率 99%）</div>
+      </div>
+      <div class="demo-card">
+        <div class="demo-num">38.2</div>
+        <div class="demo-label">平均年齡<br>（SD=10.3）</div>
+      </div>
+      <div class="demo-card">
+        <div class="demo-num">13.1</div>
+        <div class="demo-label">平均年資（年）<br>（SD=9.8）</div>
+      </div>
+      <div class="demo-card">
+        <div class="demo-num">53.2</div>
+        <div class="demo-label">平均每週工時<br>（SD=26.2）</div>
+      </div>
+    </div>
+
+    <div class="two-col anim" style="margin-top:1.5rem;">
+      <div>
+        <div class="bar-section">
+          <div class="bar-section-title">性別分佈</div>
+          <div class="bar-chart">
+            <div class="bar-row"><div class="bar-label">生理男</div><div class="bar-track"><div class="bar-fill f-teal" data-w="81.1" style="--print-w:81.1%"></div></div><span class="bar-value">394 人（81.1%）</span></div>
+            <div class="bar-row"><div class="bar-label">生理女</div><div class="bar-track"><div class="bar-fill f-slate" data-w="18.9" style="--print-w:18.9%"></div></div><span class="bar-value">92 人（18.9%）</span></div>
+          </div>
+        </div>
+        <div class="bar-section" style="margin-top:1.25rem;">
+          <div class="bar-section-title">婚姻狀況</div>
+          <div class="bar-chart">
+            <div class="bar-row"><div class="bar-label">已婚/有伴侶</div><div class="bar-track"><div class="bar-fill f-teal" data-w="54.1" style="--print-w:54.1%"></div></div><span class="bar-value">54.1%</span></div>
+            <div class="bar-row"><div class="bar-label">單身</div><div class="bar-track"><div class="bar-fill f-slate" data-w="24.5" style="--print-w:24.5%"></div></div><span class="bar-value">24.5%</span></div>
+            <div class="bar-row"><div class="bar-label">未婚有固定伴侶</div><div class="bar-track"><div class="bar-fill f-slate" data-w="17.5" style="--print-w:17.5%"></div></div><span class="bar-value">17.5%</span></div>
+            <div class="bar-row"><div class="bar-label">離婚/分居</div><div class="bar-track"><div class="bar-fill f-gold" data-w="3.9" style="--print-w:3.9%"></div></div><span class="bar-value">3.9%</span></div>
+          </div>
+        </div>
+        <div class="bar-section" style="margin-top:1.25rem;">
+          <div class="bar-section-title">最高學歷</div>
+          <div class="bar-chart">
+            <div class="bar-row"><div class="bar-label">大學/專科</div><div class="bar-track"><div class="bar-fill f-teal" data-w="76.5" style="--print-w:76.5%"></div></div><span class="bar-value">76.5%</span></div>
+            <div class="bar-row"><div class="bar-label">研究所以上</div><div class="bar-track"><div class="bar-fill f-slate" data-w="15.6" style="--print-w:15.6%"></div></div><span class="bar-value">15.6%</span></div>
+            <div class="bar-row"><div class="bar-label">高中職</div><div class="bar-track"><div class="bar-fill f-gold" data-w="7.6" style="--print-w:7.6%"></div></div><span class="bar-value">7.6%</span></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="bar-section">
+          <div class="bar-section-title">年齡分佈</div>
+          <div class="bar-chart">
+            <div class="bar-row"><div class="bar-label">&lt;25 歲</div><div class="bar-track"><div class="bar-fill f-slate" data-w="10.9" style="--print-w:10.9%"></div></div><span class="bar-value">10.9%</span></div>
+            <div class="bar-row"><div class="bar-label">25–29 歲</div><div class="bar-track"><div class="bar-fill f-slate" data-w="14.8" style="--print-w:14.8%"></div></div><span class="bar-value">14.8%</span></div>
+            <div class="bar-row"><div class="bar-label">30–34 歲</div><div class="bar-track"><div class="bar-fill f-teal" data-w="15.2" style="--print-w:15.2%"></div></div><span class="bar-value">15.2%</span></div>
+            <div class="bar-row"><div class="bar-label">35–39 歲</div><div class="bar-track"><div class="bar-fill f-teal" data-w="16.3" style="--print-w:16.3%"></div></div><span class="bar-value">16.3%</span></div>
+            <div class="bar-row"><div class="bar-label">40–44 歲</div><div class="bar-track"><div class="bar-fill f-teal" data-w="17.9" style="--print-w:17.9%"></div></div><span class="bar-value">17.9%（最多）</span></div>
+            <div class="bar-row"><div class="bar-label">45–49 歲</div><div class="bar-track"><div class="bar-fill f-slate" data-w="11.5" style="--print-w:11.5%"></div></div><span class="bar-value">11.5%</span></div>
+            <div class="bar-row"><div class="bar-label">50–54 歲</div><div class="bar-track"><div class="bar-fill f-slate" data-w="8.2" style="--print-w:8.2%"></div></div><span class="bar-value">8.2%</span></div>
+            <div class="bar-row"><div class="bar-label">55 歲+</div><div class="bar-track"><div class="bar-fill f-slate" data-w="4.5" style="--print-w:4.5%"></div></div><span class="bar-value">4.5%</span></div>
+          </div>
+        </div>
+        <div class="bar-section" style="margin-top:1.25rem;">
+          <div class="bar-section-title">服務年資分組</div>
+          <div class="bar-chart">
+            <div class="bar-row"><div class="bar-label">&lt;1 年</div><div class="bar-track"><div class="bar-fill f-slate" data-w="10.5" style="--print-w:10.5%"></div></div><span class="bar-value">10.5%</span></div>
+            <div class="bar-row"><div class="bar-label">1–5 年</div><div class="bar-track"><div class="bar-fill f-slate" data-w="17.5" style="--print-w:17.5%"></div></div><span class="bar-value">17.5%</span></div>
+            <div class="bar-row"><div class="bar-label">5–10 年</div><div class="bar-track"><div class="bar-fill f-teal" data-w="19.8" style="--print-w:19.8%"></div></div><span class="bar-value">19.8%</span></div>
+            <div class="bar-row"><div class="bar-label">10–15 年</div><div class="bar-track"><div class="bar-fill f-slate" data-w="12.1" style="--print-w:12.1%"></div></div><span class="bar-value">12.1%</span></div>
+            <div class="bar-row"><div class="bar-label">15–20 年</div><div class="bar-track"><div class="bar-fill f-teal" data-w="20.8" style="--print-w:20.8%"></div></div><span class="bar-value">20.8%（最多）</span></div>
+            <div class="bar-row"><div class="bar-label">20–25 年</div><div class="bar-track"><div class="bar-fill f-slate" data-w="6.4" style="--print-w:6.4%"></div></div><span class="bar-value">6.4%</span></div>
+            <div class="bar-row"><div class="bar-label">25 年+</div><div class="bar-track"><div class="bar-fill f-slate" data-w="11.9" style="--print-w:11.9%"></div></div><span class="bar-value">11.9%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col anim" style="margin-top:2rem;">
+      <div>
+        <div class="bar-section">
+          <div class="bar-section-title">服務單位</div>
+          <div class="bar-chart">
+            <div class="bar-row"><div class="bar-label">消防</div><div class="bar-track"><div class="bar-fill f-teal" data-w="66.9" style="--print-w:66.9%"></div></div><span class="bar-value">325 人（66.9%）</span></div>
+            <div class="bar-row"><div class="bar-label">警察</div><div class="bar-track"><div class="bar-fill f-slate" data-w="25.5" style="--print-w:25.5%"></div></div><span class="bar-value">124 人（25.5%）</span></div>
+            <div class="bar-row"><div class="bar-label">民間救護</div><div class="bar-track"><div class="bar-fill f-green" data-w="6.4" style="--print-w:6.4%"></div></div><span class="bar-value">31 人（6.4%）</span></div>
+            <div class="bar-row"><div class="bar-label">民間救難</div><div class="bar-track"><div class="bar-fill f-gold" data-w="1.2" style="--print-w:1.2%"></div></div><span class="bar-value">6 人（1.2%）</span></div>
+          </div>
+        </div>
+        <div class="bar-section" style="margin-top:1.25rem;">
+          <div class="bar-section-title">主要服務類型</div>
+          <div class="bar-chart">
+            <div class="bar-row"><div class="bar-label">緊急救護</div><div class="bar-track"><div class="bar-fill f-teal" data-w="47.3" style="--print-w:47.3%"></div></div><span class="bar-value">230 人（47.3%）</span></div>
+            <div class="bar-row"><div class="bar-label">災害搶救</div><div class="bar-track"><div class="bar-fill f-slate" data-w="24.7" style="--print-w:24.7%"></div></div><span class="bar-value">120 人（24.7%）</span></div>
+            <div class="bar-row"><div class="bar-label">安全秩序</div><div class="bar-track"><div class="bar-fill f-slate" data-w="14.6" style="--print-w:14.6%"></div></div><span class="bar-value">71 人（14.6%）</span></div>
+            <div class="bar-row"><div class="bar-label">其他</div><div class="bar-track"><div class="bar-fill f-slate" data-w="9.9" style="--print-w:9.9%"></div></div><span class="bar-value">48 人（9.9%）</span></div>
+            <div class="bar-row"><div class="bar-label">預防宣導</div><div class="bar-track"><div class="bar-fill f-slate" data-w="2.9" style="--print-w:2.9%"></div></div><span class="bar-value">14 人（2.9%）</span></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="bar-section">
+          <div class="bar-section-title">任職身分</div>
+          <div class="bar-chart">
+            <div class="bar-row"><div class="bar-label">正職公務人員</div><div class="bar-track"><div class="bar-fill f-teal" data-w="83.9" style="--print-w:83.9%"></div></div><span class="bar-value">408 人（83.9%）</span></div>
+            <div class="bar-row"><div class="bar-label">志願服務</div><div class="bar-track"><div class="bar-fill f-slate" data-w="16.1" style="--print-w:16.1%"></div></div><span class="bar-value">78 人（16.1%）</span></div>
+          </div>
+        </div>
+        <div class="bar-section" style="margin-top:1.25rem;">
+          <div class="bar-section-title">工作主要角色</div>
+          <div class="bar-chart">
+            <div class="bar-row"><div class="bar-label">第一線出勤</div><div class="bar-track"><div class="bar-fill f-teal" data-w="80.5" style="--print-w:80.5%"></div></div><span class="bar-value">391 人（80.5%）</span></div>
+            <div class="bar-row"><div class="bar-label">內勤行政</div><div class="bar-track"><div class="bar-fill f-slate" data-w="12.8" style="--print-w:12.8%"></div></div><span class="bar-value">62 人（12.8%）</span></div>
+            <div class="bar-row"><div class="bar-label">管理階層</div><div class="bar-track"><div class="bar-fill f-slate" data-w="3.7" style="--print-w:3.7%"></div></div><span class="bar-value">18 人（3.7%）</span></div>
+            <div class="bar-row"><div class="bar-label">指揮派遣</div><div class="bar-track"><div class="bar-fill f-slate" data-w="3.1" style="--print-w:3.1%"></div></div><span class="bar-value">15 人（3.1%）</span></div>
+          </div>
+        </div>
+        <div class="bar-section" style="margin-top:1.25rem;">
+          <div class="bar-section-title">排班狀況</div>
+          <div class="bar-chart">
+            <div class="bar-row"><div class="bar-label">日夜輪班</div><div class="bar-track"><div class="bar-fill f-red" data-w="70.0" style="--print-w:70.0%"></div></div><span class="bar-value">340 人（70.0%）</span></div>
+            <div class="bar-row"><div class="bar-label">固定日班</div><div class="bar-track"><div class="bar-fill f-slate" data-w="16.7" style="--print-w:16.7%"></div></div><span class="bar-value">81 人（16.7%）</span></div>
+            <div class="bar-row"><div class="bar-label">無固定排班</div><div class="bar-track"><div class="bar-fill f-slate" data-w="13.0" style="--print-w:13.0%"></div></div><span class="bar-value">63 人（13.0%）</span></div>
+          </div>
+        </div>
+        <div class="bar-section" style="margin-top:1.25rem;">
+          <div class="bar-section-title">服務地點</div>
+          <div class="bar-chart">
+            <div class="bar-row"><div class="bar-label">都會區</div><div class="bar-track"><div class="bar-fill f-teal" data-w="69.3" style="--print-w:69.3%"></div></div><span class="bar-value">337 人（69.3%）</span></div>
+            <div class="bar-row"><div class="bar-label">郊區</div><div class="bar-track"><div class="bar-fill f-slate" data-w="24.1" style="--print-w:24.1%"></div></div><span class="bar-value">117 人（24.1%）</span></div>
+            <div class="bar-row"><div class="bar-label">偏遠地區</div><div class="bar-track"><div class="bar-fill f-gold" data-w="6.6" style="--print-w:6.6%"></div></div><span class="bar-value">32 人（6.6%）</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENTAL HEALTH -->
+<section class="section" id="mental">
+  <div class="container">
+    <div class="section-head anim">
+      <div class="section-num">第三章</div>
+      <h2 class="section-title">心理健康現況</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">使用 K6 心理困擾量表、BRS 韌性量表及 PCL-5 改編版 PTSD 篩檢，全面評估受訪者身心狀態。</p>
+    </div>
+
+    <!-- K6 -->
+    <div class="two-col anim" style="margin-bottom:2rem;">
+      <div>
+        <div class="bar-section">
+          <div class="bar-section-title">K6 心理困擾量表（0–24 分，n=486）</div>
+          <p style="font-size:0.82rem;color:var(--text-light);margin-bottom:0.75rem;">均值 8.83（SD=5.47），中位數 8.0</p>
+          <div class="bar-chart">
+            <div class="bar-row"><div class="bar-label">低度困擾（0–4）</div><div class="bar-track"><div class="bar-fill f-green" data-w="23.0" style="--print-w:23.0%"></div></div><span class="bar-value">23.0%（n=112）</span></div>
+            <div class="bar-row"><div class="bar-label">中度困擾（5–12）</div><div class="bar-track"><div class="bar-fill f-gold" data-w="52.9" style="--print-w:52.9%"></div></div><span class="bar-value">52.9%（n=257）</span></div>
+            <div class="bar-row"><div class="bar-label">嚴重困擾（≥13）</div><div class="bar-track"><div class="bar-fill f-red" data-w="24.1" style="--print-w:24.1%"></div></div><span class="bar-value">24.1%（n=117）</span></div>
+          </div>
+        </div>
+        <div class="callout c-gold" style="margin-top:1rem;">
+          <strong>K6 各題高頻感受：</strong>近一個月內「緊張」（87.2% 有過偶爾以上）、「坐立難安」（67.9%）、「做每件事都很費力」（61.7%）最為普遍，顯示焦慮症狀尤其突出。
+        </div>
+      </div>
+      <div>
+        <div class="bar-section">
+          <div class="bar-section-title">BRS 韌性量表（6–36 分）</div>
+          <p style="font-size:0.82rem;color:var(--text-light);margin-bottom:0.75rem;">均值 19.74（SD=5.78）</p>
+          <div class="bar-chart">
+            <div class="bar-row"><div class="bar-label">低韌性（≤12）</div><div class="bar-track"><div class="bar-fill f-red" data-w="9.9" style="--print-w:9.9%"></div></div><span class="bar-value">9.9%（n=48）</span></div>
+            <div class="bar-row"><div class="bar-label">中度韌性（13–17）</div><div class="bar-track"><div class="bar-fill f-gold" data-w="27.6" style="--print-w:27.6%"></div></div><span class="bar-value">27.6%（n=134）</span></div>
+            <div class="bar-row"><div class="bar-label">高韌性（≥18）</div><div class="bar-track"><div class="bar-fill f-green" data-w="62.6" style="--print-w:62.6%"></div></div><span class="bar-value">62.6%（n=304）</span></div>
+          </div>
+        </div>
+        <div class="bar-section" style="margin-top:1.25rem;">
+          <div class="bar-section-title">PTSD 症狀篩檢（PCL-5 改編，0–5 題）</div>
+          <div class="bar-chart">
+            <div class="bar-row"><div class="bar-label">無症狀（0題）</div><div class="bar-track"><div class="bar-fill f-green" data-w="39.5" style="--print-w:39.5%"></div></div><span class="bar-value">39.5%（n=192）</span></div>
+            <div class="bar-row"><div class="bar-label">1 項症狀</div><div class="bar-track"><div class="bar-fill f-gold" data-w="19.8" style="--print-w:19.8%"></div></div><span class="bar-value">19.8%（n=96）</span></div>
+            <div class="bar-row"><div class="bar-label">2 項症狀</div><div class="bar-track"><div class="bar-fill f-gold" data-w="13.6" style="--print-w:13.6%"></div></div><span class="bar-value">13.6%（n=66）</span></div>
+            <div class="bar-row"><div class="bar-label">3 項症狀</div><div class="bar-track"><div class="bar-fill f-red" data-w="9.9" style="--print-w:9.9%"></div></div><span class="bar-value">9.9%（n=48）</span></div>
+            <div class="bar-row"><div class="bar-label">4–5 項症狀</div><div class="bar-track"><div class="bar-fill f-red" data-w="17.3" style="--print-w:17.3%"></div></div><span class="bar-value">17.3%（n=84）</span></div>
+          </div>
+          <p style="font-size:0.78rem;color:var(--text-muted);margin-top:0.5rem;">各症狀盛行率：高度警覺/驚嚇（39.9%）、疏離麻木（39.7%）、主動迴避（30.2%）、罪惡感（26.7%）、惡夢（19.1%）</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Physical & Sleep -->
+    <div class="three-col anim">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.5rem;">
+        <div class="bar-section-title" style="margin-bottom:0.5rem;">身體健康自評</div>
+        <div style="font-size:2.2rem;font-family:'Noto Serif TC',serif;font-weight:700;color:var(--teal-dark);">6.03</div>
+        <div style="font-size:0.78rem;color:var(--text-muted);">10 分制 均值</div>
+        <div class="bar-chart" style="margin-top:0.75rem;">
+          <div class="bar-row"><div class="bar-label" style="width:60px;font-size:0.72rem;">差（≤4）</div><div class="bar-track"><div class="bar-fill f-red" data-w="17" style="--print-w:17%"></div></div><span class="bar-value">~17%</span></div>
+          <div class="bar-row"><div class="bar-label" style="width:60px;font-size:0.72rem;">普通（5-6）</div><div class="bar-track"><div class="bar-fill f-gold" data-w="38" style="--print-w:38%"></div></div><span class="bar-value">~38%</span></div>
+          <div class="bar-row"><div class="bar-label" style="width:60px;font-size:0.72rem;">好（≥7）</div><div class="bar-track"><div class="bar-fill f-green" data-w="45" style="--print-w:45%"></div></div><span class="bar-value">~45%</span></div>
+        </div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.5rem;">
+        <div class="bar-section-title" style="margin-bottom:0.5rem;">睡眠品質</div>
+        <div style="font-size:2.2rem;font-family:'Noto Serif TC',serif;font-weight:700;color:var(--teal-dark);">5.25</div>
+        <div style="font-size:0.78rem;color:var(--text-muted);">10 分制 均值</div>
+        <div class="bar-chart" style="margin-top:0.75rem;">
+          <div class="bar-row"><div class="bar-label" style="width:60px;font-size:0.72rem;">不佳（≤4）</div><div class="bar-track"><div class="bar-fill f-red" data-w="37.9" style="--print-w:37.9%"></div></div><span class="bar-value">37.9%</span></div>
+          <div class="bar-row"><div class="bar-label" style="width:60px;font-size:0.72rem;">普通（5-6）</div><div class="bar-track"><div class="bar-fill f-gold" data-w="30.6" style="--print-w:30.6%"></div></div><span class="bar-value">30.6%</span></div>
+          <div class="bar-row"><div class="bar-label" style="width:60px;font-size:0.72rem;">好（≥7）</div><div class="bar-track"><div class="bar-fill f-green" data-w="31.5" style="--print-w:31.5%"></div></div><span class="bar-value">31.5%</span></div>
+        </div>
+        <div class="callout c-red" style="margin-top:0.75rem;padding:0.6rem 0.75rem;font-size:0.78rem;">⚠ 超過 1/3 受訪者睡眠品質不佳</div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.5rem;">
+        <div class="bar-section-title" style="margin-bottom:0.5rem;">每週運動天數</div>
+        <div class="bar-chart" style="margin-top:0.25rem;">
+          <div class="bar-row"><div class="bar-label" style="width:60px;font-size:0.72rem;">0 天</div><div class="bar-track"><div class="bar-fill f-red" data-w="20.6" style="--print-w:20.6%"></div></div><span class="bar-value">20.6%</span></div>
+          <div class="bar-row"><div class="bar-label" style="width:60px;font-size:0.72rem;">1–2 天</div><div class="bar-track"><div class="bar-fill f-gold" data-w="44.4" style="--print-w:44.4%"></div></div><span class="bar-value">44.4%</span></div>
+          <div class="bar-row"><div class="bar-label" style="width:60px;font-size:0.72rem;">3–4 天</div><div class="bar-track"><div class="bar-fill f-teal" data-w="23.9" style="--print-w:23.9%"></div></div><span class="bar-value">23.9%</span></div>
+          <div class="bar-row"><div class="bar-label" style="width:60px;font-size:0.72rem;">5 天+</div><div class="bar-track"><div class="bar-fill f-green" data-w="11.1" style="--print-w:11.1%"></div></div><span class="bar-value">11.1%</span></div>
+        </div>
+        <div style="margin-top:0.75rem;">
+          <div class="bar-section-title" style="margin-bottom:0.5rem;">飲酒頻率</div>
+          <div class="bar-chart">
+            <div class="bar-row"><div class="bar-label" style="width:60px;font-size:0.72rem;">從不</div><div class="bar-track"><div class="bar-fill f-green" data-w="26.7" style="--print-w:26.7%"></div></div><span class="bar-value">26.7%</span></div>
+            <div class="bar-row"><div class="bar-label" style="width:60px;font-size:0.72rem;">月≤1次</div><div class="bar-track"><div class="bar-fill f-teal" data-w="47.7" style="--print-w:47.7%"></div></div><span class="bar-value">47.7%</span></div>
+            <div class="bar-row"><div class="bar-label" style="width:60px;font-size:0.72rem;">月2-4次</div><div class="bar-track"><div class="bar-fill f-gold" data-w="16.9" style="--print-w:16.9%"></div></div><span class="bar-value">16.9%</span></div>
+            <div class="bar-row"><div class="bar-label" style="width:60px;font-size:0.72rem;">週2次+</div><div class="bar-track"><div class="bar-fill f-red" data-w="8.6" style="--print-w:8.6%"></div></div><span class="bar-value">8.6%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col anim" style="margin-top:1.5rem;">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.5rem;">
+        <div class="bar-section-title">豪飲行為（過去一年曾一次喝5罐以上）</div>
+        <div class="bar-chart" style="margin-top:0.75rem;">
+          <div class="bar-row"><div class="bar-label">從不</div><div class="bar-track"><div class="bar-fill f-green" data-w="55.1" style="--print-w:55.1%"></div></div><span class="bar-value">55.1%（n=268）</span></div>
+          <div class="bar-row"><div class="bar-label">每月少於一次</div><div class="bar-track"><div class="bar-fill f-gold" data-w="32.1" style="--print-w:32.1%"></div></div><span class="bar-value">32.1%（n=156）</span></div>
+          <div class="bar-row"><div class="bar-label">每月一次</div><div class="bar-track"><div class="bar-fill f-gold" data-w="7.8" style="--print-w:7.8%"></div></div><span class="bar-value">7.8%（n=38）</span></div>
+          <div class="bar-row"><div class="bar-label">每週以上</div><div class="bar-track"><div class="bar-fill f-red" data-w="4.9" style="--print-w:4.9%"></div></div><span class="bar-value">4.9%（n=24）</span></div>
+        </div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.5rem;">
+        <div class="bar-section-title">非醫療用途處方藥/非法藥物使用（過去12個月）</div>
+        <div class="bar-chart" style="margin-top:0.75rem;">
+          <div class="bar-row"><div class="bar-label">從不</div><div class="bar-track"><div class="bar-fill f-green" data-w="82.7" style="--print-w:82.7%"></div></div><span class="bar-value">82.7%（n=402）</span></div>
+          <div class="bar-row"><div class="bar-label">每月少於一次</div><div class="bar-track"><div class="bar-fill f-gold" data-w="7.0" style="--print-w:7.0%"></div></div><span class="bar-value">7.0%（n=34）</span></div>
+          <div class="bar-row"><div class="bar-label">每月一次</div><div class="bar-track"><div class="bar-fill f-gold" data-w="2.9" style="--print-w:2.9%"></div></div><span class="bar-value">2.9%（n=14）</span></div>
+          <div class="bar-row"><div class="bar-label">每週一次</div><div class="bar-track"><div class="bar-fill f-red" data-w="3.1" style="--print-w:3.1%"></div></div><span class="bar-value">3.1%（n=15）</span></div>
+          <div class="bar-row"><div class="bar-label">幾乎每日</div><div class="bar-track"><div class="bar-fill f-red" data-w="4.3" style="--print-w:4.3%"></div></div><span class="bar-value">4.3%（n=21）</span></div>
+        </div>
+        <div class="callout c-gold" style="margin-top:0.75rem;padding:0.6rem 0.75rem;font-size:0.78rem;">⚠ 17.3% 有非醫療用途使用紀錄，其中 4.3% 幾乎每日使用</div>
+      </div>
+    </div>
+
+    <!-- OSLO -->
+    <div class="anim" style="margin-top:1.5rem;">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.5rem;">
+        <div class="bar-section-title" style="margin-bottom:0.75rem;">OSLO-3 社會支持量表（3–14 分，均值 9.06，SD=2.19）</div>
+        <div class="three-col" style="gap:1rem;">
+          <div>
+            <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:0.5rem;">遇嚴重問題時有多少親近的人可依靠？</div>
+            <div class="bar-chart">
+              <div class="bar-row"><div class="bar-label" style="width:80px;font-size:0.72rem;">沒有</div><div class="bar-track"><div class="bar-fill f-red" data-w="11.5" style="--print-w:11.5%"></div></div><span class="bar-value">11.5%</span></div>
+              <div class="bar-row"><div class="bar-label" style="width:80px;font-size:0.72rem;">1-2 人</div><div class="bar-track"><div class="bar-fill f-gold" data-w="59.5" style="--print-w:59.5%"></div></div><span class="bar-value">59.5%</span></div>
+              <div class="bar-row"><div class="bar-label" style="width:80px;font-size:0.72rem;">3-5 人</div><div class="bar-track"><div class="bar-fill f-teal" data-w="21.0" style="--print-w:21.0%"></div></div><span class="bar-value">21.0%</span></div>
+              <div class="bar-row"><div class="bar-label" style="width:80px;font-size:0.72rem;">5 人以上</div><div class="bar-track"><div class="bar-fill f-green" data-w="8.0" style="--print-w:8.0%"></div></div><span class="bar-value">8.0%</span></div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:0.5rem;">親友對您的興趣與關心程度</div>
+            <div class="bar-chart">
+              <div class="bar-row"><div class="bar-label" style="width:80px;font-size:0.72rem;">完全沒有</div><div class="bar-track"><div class="bar-fill f-red" data-w="3.9" style="--print-w:3.9%"></div></div><span class="bar-value">3.9%</span></div>
+              <div class="bar-row"><div class="bar-label" style="width:80px;font-size:0.72rem;">很少</div><div class="bar-track"><div class="bar-fill f-gold" data-w="21.8" style="--print-w:21.8%"></div></div><span class="bar-value">21.8%</span></div>
+              <div class="bar-row"><div class="bar-label" style="width:80px;font-size:0.72rem;">不確定</div><div class="bar-track"><div class="bar-fill f-slate" data-w="18.7" style="--print-w:18.7%"></div></div><span class="bar-value">18.7%</span></div>
+              <div class="bar-row"><div class="bar-label" style="width:80px;font-size:0.72rem;">有些關心</div><div class="bar-track"><div class="bar-fill f-teal" data-w="38.5" style="--print-w:38.5%"></div></div><span class="bar-value">38.5%</span></div>
+              <div class="bar-row"><div class="bar-label" style="width:80px;font-size:0.72rem;">非常關心</div><div class="bar-track"><div class="bar-fill f-green" data-w="17.1" style="--print-w:17.1%"></div></div><span class="bar-value">17.1%</span></div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:0.5rem;">獲得實質幫助的難易度</div>
+            <div class="bar-chart">
+              <div class="bar-row"><div class="bar-label" style="width:80px;font-size:0.72rem;">非常困難</div><div class="bar-track"><div class="bar-fill f-red" data-w="3.1" style="--print-w:3.1%"></div></div><span class="bar-value">3.1%</span></div>
+              <div class="bar-row"><div class="bar-label" style="width:80px;font-size:0.72rem;">困難</div><div class="bar-track"><div class="bar-fill f-gold" data-w="8.4" style="--print-w:8.4%"></div></div><span class="bar-value">8.4%</span></div>
+              <div class="bar-row"><div class="bar-label" style="width:80px;font-size:0.72rem;">還可以</div><div class="bar-track"><div class="bar-fill f-slate" data-w="47.3" style="--print-w:47.3%"></div></div><span class="bar-value">47.3%</span></div>
+              <div class="bar-row"><div class="bar-label" style="width:80px;font-size:0.72rem;">容易</div><div class="bar-track"><div class="bar-fill f-teal" data-w="30.7" style="--print-w:30.7%"></div></div><span class="bar-value">30.7%</span></div>
+              <div class="bar-row"><div class="bar-label" style="width:80px;font-size:0.72rem;">非常容易</div><div class="bar-track"><div class="bar-fill f-green" data-w="10.5" style="--print-w:10.5%"></div></div><span class="bar-value">10.5%</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="callout c-gold" style="margin-top:1rem;font-size:0.83rem;">⚠ <strong>11.5% 受訪者表示遇到嚴重問題時沒有任何可依靠的親近之人</strong>，這群人的 K6 顯著偏高，是最需要主動關懷的高風險族群。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK STRESS -->
+<section class="section alt" id="stress">
+  <div class="container">
+    <div class="section-head anim">
+      <div class="section-num">第四章</div>
+      <h2 class="section-title">職業壓力分析</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">工作壓力均值 6.53 分（0–10），57.6% 的受訪者感受到高度工作壓力（≥7分）。與澳洲研究一致，組織性壓力遠超現場創傷。</p>
+    </div>
+
+    <div class="two-col anim">
+      <div>
+        <div class="bar-section">
+          <div class="bar-section-title">主要工作壓力來源（可複選）</div>
+          <div class="bar-chart">
+            <div class="bar-row"><div class="bar-label">行政業務負擔</div><div class="bar-track"><div class="bar-fill f-red" data-w="59.1" style="--print-w:59.1%"></div></div><span class="bar-value">59.1%（287人）</span></div>
+            <div class="bar-row"><div class="bar-label">工時與排班問題</div><div class="bar-track"><div class="bar-fill f-red" data-w="46.3" style="--print-w:46.3%"></div></div><span class="bar-value">46.3%（225人）</span></div>
+            <div class="bar-row"><div class="bar-label">人力裝備資源短缺</div><div class="bar-track"><div class="bar-fill f-gold" data-w="40.1" style="--print-w:40.1%"></div></div><span class="bar-value">40.1%（195人）</span></div>
+            <div class="bar-row"><div class="bar-label">主管的領導風格</div><div class="bar-track"><div class="bar-fill f-gold" data-w="39.9" style="--print-w:39.9%"></div></div><span class="bar-value">39.9%（194人）</span></div>
+            <div class="bar-row"><div class="bar-label">同事間的互動</div><div class="bar-track"><div class="bar-fill f-teal" data-w="28.6" style="--print-w:28.6%"></div></div><span class="bar-value">28.6%（139人）</span></div>
+            <div class="bar-row"><div class="bar-label">值勤遭民眾攻擊</div><div class="bar-track"><div class="bar-fill f-teal" data-w="20.0" style="--print-w:20.0%"></div></div><span class="bar-value">20.0%（97人）</span></div>
+            <div class="bar-row"><div class="bar-label">其他</div><div class="bar-track"><div class="bar-fill f-slate" data-w="19.3" style="--print-w:19.3%"></div></div><span class="bar-value">19.3%（94人）</span></div>
+            <div class="bar-row"><div class="bar-label">因勤務被調查訴訟</div><div class="bar-track"><div class="bar-fill f-teal" data-w="8.8" style="--print-w:8.8%"></div></div><span class="bar-value">8.8%（43人）</span></div>
+            <div class="bar-row"><div class="bar-label">職場霸凌</div><div class="bar-track"><div class="bar-fill f-teal" data-w="6.4" style="--print-w:6.4%"></div></div><span class="bar-value">6.4%（31人）</span></div>
+            <div class="bar-row"><div class="bar-label">性騷擾</div><div class="bar-track"><div class="bar-fill f-slate" data-w="0.4" style="--print-w:0.4%"></div></div><span class="bar-value">0.4%（2人）</span></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="callout c-teal" style="margin-bottom:1rem;">
+          <strong>組織性壓力 ≥ 現場創傷</strong><br>
+          排名前四的壓力來源全屬組織內部管理問題（行政、排班、資源、主管），而非現場危險。這與澳洲《Answering the Call》的發現完全一致：「不良的工作場所實踐，對心理健康的傷害不亞於創傷暴露。」
+        </div>
+        <div class="bar-section">
+          <div class="bar-section-title">因應方法（可複選）</div>
+          <div class="bar-chart">
+            <div class="bar-row"><div class="bar-label">運動或休閒</div><div class="bar-track"><div class="bar-fill f-green" data-w="62.8" style="--print-w:62.8%"></div></div><span class="bar-value">62.8%</span></div>
+            <div class="bar-row"><div class="bar-label">睡覺放空</div><div class="bar-track"><div class="bar-fill f-teal" data-w="61.5" style="--print-w:61.5%"></div></div><span class="bar-value">61.5%</span></div>
+            <div class="bar-row"><div class="bar-label">找家人或朋友</div><div class="bar-track"><div class="bar-fill f-teal" data-w="56.4" style="--print-w:56.4%"></div></div><span class="bar-value">56.4%</span></div>
+            <div class="bar-row"><div class="bar-label">找同事聊</div><div class="bar-track"><div class="bar-fill f-teal" data-w="42.2" style="--print-w:42.2%"></div></div><span class="bar-value">42.2%</span></div>
+            <div class="bar-row"><div class="bar-label">自己忍耐</div><div class="bar-track"><div class="bar-fill f-gold" data-w="34.8" style="--print-w:34.8%"></div></div><span class="bar-value">34.8%</span></div>
+            <div class="bar-row"><div class="bar-label">抽菸喝酒</div><div class="bar-track"><div class="bar-fill f-gold" data-w="26.7" style="--print-w:26.7%"></div></div><span class="bar-value">26.7%</span></div>
+            <div class="bar-row"><div class="bar-label">尋求專業協助</div><div class="bar-track"><div class="bar-fill f-red" data-w="14.0" style="--print-w:14.0%"></div></div><span class="bar-value">14.0%</span></div>
+          </div>
+        </div>
+        <div class="bar-section" style="margin-top:1.25rem;">
+          <div class="bar-section-title">遇到問題多久才會採取行動</div>
+          <div class="bar-chart">
+            <div class="bar-row"><div class="bar-label">立刻</div><div class="bar-track"><div class="bar-fill f-green" data-w="18.7" style="--print-w:18.7%"></div></div><span class="bar-value">18.7%（n=91）</span></div>
+            <div class="bar-row"><div class="bar-label">1–2 天</div><div class="bar-track"><div class="bar-fill f-teal" data-w="36.2" style="--print-w:36.2%"></div></div><span class="bar-value">36.2%（n=176）</span></div>
+            <div class="bar-row"><div class="bar-label">一週內</div><div class="bar-track"><div class="bar-fill f-gold" data-w="27.8" style="--print-w:27.8%"></div></div><span class="bar-value">27.8%（n=135）</span></div>
+            <div class="bar-row"><div class="bar-label">一個月內</div><div class="bar-track"><div class="bar-fill f-gold" data-w="8.8" style="--print-w:8.8%"></div></div><span class="bar-value">8.8%（n=43）</span></div>
+            <div class="bar-row"><div class="bar-label">一個月以上</div><div class="bar-track"><div class="bar-fill f-red" data-w="8.4" style="--print-w:8.4%"></div></div><span class="bar-value">8.4%（n=41）</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UNIT COMPARISON -->
+<section class="section" id="units">
+  <div class="container">
+    <div class="section-head anim">
+      <div class="section-num">第五章</div>
+      <h2 class="section-title">職類比較分析</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">消防、警察、民間救護三大職類呈現顯著差異，其中警察族群在所有不利指標均最為嚴峻（ANOVA F=9.3, p&lt;0.001）。</p>
+    </div>
+
+    <div class="unit-grid anim" style="margin-bottom:1.5rem;">
+      <div class="unit-card u-fire">
+        <div class="unit-card-title">🚒 消防</div>
+        <div class="unit-n">n = 325（66.9%） · 均值年資 13.1 年</div>
+        <div class="unit-metrics">
+          <div class="unit-metric"><div class="unit-metric-val">8.24</div><div class="unit-metric-label">K6 均值<br>嚴重：21.1%</div></div>
+          <div class="unit-metric"><div class="unit-metric-val">20.34</div><div class="unit-metric-label">BRS 均值<br>高韌：67.2%</div></div>
+          <div class="unit-metric"><div class="unit-metric-val">57.2%</div><div class="unit-metric-label">PTSD<br>症狀陽性</div></div>
+        </div>
+        <div class="bar-chart" style="gap:0.4rem;">
+          <div style="font-size:0.68rem;color:var(--text-muted);margin-bottom:0.25rem;">主要壓力來源</div>
+          <div class="bar-row"><div class="bar-label" style="width:85px;font-size:0.72rem;">行政負擔</div><div class="bar-track"><div class="bar-fill f-red" data-w="57" style="--print-w:57%"></div></div><span class="bar-value">57%</span></div>
+          <div class="bar-row"><div class="bar-label" style="width:85px;font-size:0.72rem;">排班工時</div><div class="bar-track"><div class="bar-fill f-gold" data-w="46" style="--print-w:46%"></div></div><span class="bar-value">46%</span></div>
+          <div class="bar-row"><div class="bar-label" style="width:85px;font-size:0.72rem;">主管風格</div><div class="bar-track"><div class="bar-fill f-teal" data-w="36" style="--print-w:36%"></div></div><span class="bar-value">36%</span></div>
+        </div>
+        <div class="alert-box info" style="margin-top:0.75rem;font-size:0.78rem;">社會支持最佳（OSLO=9.28）；睡眠品質較差（均值5.19）</div>
+      </div>
+
+      <div class="unit-card u-police">
+        <div class="unit-card-title">🚔 警察</div>
+        <div class="unit-n">n = 124（25.5%） · ANOVA 各項指標最嚴峻</div>
+        <div class="unit-metrics">
+          <div class="unit-metric"><div class="unit-metric-val" style="color:#C44A3A;">10.66</div><div class="unit-metric-label">K6 均值<br>嚴重：32.3%</div></div>
+          <div class="unit-metric"><div class="unit-metric-val" style="color:#C44A3A;">18.09</div><div class="unit-metric-label">BRS 均值<br>高韌：52.4%</div></div>
+          <div class="unit-metric"><div class="unit-metric-val" style="color:#C44A3A;">69.4%</div><div class="unit-metric-label">PTSD<br>症狀陽性</div></div>
+        </div>
+        <div class="bar-chart" style="gap:0.4rem;">
+          <div style="font-size:0.68rem;color:var(--text-muted);margin-bottom:0.25rem;">主要壓力來源</div>
+          <div class="bar-row"><div class="bar-label" style="width:85px;font-size:0.72rem;">行政負擔</div><div class="bar-track"><div class="bar-fill f-red" data-w="72.6" style="--print-w:72.6%"></div></div><span class="bar-value">72.6%</span></div>
+          <div class="bar-row"><div class="bar-label" style="width:85px;font-size:0.72rem;">主管風格</div><div class="bar-track"><div class="bar-fill f-red" data-w="54.8" style="--print-w:54.8%"></div></div><span class="bar-value">54.8%</span></div>
+          <div class="bar-row"><div class="bar-label" style="width:85px;font-size:0.72rem;">調查訴訟</div><div class="bar-track"><div class="bar-fill f-gold" data-w="16.9" style="--print-w:16.9%"></div></div><span class="bar-value">16.9%</span></div>
+        </div>
+        <div class="alert-box danger" style="margin-top:0.75rem;font-size:0.78rem;">⚠ K6 最高、BRS 最低、OSLO 最低、PTSD 最高、尋求專業最低（11.3%）<br>消防 vs 警察 K6 差異達統計顯著（p_adj=0.0001）</div>
+      </div>
+
+      <div class="unit-card u-ems">
+        <div class="unit-card-title">🚑 民間救護</div>
+        <div class="unit-n">n = 31（6.4%） · 睡眠品質最好</div>
+        <div class="unit-metrics">
+          <div class="unit-metric"><div class="unit-metric-val">8.23</div><div class="unit-metric-label">K6 均值<br>嚴重：28.1%</div></div>
+          <div class="unit-metric"><div class="unit-metric-val">19.87</div><div class="unit-metric-label">BRS 均值<br>高韌：56.2%</div></div>
+          <div class="unit-metric"><div class="unit-metric-val">53.1%</div><div class="unit-metric-label">PTSD<br>症狀陽性</div></div>
+        </div>
+        <div class="bar-chart" style="gap:0.4rem;">
+          <div style="font-size:0.68rem;color:var(--text-muted);margin-bottom:0.25rem;">主要壓力來源</div>
+          <div class="bar-row"><div class="bar-label" style="width:85px;font-size:0.72rem;">人力設備</div><div class="bar-track"><div class="bar-fill f-red" data-w="43.8" style="--print-w:43.8%"></div></div><span class="bar-value">43.8%</span></div>
+          <div class="bar-row"><div class="bar-label" style="width:85px;font-size:0.72rem;">排班工時</div><div class="bar-track"><div class="bar-fill f-gold" data-w="37.5" style="--print-w:37.5%"></div></div><span class="bar-value">37.5%</span></div>
+          <div class="bar-row"><div class="bar-label" style="width:85px;font-size:0.72rem;">行政負擔</div><div class="bar-track"><div class="bar-fill f-teal" data-w="31.2" style="--print-w:31.2%"></div></div><span class="bar-value">31.2%</span></div>
+        </div>
+        <div class="alert-box warn" style="margin-top:0.75rem;font-size:0.78rem;">睡眠最好（6.61/10）；但抽菸喝酒紓壓最高（43.8%）、自己忍耐也最高（40.6%）<br>消防 vs 民間救護 睡眠差異顯著（p_adj=0.0039）</div>
+      </div>
+    </div>
+
+    <!-- Main service comparison -->
+    <div class="anim">
+      <div class="bar-section-title" style="margin-bottom:0.75rem;font-size:0.9rem;color:var(--teal-dark);">主要服務類型 × K6 心理困擾（ANOVA F=6.70, p=0.0002***）</div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.5rem;">
+        <div class="bar-chart">
+          <div class="bar-row"><div class="bar-label">緊急救護（n=230）</div><div class="bar-track"><div class="bar-fill f-teal" data-w="37.6" style="--print-w:37.6%"></div></div><span class="bar-value">K6=8.47</span></div>
+          <div class="bar-row"><div class="bar-label">災害搶救（n=120）</div><div class="bar-track"><div class="bar-fill f-green" data-w="34.4" style="--print-w:34.4%"></div></div><span class="bar-value">K6=7.75（最低）</span></div>
+          <div class="bar-row"><div class="bar-label">安全秩序（n=71）</div><div class="bar-track"><div class="bar-fill f-red" data-w="48.4" style="--print-w:48.4%"></div></div><span class="bar-value">K6=10.90（最高）</span></div>
+          <div class="bar-row"><div class="bar-label">其他（n=48）</div><div class="bar-track"><div class="bar-fill f-gold" data-w="45.5" style="--print-w:45.5%"></div></div><span class="bar-value">K6=10.23</span></div>
+        </div>
+        <div class="callout c-red" style="margin-top:1rem;font-size:0.83rem;">「安全秩序」（主要對應警察勤務）K6 均值達 10.90，遠高於「災害搶救」（7.75），差異達統計顯著，顯示執法勤務的特殊心理負擔。</div>
+      </div>
+    </div>
+
+    <!-- Volunteer vs permanent -->
+    <div class="anim" style="margin-top:1.5rem;">
+      <div class="bar-section-title" style="margin-bottom:0.75rem;font-size:0.9rem;color:var(--teal-dark);">任職身分比較（正職公務人員 vs. 志願服務）</div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;">
+        <table class="data-table">
+          <thead><tr><th>指標</th><th>正職公務人員（n=408）</th><th>志願服務（n=78）</th><th>t 檢定</th></tr></thead>
+          <tbody>
+            <tr><td>K6 心理困擾均值</td><td><span class="val-tw">9.18</span></td><td><span class="val-ems">6.99</span></td><td><span class="badge-sig">p=0.001***</span></td></tr>
+            <tr><td>BRS 韌性均值</td><td>19.50</td><td><span class="val-ems">21.01</span></td><td><span class="badge-sig">p=0.034*</span></td></tr>
+            <tr><td>工作壓力均值</td><td><span class="val-tw">6.74</span></td><td>5.45</td><td><span class="badge-sig">p&lt;0.001***</span></td></tr>
+            <tr><td>睡眠品質均值</td><td>4.93</td><td><span class="val-ems">6.96</span></td><td><span class="badge-sig">p&lt;0.001***</span></td></tr>
+            <tr><td>OSLO 社會支持均值</td><td>9.00</td><td>9.33</td><td>p=0.222（ns）</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout c-gold" style="margin-top:1rem;font-size:0.85rem;">
+        <strong>正職公務人員面臨更嚴峻的處境：</strong>心理困擾顯著較高（p=0.001）、韌性較低（p=0.034）、工作壓力顯著更大（p&lt;0.001）、睡眠品質顯著更差（p&lt;0.001）。職業制度的結構性因素（如職業曝露、組織文化、職業壓力）可能是重要原因。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HELP SEEKING & STIGMA -->
+<section class="section alt" id="support">
+  <div class="container">
+    <div class="section-head anim">
+      <div class="section-num">第六章</div>
+      <h2 class="section-title">求助行為與污名化</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">55% 受訪者目前在單位內擔任傾聽支持角色，但有效的求助文化仍需持續培育。</p>
+    </div>
+
+    <div class="two-col anim">
+      <div>
+        <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1.25rem;">
+          <div class="bar-section-title" style="margin-bottom:0.75rem;">自我污名（Self-Stigma）程度</div>
+          <div style="margin-bottom:1rem;">
+            <div style="font-size:0.8rem;color:var(--text-light);margin-bottom:0.4rem;">「不希望別人知道我有心理健康問題」</div>
+            <div class="bar-chart">
+              <div class="bar-row"><div class="bar-label" style="font-size:0.72rem;">同意/非常同意</div><div class="bar-track"><div class="bar-fill f-red" data-w="46.3" style="--print-w:46.3%"></div></div><span class="bar-value">46.3% ⚠</span></div>
+              <div class="bar-row"><div class="bar-label" style="font-size:0.72rem;">普通</div><div class="bar-track"><div class="bar-fill f-slate" data-w="35.2" style="--print-w:35.2%"></div></div><span class="bar-value">35.2%</span></div>
+              <div class="bar-row"><div class="bar-label" style="font-size:0.72rem;">不同意/非常不同意</div><div class="bar-track"><div class="bar-fill f-green" data-w="18.5" style="--print-w:18.5%"></div></div><span class="bar-value">18.5%</span></div>
+            </div>
+          </div>
+          <div style="margin-bottom:1rem;">
+            <div style="font-size:0.8rem;color:var(--text-light);margin-bottom:0.4rem;">「求助代表我不夠堅強」</div>
+            <div class="bar-chart">
+              <div class="bar-row"><div class="bar-label" style="font-size:0.72rem;">同意/非常同意</div><div class="bar-track"><div class="bar-fill f-gold" data-w="17.9" style="--print-w:17.9%"></div></div><span class="bar-value">17.9%</span></div>
+              <div class="bar-row"><div class="bar-label" style="font-size:0.72rem;">普通</div><div class="bar-track"><div class="bar-fill f-slate" data-w="28.8" style="--print-w:28.8%"></div></div><span class="bar-value">28.8%</span></div>
+              <div class="bar-row"><div class="bar-label" style="font-size:0.72rem;">不同意/非常不同意</div><div class="bar-track"><div class="bar-fill f-green" data-w="53.3" style="--print-w:53.3%"></div></div><span class="bar-value">53.3% ✓</span></div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:0.8rem;color:var(--text-light);margin-bottom:0.4rem;">「知道周遭有可用的資源」</div>
+            <div class="bar-chart">
+              <div class="bar-row"><div class="bar-label" style="font-size:0.72rem;">同意/非常同意</div><div class="bar-track"><div class="bar-fill f-green" data-w="59.5" style="--print-w:59.5%"></div></div><span class="bar-value">59.5% ✓</span></div>
+              <div class="bar-row"><div class="bar-label" style="font-size:0.72rem;">普通</div><div class="bar-track"><div class="bar-fill f-slate" data-w="30.0" style="--print-w:30.0%"></div></div><span class="bar-value">30.0%</span></div>
+              <div class="bar-row"><div class="bar-label" style="font-size:0.72rem;">不同意/非常不同意</div><div class="bar-track"><div class="bar-fill f-gold" data-w="10.5" style="--print-w:10.5%"></div></div><span class="bar-value">10.5%</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1.25rem;">
+          <div class="bar-section-title" style="margin-bottom:0.75rem;">同仁支持角色（擔任單位內傾聽/支持者）</div>
+          <div style="display:flex;gap:2rem;align-items:center;margin-bottom:1rem;">
+            <div><div style="font-family:'Noto Serif TC',serif;font-size:2.2rem;font-weight:700;color:var(--teal-dark);">54.9%</div><div style="font-size:0.78rem;color:var(--text-muted);">是（n=267）</div></div>
+            <div><div style="font-family:'Noto Serif TC',serif;font-size:2.2rem;font-weight:700;color:#8FA3B1;">45.1%</div><div style="font-size:0.78rem;color:var(--text-muted);">否（n=219）</div></div>
+          </div>
+          <div style="background:var(--teal-pale);border-radius:8px;padding:1rem;margin-bottom:0.75rem;">
+            <div style="font-size:0.8rem;font-weight:700;color:var(--teal-dark);margin-bottom:0.4rem;">✓ 擔任支持角色者（t 檢定均顯著）</div>
+            <table style="width:100%;font-size:0.78rem;border-collapse:collapse;">
+              <tr><td style="padding:0.2rem 0;color:var(--text-light);">K6</td><td style="font-weight:700;color:var(--teal-dark);">8.12</td><td style="color:var(--text-muted);">vs 非支持者 9.69</td><td><span style="color:var(--teal);font-size:0.68rem;font-weight:700;">p=0.002**</span></td></tr>
+              <tr><td style="padding:0.2rem 0;color:var(--text-light);">BRS</td><td style="font-weight:700;color:var(--teal-dark);">20.36</td><td style="color:var(--text-muted);">vs 非支持者 19.00</td><td><span style="color:var(--teal);font-size:0.68rem;font-weight:700;">p=0.010**</span></td></tr>
+              <tr><td style="padding:0.2rem 0;color:var(--text-light);">OSLO</td><td style="font-weight:700;color:var(--teal-dark);">9.35</td><td style="color:var(--text-muted);">vs 非支持者 8.70</td><td><span style="color:var(--teal);font-size:0.68rem;font-weight:700;">p=0.001***</span></td></tr>
+            </table>
+          </div>
+          <div class="alert-box info" style="font-size:0.78rem;">擔任傾聽支持角色者心理健康顯著更好，但需注意「助人者耗竭」風險，應有配套支持機制。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INFERENTIAL STATS -->
+<section class="section" id="inference">
+  <div class="container">
+    <div class="section-head anim">
+      <div class="section-num">第七章</div>
+      <h2 class="section-title">推論統計分析</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">本研究進行相關分析、獨立樣本 t 檢定及單因子 ANOVA，以了解各變項的統計顯著關聯。</p>
+    </div>
+
+    <h3 style="font-family:'Noto Serif TC',serif;font-size:1.1rem;color:var(--teal-dark);margin-bottom:1rem;" class="anim">7.1 相關分析（Pearson r）</h3>
+    <div class="corr-grid anim">
+      <div class="corr-item">
+        <div class="corr-r neg">−0.629</div>
+        <div class="corr-label">K6 × BRS（韌性）</div>
+        <div class="corr-sig">p &lt; 0.001 ***</div>
+      </div>
+      <div class="corr-item">
+        <div class="corr-r pos">+0.638</div>
+        <div class="corr-label">K6 × PTSD 症狀</div>
+        <div class="corr-sig">p &lt; 0.001 ***</div>
+      </div>
+      <div class="corr-item">
+        <div class="corr-r neg">−0.564</div>
+        <div class="corr-label">K6 × 身體健康</div>
+        <div class="corr-sig">p &lt; 0.001 ***</div>
+      </div>
+      <div class="corr-item">
+        <div class="corr-r neg">−0.493</div>
+        <div class="corr-label">K6 × 睡眠品質</div>
+        <div class="corr-sig">p &lt; 0.001 ***</div>
+      </div>
+      <div class="corr-item">
+        <div class="corr-r neg">−0.481</div>
+        <div class="corr-label">K6 × OSLO（社會支持）</div>
+        <div class="corr-sig">p &lt; 0.001 ***</div>
+      </div>
+      <div class="corr-item">
+        <div class="corr-r pos">+0.472</div>
+        <div class="corr-label">K6 × 工作壓力</div>
+        <div class="corr-sig">p &lt; 0.001 ***</div>
+      </div>
+      <div class="corr-item">
+        <div class="corr-r pos">+0.101</div>
+        <div class="corr-label">K6 × 週工時</div>
+        <div class="corr-sig">p = 0.028 *</div>
+      </div>
+      <div class="corr-item">
+        <div class="corr-r pos" style="color:#8FA3B1;">−0.079</div>
+        <div class="corr-label">K6 × 年齡</div>
+        <div class="corr-sig" style="color:#8FA3B1;">p = 0.084（ns）</div>
+      </div>
+      <div class="corr-item">
+        <div class="corr-r neg">+0.400</div>
+        <div class="corr-label">BRS × OSLO</div>
+        <div class="corr-sig">p &lt; 0.001 ***</div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Noto Serif TC',serif;font-size:1.1rem;color:var(--teal-dark);margin:2rem 0 1rem;" class="anim">7.2 群體差異（ANOVA / t 檢定）</h3>
+    <div class="infer-grid anim">
+      <div class="infer-card">
+        <div class="infer-title">🏢 服務單位 × K6 困擾（ANOVA）</div>
+        <div class="infer-result">F = 9.279<span class="infer-sig">p &lt; 0.001 ***</span></div>
+        <div class="infer-desc">消防（8.24）vs 警察（10.66）vs 民間救護（8.23）。消防 vs 警察事後比較 Bonferroni 校正後 p=0.0001，警察顯著較高。</div>
+      </div>
+      <div class="infer-card">
+        <div class="infer-title">💪 服務單位 × BRS 韌性（ANOVA）</div>
+        <div class="infer-result">F = 6.957<span class="infer-sig">p = 0.001 **</span></div>
+        <div class="infer-desc">消防（20.34）顯著高於警察（18.09），p=0.0006。民間救護（19.87）居中，無顯著差異。</div>
+      </div>
+      <div class="infer-card">
+        <div class="infer-title">😴 服務單位 × 睡眠品質（ANOVA）</div>
+        <div class="infer-result">F = 6.461<span class="infer-sig">p = 0.002 **</span></div>
+        <div class="infer-desc">民間救護（6.61）睡眠品質顯著優於消防（5.19，p=0.004）及警察（4.98，p=0.001）。</div>
+      </div>
+      <div class="infer-card">
+        <div class="infer-title">🔄 排班制度 × 睡眠（ANOVA）</div>
+        <div class="infer-result">F = 25.148<span class="infer-sig">p &lt; 0.001 ***</span></div>
+        <div class="infer-desc">輪班（4.85）&lt; 固定白班（5.75）&lt; 無固定排班（6.89）。輪班制度對睡眠品質有顯著不利影響。</div>
+      </div>
+      <div class="infer-card">
+        <div class="infer-title">👤 任職身分 × K6（t 檢定）</div>
+        <div class="infer-result">t = 3.279<span class="infer-sig">p = 0.001 **</span></div>
+        <div class="infer-desc">正職公務（9.18）顯著高於志願服務（6.99）。工作壓力（6.74 vs 5.45）與睡眠差異均達顯著。</div>
+      </div>
+      <div class="infer-card">
+        <div class="infer-title">🤝 支持角色 × K6（t 檢定）</div>
+        <div class="infer-result">t = −3.170<span class="infer-sig">p = 0.002 **</span></div>
+        <div class="infer-desc">擔任傾聽支持者（8.12）K6 顯著低於非支持者（9.69）。支持者同時有更高韌性與社會支持。</div>
+      </div>
+      <div class="infer-card">
+        <div class="infer-title">💼 主要服務 × K6（ANOVA）</div>
+        <div class="infer-result">F = 6.699<span class="infer-sig">p &lt; 0.001 ***</span></div>
+        <div class="infer-desc">安全秩序（10.90）&gt; 其他（10.23）&gt; 緊急救護（8.47）&gt; 災害搶救（7.75）。執法勤務心理負擔顯著最重。</div>
+      </div>
+      <div class="infer-card">
+        <div class="infer-title">⚧ 性別 × 各指標（t 檢定）</div>
+        <div class="infer-result" style="font-size:1rem;">均無顯著差異<span class="infer-ns">ns</span></div>
+        <div class="infer-desc">男（8.72）vs 女（9.32）K6 無顯著差異（p=0.344），BRS、OSLO、睡眠均類似。性別並非心理健康的重要分界點。</div>
+      </div>
+    </div>
+
+    <div class="callout c-teal anim" style="margin-top:1rem;">
+      <strong>高風險族群識別：</strong>同時呈現高心理困擾（K6 ≥ 13）且低韌性（BRS ≤ 12）的受訪者共 <strong>39 人（8.0%）</strong>，其中消防 21 人、警察 16 人、民間救護 2 人。這群人是最需要主動介入的優先對象。
+    </div>
+  </div>
+</section>
+
+<!-- INTERNATIONAL COMPARISON -->
+<section class="section alt" id="intl">
+  <div class="container">
+    <div class="section-head anim">
+      <div class="section-num">第八章</div>
+      <h2 class="section-title">國際比較：台灣 × 澳洲</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">與澳洲 Beyond Blue《Answering the Call》（2018，n=21,014）比較，揭示跨國共通模式與台灣的進步空間。</p>
+    </div>
+
+    <div style="background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;" class="anim">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:32%;">比較指標</th>
+            <th style="width:22%;">🇹🇼 台灣 2024（n=486）</th>
+            <th style="width:22%;">🇦🇺 澳洲 2018（n=21,014）</th>
+            <th style="width:24%;">比較方向與意義</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>樣本規模</td><td class="val-tw">486 人</td><td class="val-au">21,014 人</td><td>澳洲具全國代表性</td></tr>
+          <tr><td>嚴重心理困擾率</td><td class="val-tw">24.1%</td><td class="val-au">~32%（員工）</td><td><span class="badge-diff badge-lower">↓ 台灣較低</span> 但仍為一般民眾 2–3 倍</td></tr>
+          <tr><td>中度以上困擾</td><td class="val-tw">76.9%</td><td class="val-au">~62%（推估）</td><td><span class="badge-diff badge-higher">↑ 台灣偏高</span> 輕中度問題普遍</td></tr>
+          <tr><td>高韌性比例</td><td class="val-tw">62.6%</td><td class="val-au">&gt;50%</td><td><span class="badge-diff badge-similar">≈ 一致</span> 整體韌性相近</td></tr>
+          <tr><td>首要壓力來源</td><td class="val-tw">行政負擔 59%</td><td class="val-au">排班/資源不足</td><td><span class="badge-diff badge-similar">≈ 組織性壓力一致</span></td></tr>
+          <tr><td>自我污名（隱匿傾向）</td><td class="val-tw">46.3%</td><td class="val-au">61%</td><td><span class="badge-diff badge-lower">↓ 台灣顯著較低</span></td></tr>
+          <tr><td>求助=不堅強（認同率）</td><td class="val-tw">17.9%</td><td class="val-au">33%</td><td><span class="badge-diff badge-lower">↓ 台灣顯著改善</span></td></tr>
+          <tr><td>資源知悉程度</td><td class="val-tw">59.5%（同意）</td><td class="val-au">持續建立中</td><td><span class="badge-diff badge-lower">↑ 台灣良好</span></td></tr>
+          <tr><td>韌性為最強保護因子</td><td class="val-tw">r = −0.629</td><td class="val-au">韌性培訓有效</td><td><span class="badge-diff badge-similar">≈ 方向一致</span></td></tr>
+          <tr><td>職業長度與 PTSD 風險</td><td class="val-tw">年資效應 ns</td><td class="val-au">10+年 PTSD 增 6 倍</td><td>台灣尚未見顯著年資效應</td></tr>
+          <tr><td>工作場所文化對心理健康的影響</td><td class="val-tw">組織壓力最高</td><td class="val-au">等同創傷暴露</td><td><span class="badge-diff badge-similar">≈ 一致</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="three-col anim" style="margin-top:1.5rem;">
+      <div class="callout c-red" style="margin:0;">
+        <strong>🔴 跨國共通問題</strong><br>
+        組織性壓力（行政、排班、資源）在兩國均高於現場創傷，顯示這是全球緊急服務體系的結構性挑戰，需從制度層面介入。
+      </div>
+      <div class="callout c-green" style="margin:0;">
+        <strong>🟢 台灣進步之處</strong><br>
+        自我污名（46.3% vs 61%）及「求助＝不堅強」認同率（17.9% vs 33%）均顯著低於澳洲，顯示台灣心理健康倡議已見成效。
+      </div>
+      <div class="callout c-teal" style="margin:0;">
+        <strong>🔵 共同行動方向</strong><br>
+        兩國數據均指向韌性為最強保護因子，韌性培訓、同儕支持系統、改善工作場所文化，是跨國驗證有效的干預方向。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECOMMENDATIONS -->
+<section class="section" id="reco">
+  <div class="container">
+    <div class="section-head anim">
+      <div class="section-num">第九章</div>
+      <h2 class="section-title">建議與行動方向</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">基於本年度調查數據，提出以下具優先級的行動建議，供各機關、政策制定者及本學會參考。</p>
+    </div>
+
+    <div class="reco-grid anim">
+      <div class="reco-card r1">
+        <div class="reco-priority">優先級 1 · 立即行動</div>
+        <div class="reco-title">🚔 警察族群主動外展</div>
+        <div class="reco-desc">警察呈現所有職類中最嚴峻的組合：K6 最高（10.66）、韌性最低（18.09）、PTSD 最高（69.4%）、尋求專業比例最低（11.3%）。必須建立主動外展而非等待自行求助的機制，例如定期心理健康評估、同儕支持員培訓，以及降低匿名求助門檻。</div>
+      </div>
+      <div class="reco-card r2">
+        <div class="reco-priority">優先級 2 · 短期（3–6 個月）</div>
+        <div class="reco-title">📋 系統性降低行政業務負擔</div>
+        <div class="reco-desc">行政負擔（59.1%）連續為最普遍壓力來源，跨三個職類均高。各機關應進行行政流程盤點，借助數位工具（如 AI 輔助報告）減少非核心業務，是規模最大的單一干預機會。估計可惠及近 6 成人員。</div>
+      </div>
+      <div class="reco-card r3">
+        <div class="reco-priority">優先級 3 · 中期（6–12 個月）</div>
+        <div class="reco-title">💪 全面性韌性培訓計畫</div>
+        <div class="reco-desc">韌性（BRS）為本研究最強保護因子（r = −0.629），且與社會支持高度相關（r = +0.40）。應將韌性培訓納入職前訓練與年度在職教育，而非選修課程。低韌性者（9.9%，n=48）應安排個別化支持介入。</div>
+      </div>
+      <div class="reco-card r4">
+        <div class="reco-priority">優先級 4 · 長期（年度追蹤）</div>
+        <div class="reco-title">📊 建立縱貫性追蹤資料庫</div>
+        <div class="reco-desc">持續年度調查，擴大至全國代表性樣本（目標 1,000+ 人），建立時間序列趨勢數據，評估各項介入成效，並逐步推展分職類、分縣市的精細化分析，支持政策精準制定。</div>
+      </div>
+    </div>
+
+    <div class="callout c-gold anim" style="margin-top:1.5rem;">
+      <strong>給民間救護人員的特別建議：</strong>民間救護的 K6 與消防相近，但抽菸喝酒紓壓（43.8%）和自己忍耐（40.6%）比例在所有職類中最高，運動休閒（28.1%）卻最低。這顯示壓力強度不是主要問題，而是<strong>情緒因應策略的品質</strong>需要改善——應推廣正念、運動等健康因應方式，取代物質依賴。
+    </div>
+    <div class="callout c-teal anim">
+      <strong>關於輪班人員的特別建議：</strong>輪班制度對睡眠的影響達高度統計顯著（F=25.148, p&lt;0.001），輪班人員睡眠均值（4.85）遠低於無固定排班（6.89）。應研議最低連續休息時間保障、夜班後強制休息規定，並提供睡眠衛生教育。
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">台灣醫療救護學會<br>安全衛生委員會</div>
+        <div class="footer-note">本報告為台灣首份緊急服務人員心理健康系統性年度調查報告。調查工具：Kessler K6、Brief Resilience Scale、OSLO-3、PCL-5（改編版）。收案期間：2026年3月27日至5月11日。</div>
+      </div>
+      <div>
+        <div style="color:rgba(255,255,255,0.85);font-size:0.85rem;margin-bottom:0.5rem;">比較基準</div>
+        <div class="footer-note">Beyond Blue Ltd. (2018). Answering the call national survey, National Mental Health and Wellbeing Study of Police and Emergency Services – Final report. Australia.<br><br>有效樣本 n=486；總回覆 491 份，拒答 5 份。</div>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 台灣醫療救護學會 Taiwan Society of Paramedicine · 安全衛生委員會 · 版權所有</div>
+  </div>
+</footer>
+
+<script>
+// Animate bars on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      entry.target.querySelectorAll('.bar-fill[data-w]').forEach(bar => {
+        const w = bar.dataset.w;
+        setTimeout(() => { bar.style.width = w + '%'; }, 100);
+      });
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.anim').forEach(el => observer.observe(el));
+
+// 列印前強制展開所有 bar（處理未滾動到的元素）
+window.addEventListener('beforeprint', () => {
+  document.querySelectorAll('.anim').forEach(el => {
+    el.classList.add('visible');
+  });
+  document.querySelectorAll('.bar-fill[data-w]').forEach(bar => {
+    bar.style.width = bar.dataset.w + '%';
+  });
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const el = document.querySelector(a.getAttribute('href'));
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+</body>
+</html>
