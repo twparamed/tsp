@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI × EMS 帶狀節目</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .ad-wrap {
+    width: 600px;
+    height: 600px;
+    background: #0D1B2A;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .ad-top-bar {
+    background: #0A9396;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .ad-top-label {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+  .ad-top-badge {
+    background: rgba(255,255,255,0.18);
+    color: #fff;
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .ad-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 18px 24px 14px;
+    gap: 12px;
+  }
+  .ad-header-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .ad-tag-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .ad-tag {
+    display: inline-block;
+    background: rgba(10,147,150,0.22);
+    color: #94D2BD;
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 0.5px solid rgba(148,210,189,0.4);
+    width: fit-content;
+  }
+  .ad-tag-free {
+    display: inline-block;
+    background: rgba(233,196,106,0.18);
+    color: #E9C46A;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 0.5px solid rgba(233,196,106,0.4);
+    width: fit-content;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+  .ad-title {
+    color: #fff;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .ad-title span { color: #0A9396; }
+  .ad-subtitle {
+    color: #94D2BD;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .ad-eps {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+  }
+  .ad-ep-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 8px;
+    padding: 7px 12px;
+    border: 0.5px solid rgba(255,255,255,0.07);
+  }
+  .ad-ep-num {
+    background: #0A9396;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    letter-spacing: 0.04em;
+  }
+  .ad-ep-date {
+    color: rgba(255,255,255,0.35);
+    font-size: 11px;
+    flex-shrink: 0;
+    min-width: 36px;
+  }
+  .ad-ep-text {
+    color: rgba(255,255,255,0.82);
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  .ad-bottom {
+    background: rgba(255,255,255,0.05);
+    border-top: 0.5px solid rgba(255,255,255,0.1);
+    padding: 13px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .ad-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .ad-meta-line {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: rgba(255,255,255,0.55);
+    font-size: 12px;
+  }
+  .ad-meta-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #0A9396;
+    flex-shrink: 0;
+  }
+  .ad-join-btn {
+    background: #0A9396;
+    color: #fff;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 24px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    white-space: nowrap;
+  }
+  .ad-join-btn:hover { background: #0C8E91; }
+</style>
+</head>
+<body>
+  <div class="ad-wrap">
+    <div class="ad-top-bar">
+      <span class="ad-top-label">AI × EMS 帶狀節目　Taiwan Society of Paramedicine</span>
+      <span class="ad-top-badge">共 5 集</span>
+    </div>
+
+    <div class="ad-body">
+      <div class="ad-header-row">
+        <div class="ad-tag-group">
+          <span class="ad-tag">每週一 12:50–13:30 ｜ Google Meet</span>
+          <span class="ad-tag">7/6 起，連續 5 週</span>
+        </div>
+        <span class="ad-tag-free">免費 ✦ 無需報名</span>
+      </div>
+
+      <p class="ad-title">救護員的<span>AI</span>工具箱<br>從發想到投稿</p>
+      <p class="ad-subtitle">現職 EMT 也能做工具、寫研究、拿摘要上稿——<br>不需要程式基礎，連結即進，隨時加入</p>
+
+      <div class="ad-eps">
+        <div class="ad-ep-row">
+          <span class="ad-ep-num">EP 01</span>
+          <span class="ad-ep-date">7/6</span>
+          <span class="ad-ep-text">AI 是你的開發夥伴——救護員也能做工具</span>
+        </div>
+        <div class="ad-ep-row">
+          <span class="ad-ep-num">EP 02</span>
+          <span class="ad-ep-date">7/13</span>
+          <span class="ad-ep-text">AI 幫你從臨床經驗挖出研究題目</span>
+        </div>
+        <div class="ad-ep-row">
+          <span class="ad-ep-num">EP 03</span>
+          <span class="ad-ep-date">7/20</span>
+          <span class="ad-ep-text">AI 協助問卷設計與資料分析</span>
+        </div>
+        <div class="ad-ep-row">
+          <span class="ad-ep-num">EP 04</span>
+          <span class="ad-ep-date">7/27</span>
+          <span class="ad-ep-text">AI 幫你寫出會被接受的摘要</span>
+        </div>
+        <div class="ad-ep-row">
+          <span class="ad-ep-num">EP 05</span>
+          <span class="ad-ep-date">8/3</span>
+          <span class="ad-ep-text">完整工作流整合——你的 AI 行動框架</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ad-bottom">
+      <div class="ad-meta">
+        <div class="ad-meta-line"><span class="ad-meta-dot"></span>對象：TSP 會員 ／ 現職 EMT</div>
+        <div class="ad-meta-line"><span class="ad-meta-dot"></span>點擊連結即可加入，無需報名</div>
+        <div class="ad-meta-line"><span class="ad-meta-dot"></span>錯過當集？下週繼續都來得及</div>
+      </div>
+      <a class="ad-join-btn" href="https://meet.google.com/spv-snwj-hyv" target="_blank">
+        ▶ 立即加入
+      </a>
+    </div>
+  </div>
+</body>
+</html>
