@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EP01 · AI × EMS｜AI是你的開發夥伴</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0A1628;
+  --navy2:#0D1F38;
+  --teal:#0A9396;
+  --teal-light:#94D2BD;
+  --amber:#E9C46A;
+  --red-light:rgba(255,60,60,0.55);
+  --blue-light:rgba(60,140,255,0.55);
+  --white:#FFFFFF;
+  --card:#ffffff;
+  --off:#F4F7FB;
+  --slate:#3D4F63;
+  --muted:#7B8FA6;
+}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--navy);font-family:'Noto Sans TC',sans-serif}
+
+/* ═══════════════════════════════
+   AMBIENT BACKGROUND
+═══════════════════════════════ */
+#bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+
+/* Grid lines */
+#bg::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(10,147,150,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10,147,150,.05) 1px, transparent 1px);
+  background-size:60px 60px;
+}
+
+/* Red/Blue strobe glows — bottom right corner */
+.glow-red{
+  position:absolute;
+  width:500px;height:500px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(255,50,50,0.18) 0%, transparent 65%);
+  bottom:-120px;right:-80px;
+  animation:strobeR 2.4s ease-in-out infinite;
+}
+.glow-blue{
+  position:absolute;
+  width:420px;height:420px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(40,120,255,0.18) 0%, transparent 65%);
+  bottom:-80px;right:60px;
+  animation:strobeB 2.4s ease-in-out infinite;
+  animation-delay:1.2s;
+}
+/* secondary subtle glow top-left */
+.glow-teal{
+  position:absolute;
+  width:600px;height:400px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(10,147,150,.08) 0%, transparent 70%);
+  top:-100px;left:-100px;
+}
+/* ambulance silhouette hint — pure CSS */
+.amb-shape{
+  position:absolute;bottom:18px;right:18px;
+  opacity:0.04;pointer-events:none;
+}
+.amb-body{
+  width:140px;height:52px;
+  background:rgba(255,255,255,1);
+  border-radius:6px 14px 6px 6px;
+  position:relative;
+}
+.amb-cabin{
+  width:44px;height:44px;
+  background:rgba(255,255,255,1);
+  border-radius:10px 10px 0 0;
+  position:absolute;right:0;top:-44px;
+}
+.amb-wheel1,.amb-wheel2{
+  width:22px;height:22px;
+  background:rgba(255,255,255,1);
+  border-radius:50%;
+  position:absolute;bottom:-11px;
+}
+.amb-wheel1{left:14px}
+.amb-wheel2{right:14px}
+.amb-cross{
+  position:absolute;top:50%;left:40%;transform:translate(-50%,-50%);
+  width:24px;height:24px;
+}
+.amb-cross::before,.amb-cross::after{
+  content:'';position:absolute;background:var(--navy);
+}
+.amb-cross::before{width:8px;height:24px;left:8px;top:0}
+.amb-cross::after{width:24px;height:8px;left:0;top:8px}
+
+/* light bar on top of cabin */
+.light-bar{
+  width:44px;height:7px;
+  background:linear-gradient(90deg,rgba(255,60,60,.6),rgba(60,140,255,.6));
+  border-radius:3px;
+  position:absolute;right:0;top:-51px;
+  animation:barFlash 1.2s linear infinite;
+}
+
+@keyframes strobeR{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:0.15;transform:scale(0.9)}
+}
+@keyframes strobeB{
+  0%,100%{opacity:0.15;transform:scale(0.9)}
+  50%{opacity:1;transform:scale(1)}
+}
+@keyframes barFlash{
+  0%,49%{background:linear-gradient(90deg,rgba(255,60,60,.8) 50%,rgba(60,140,255,.1) 50%)}
+  50%,100%{background:linear-gradient(90deg,rgba(255,60,60,.1) 50%,rgba(60,140,255,.8) 50%)}
+}
+
+/* ═══════════════════════════════
+   NAV
+═══════════════════════════════ */
+#nav{
+  position:fixed;top:0;left:0;right:0;height:50px;
+  background:rgba(10,22,40,0.92);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(10,147,150,0.18);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;z-index:1000;
+}
+.nav-left{display:flex;align-items:center;gap:10px}
+.nav-dot{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 6px var(--teal)}
+.nav-title{font-size:13px;font-weight:600;color:#fff;letter-spacing:.03em}
+.nav-ep{font-size:11px;color:var(--muted);margin-left:2px}
+.nav-right{display:flex;align-items:center;gap:6px}
+.nb{
+  display:flex;align-items:center;gap:4px;
+  padding:5px 12px;border-radius:18px;
+  border:1px solid rgba(10,147,150,0.25);
+  background:rgba(10,147,150,0.08);
+  cursor:pointer;
+  font-family:'Noto Sans TC',sans-serif;font-size:12px;color:var(--teal-light);
+  transition:all .18s;white-space:nowrap;
+}
+.nb:hover{background:var(--teal);color:#fff;border-color:var(--teal)}
+.nb.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+.nb:disabled{opacity:.3;pointer-events:none}
+
+/* progress */
+#prog{
+  position:fixed;bottom:0;left:0;height:3px;
+  background:linear-gradient(90deg,var(--teal),var(--amber));
+  transition:width .5s ease;z-index:1000;pointer-events:none;
+}
+
+/* ═══════════════════════════════
+   CANVAS
+═══════════════════════════════ */
+#wrap{
+  position:fixed;top:50px;left:0;right:0;bottom:0;
+  overflow:hidden;cursor:grab;z-index:1;
+}
+#wrap.grabbing{cursor:grabbing}
+#cv{
+  position:absolute;
+  width:10000px;height:900px;
+  transform-origin:0 0;
+}
+#svg-lines{
+  position:absolute;top:0;left:0;
+  width:10000px;height:900px;
+  pointer-events:none;
+}
+
+/* ═══════════════════════════════
+   SLIDE BASE
+═══════════════════════════════ */
+.slide{
+  position:absolute;
+  background:rgba(255,255,255,0.97);
+  border-radius:20px;
+  box-shadow:0 4px 32px rgba(0,0,0,0.35), 0 0 0 1px rgba(10,147,150,0.1);
+  overflow:hidden;
+}
+.slide.clickable{cursor:pointer}
+.slide.clickable:hover{
+  box-shadow:0 12px 56px rgba(0,0,0,0.45), 0 0 0 2px rgba(10,147,150,0.4);
+  transform:translateY(-4px) scale(1.015);
+}
+.si{width:100%;height:100%;padding:40px 48px 36px;display:flex;flex-direction:column}
+
+/* shared components */
+.lbl{font-size:10px;font-weight:700;letter-spacing:.14em;color:var(--teal);text-transform:uppercase;margin-bottom:7px}
+.title-lg{font-family:'Noto Serif TC',serif;font-size:30px;font-weight:700;color:var(--navy);line-height:1.3}
+.title-sm{font-family:'Noto Serif TC',serif;font-size:22px;font-weight:700;color:var(--navy);line-height:1.35}
+.body-txt{font-size:14px;color:var(--slate);line-height:1.75}
+.example-box{
+  margin-top:auto;padding:14px 16px;
+  background:rgba(10,147,150,.06);
+  border-left:3px solid var(--teal);
+  border-radius:0 8px 8px 0;
+  font-size:12px;color:var(--slate);line-height:1.6;
+}
+.example-box strong{color:var(--teal);font-size:10px;font-weight:700;letter-spacing:.08em;display:block;margin-bottom:4px;text-transform:uppercase}
+
+/* ═══════════════════════════════
+   SLIDE: HERO
+═══════════════════════════════ */
+.s-hero{width:860px;height:540px}
+.hero-eye{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(10,147,150,0.1);border:1px solid rgba(10,147,150,0.3);
+  border-radius:18px;padding:4px 14px;margin-bottom:26px;width:fit-content;
+}
+.hero-eye-dot{width:5px;height:5px;border-radius:50%;background:var(--teal)}
+.hero-eye-txt{font-size:11px;color:var(--teal);font-weight:600;letter-spacing:.05em}
+.hero-h{
+  font-family:'Noto Serif TC',serif;
+  font-size:48px;font-weight:900;color:var(--navy);
+  line-height:1.15;margin-bottom:16px;
+}
+.hero-h .acc{color:var(--teal)}
+.hero-sub{font-size:15px;color:var(--slate);line-height:1.75;max-width:500px;margin-bottom:32px}
+.hero-tags{display:flex;gap:18px;flex-wrap:wrap}
+.hero-tag{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+.hero-deco{position:absolute;right:-20px;bottom:-20px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(10,147,150,.07),transparent 70%);pointer-events:none}
+.hero-deco2{position:absolute;right:80px;top:40px;width:120px;height:120px;border-radius:50%;border:1px solid rgba(10,147,150,.1);pointer-events:none}
+.hero-bg-num{position:absolute;right:40px;bottom:24px;font-family:'JetBrains Mono',monospace;font-size:100px;font-weight:700;color:rgba(13,27,42,.04);line-height:1;pointer-events:none;user-select:none}
+
+/* ═══════════════════════════════
+   SLIDE: VIDEO
+═══════════════════════════════ */
+.s-video{width:700px;height:480px}
+.yt-box{flex:1;border-radius:10px;overflow:hidden;background:#000;margin-top:14px;min-height:0}
+.yt-box iframe{width:100%;height:100%;border:none;display:block}
+.yt-cap{margin-top:10px;font-size:12px;color:var(--muted);font-style:italic;line-height:1.5;flex-shrink:0}
+
+/* ═══════════════════════════════
+   SLIDE: QUOTE
+═══════════════════════════════ */
+.s-quote{width:580px;height:360px}
+.q-bar{position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--teal),var(--amber));border-radius:20px 0 0 20px}
+.q-mark{font-family:'Noto Serif TC',serif;font-size:64px;color:var(--teal);opacity:.15;line-height:.75;margin-bottom:8px}
+.q-text{font-family:'Noto Serif TC',serif;font-size:20px;color:var(--navy);line-height:1.75;font-weight:400;margin-bottom:16px}
+.q-text strong{color:var(--teal);font-weight:700}
+.q-src{font-size:11px;color:var(--muted);letter-spacing:.04em}
+
+/* ═══════════════════════════════
+   SLIDE: PHASE (one per slide)
+═══════════════════════════════ */
+.s-phase-single{width:620px;height:420px}
+.phase-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  margin-bottom:20px;
+}
+.phase-circle{
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(10,147,150,.1);border:2px solid var(--teal);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--teal);
+  flex-shrink:0;
+}
+.phase-stage{font-size:12px;color:var(--muted);letter-spacing:.06em;font-weight:500}
+.phase-name-big{font-family:'Noto Serif TC',serif;font-size:30px;font-weight:700;color:var(--navy);margin-bottom:14px;line-height:1.2}
+.phase-desc-big{font-size:14px;color:var(--slate);line-height:1.75;margin-bottom:0;flex:1}
+
+/* ═══════════════════════════════
+   SLIDE: TIP (one per slide)
+═══════════════════════════════ */
+.s-tip-single{width:660px;height:420px}
+.tip-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:18px}
+.tip-num-big{
+  font-family:'JetBrains Mono',monospace;
+  font-size:13px;font-weight:700;color:var(--amber);
+  background:rgba(233,196,106,.15);
+  padding:4px 10px;border-radius:6px;flex-shrink:0;margin-top:4px;
+  border:1px solid rgba(233,196,106,.3);
+}
+.tip-title-big{font-family:'Noto Serif TC',serif;font-size:26px;font-weight:700;color:var(--navy);line-height:1.3}
+.tip-body{font-size:14px;color:var(--slate);line-height:1.8;flex:1}
+
+/* ═══════════════════════════════
+   SLIDE: EMS × AI
+═══════════════════════════════ */
+.s-two{width:780px;height:440px}
+.two-body{display:flex;gap:16px;flex:1;margin-top:16px}
+.col{flex:1;padding:18px;border-radius:14px;display:flex;flex-direction:column;gap:7px}
+.col.l{background:rgba(13,27,42,.03);border:1px solid rgba(13,27,42,.07)}
+.col.r{background:rgba(10,147,150,.04);border:1px solid rgba(10,147,150,.18)}
+.col-lbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.col-lbl.l{color:var(--slate)}.col-lbl.r{color:var(--teal)}
+.ci{display:flex;gap:8px;align-items:flex-start;font-size:13px;color:var(--slate);line-height:1.55}
+
+/* ═══════════════════════════════
+   SLIDE: CLOSE
+═══════════════════════════════ */
+.s-close{width:760px;height:520px}
+.close-deco{position:absolute;left:-30px;bottom:-30px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(233,196,106,.09),transparent 70%);pointer-events:none}
+.motto{font-family:'Noto Serif TC',serif;font-size:50px;font-weight:900;color:var(--navy);letter-spacing:.04em;padding:10px 0}
+.motto .it{color:var(--teal);font-style:italic}
+.motto-translation{font-size:19px;color:var(--navy);font-family:'Noto Serif TC',serif;font-weight:700;margin-bottom:4px}
+.motto-attr{font-size:12px;color:var(--muted);margin-bottom:20px}
+.motto-note{font-size:13px;color:var(--slate);line-height:1.75;margin-bottom:20px}
+.close-btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn-ep{padding:10px 16px;background:rgba(10,147,150,.08);border:1px solid rgba(10,147,150,.22);border-radius:10px;font-size:13px;color:var(--teal);font-weight:600}
+.btn-meet{padding:10px 16px;background:var(--teal);border-radius:10px;font-size:13px;color:#fff;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:6px}
+
+/* ═══════════════════════════════
+   OVERVIEW
+═══════════════════════════════ */
+body.ov #wrap{cursor:default}
+body.ov .slide.clickable:hover{box-shadow:0 16px 60px rgba(0,0,0,.5),0 0 0 2px rgba(10,147,150,.5)}
+
+/* ═══════════════════════════════
+   MINIMAP
+═══════════════════════════════ */
+#mm{
+  position:fixed;bottom:18px;right:18px;
+  width:180px;height:46px;
+  background:rgba(10,22,40,0.92);border-radius:10px;
+  padding:6px 10px;z-index:999;cursor:pointer;
+  border:1px solid rgba(10,147,150,0.2);
+  display:flex;flex-direction:column;gap:4px;
+}
+#mm-lbl{font-size:9px;color:rgba(255,255,255,.3);letter-spacing:.07em;text-transform:uppercase;flex-shrink:0}
+#mm-track{position:relative;flex:1}
+.mm-nd{position:absolute;border-radius:2px;background:rgba(10,147,150,.45);border:1px solid var(--teal)}
+.mm-vp{position:absolute;border:1.5px solid var(--amber);border-radius:2px;pointer-events:none}
+
+/* counter */
+#counter{
+  position:fixed;bottom:18px;left:50%;transform:translateX(-50%);
+  background:rgba(10,22,40,.88);color:rgba(255,255,255,.6);
+  font-size:12px;font-family:'JetBrains Mono',monospace;
+  padding:5px 14px;border-radius:16px;z-index:999;pointer-events:none;
+  border:1px solid rgba(10,147,150,.15);
+}
+
+/* hint */
+#hint{
+  position:fixed;top:62px;left:50%;transform:translateX(-50%);
+  background:rgba(10,22,40,.9);color:rgba(255,255,255,.8);
+  font-size:11px;padding:7px 18px;border-radius:16px;
+  display:flex;align-items:center;gap:10px;
+  z-index:999;opacity:1;transition:opacity 1.2s;pointer-events:none;
+  border:1px solid rgba(10,147,150,.15);
+}
+#hint.gone{opacity:0}
+.hk{background:rgba(255,255,255,.12);padding:1px 6px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:10px}
+</style>
+</head>
+<body>
+
+<!-- BG -->
+<div id="bg">
+  <div class="glow-teal"></div>
+  <div class="glow-red"></div>
+  <div class="glow-blue"></div>
+  <div class="amb-shape">
+    <div class="amb-body">
+      <div class="amb-cabin">
+        <div class="light-bar"></div>
+      </div>
+      <div class="amb-wheel1"></div>
+      <div class="amb-wheel2"></div>
+      <div class="amb-cross"></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-left">
+    <div class="nav-dot"></div>
+    <span class="nav-title">AI × EMS 帶狀節目</span>
+    <span class="nav-ep">EP 01 · 7/6</span>
+  </div>
+  <div class="nav-right">
+    <button class="nb" id="btn-fs" onclick="toggleFS()">⛶ 全螢幕</button>
+    <button class="nb" id="btn-ov" onclick="toggleOV()">⊞ 全覽</button>
+    <button class="nb" id="btn-p" onclick="prev()">← 上一段</button>
+    <button class="nb" id="btn-n" onclick="next()">下一段 →</button>
+  </div>
+</nav>
+
+<div id="prog"></div>
+
+<div id="wrap">
+  <svg id="svg-lines"></svg>
+  <div id="cv">
+
+    <!-- S0: HERO -->
+    <div class="slide s-hero" id="s0" style="left:80px;top:160px">
+      <div class="hero-deco"></div><div class="hero-deco2"></div>
+      <div class="hero-bg-num">01</div>
+      <div class="si">
+        <div class="hero-eye">
+          <div class="hero-eye-dot"></div>
+          <span class="hero-eye-txt">AI × EMS 帶狀節目 · EP 01 · 每週一 12:50–13:30</span>
+        </div>
+        <h1 class="hero-h">AI 是你的<br><span class="acc">開發夥伴</span></h1>
+        <p class="hero-sub">不是工程師的專利——現職救護員也能用 AI 做出真正有用的工具，從今天開始。</p>
+        <div class="hero-tags">
+          <span class="hero-tag">🕐 12:50–13:30</span>
+          <span class="hero-tag">📍 Google Meet</span>
+          <span class="hero-tag">🎙 張育通 · TSP × NTUNHS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- S1: VIDEO -->
+    <div class="slide s-video" id="s1" style="left:1060px;top:145px">
+      <div class="si" style="gap:0">
+        <div class="lbl">開場引言</div>
+        <div class="title-sm">黃仁勳說了什麼？</div>
+        <div class="yt-box">
+          <iframe src="https://www.youtube.com/embed/HT8-KPAjpiA?start=510"
+            allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture">
+          </iframe>
+        </div>
+        <p class="yt-cap">「會用 AI 的人，會取代不會用 AI 的人。」— Jensen Huang, NVIDIA CEO</p>
+      </div>
+    </div>
+
+    <!-- S2: QUOTE A — 問題在哪 -->
+    <div class="slide s-quote" id="s2" style="left:1880px;top:185px">
+      <div class="q-bar"></div>
+      <div class="si" style="justify-content:center">
+        <div class="q-mark">"</div>
+        <p class="q-text">問題不在你<strong>會不會寫程式</strong>——<br>問題在你心裡<strong>有沒有想清楚</strong><br>你要解決什麼。</p>
+        <p class="q-src">核心觀點 · EP 01</p>
+      </div>
+    </div>
+
+    <!-- S3: PHASE 1 -->
+    <div class="slide s-phase-single" id="s3" style="left:2600px;top:155px">
+      <div class="si">
+        <div class="phase-badge">
+          <div class="phase-circle">01</div>
+          <span class="phase-stage">第一階段</span>
+        </div>
+        <div class="phase-name-big">AI 當助手</div>
+        <p class="phase-desc-big">查資料、寫文件、改論文、翻譯英文——有用，但感覺跟 Google 差不多，只是答案比較長。</p>
+        <div class="example-box">
+          <strong>實際案例</strong>
+          「幫我把這段中文摘要翻成學術英文」「幫我把這份報告整理成條列式」——這是起點，不是終點。
+        </div>
+      </div>
+    </div>
+
+    <!-- S4: PHASE 2 -->
+    <div class="slide s-phase-single" id="s4" style="left:3360px;top:155px">
+      <div class="si">
+        <div class="phase-badge">
+          <div class="phase-circle">02</div>
+          <span class="phase-stage">第二階段</span>
+        </div>
+        <div class="phase-name-big">AI 當工具生成器</div>
+        <p class="phase-desc-big">Google Apps Script + HTML 做自動化——描述需求，AI 寫程式，貼進去就跑起來了。那個瞬間很衝擊。</p>
+        <div class="example-box">
+          <strong>實際案例</strong>
+          會議室借用系統、研討會報名表單、教師成長社群網站——每個都是一個痛點解決後的成果。
+        </div>
+      </div>
+    </div>
+
+    <!-- S5: PHASE 3 -->
+    <div class="slide s-phase-single" id="s5" style="left:4120px;top:155px">
+      <div class="si">
+        <div class="phase-badge">
+          <div class="phase-circle">03</div>
+          <span class="phase-stage">第三階段</span>
+        </div>
+        <div class="phase-name-big">AI 當架構夥伴</div>
+        <p class="phase-desc-big">Cursor + Next.js + Firebase——做出有真實網址、多人使用、串接 API 的完整 App。不是學更多技術，是更清楚描述需求。</p>
+        <div class="example-box">
+          <strong>實際案例</strong>
+          MCI 大量傷患模擬、E-Badge 電子名牌系統、USafe 校園緊急應變 App、安全教育大富翁——每個都在幾天內從零到上線。
+        </div>
+      </div>
+    </div>
+
+    <!-- S6: QUOTE B -->
+    <div class="slide s-quote" id="s6" style="left:4900px;top:185px">
+      <div class="q-bar"></div>
+      <div class="si" style="justify-content:center">
+        <div class="q-mark">"</div>
+        <p class="q-text">核心不是技術，<br>是你跟 AI <strong>溝通的能力</strong>——<br>「描述需求」才是<br>這個時代<strong>最重要的新技能</strong>。</p>
+        <p class="q-src">核心觀點 · EP 01</p>
+      </div>
+    </div>
+
+    <!-- S7: TIP 1 -->
+    <div class="slide s-tip-single" id="s7" style="left:5620px;top:145px">
+      <div class="si">
+        <div class="lbl">跟 AI 相處的心法</div>
+        <div class="tip-header">
+          <span class="tip-num-big">01 / 06</span>
+          <div class="tip-title-big">了解每個 AI 的脾氣</div>
+        </div>
+        <p class="tip-body">Claude、Cursor、Gemini 各有強弱——光聽別人說沒用，你要自己試過才知道什麼時候用什麼。</p>
+        <div class="example-box">
+          <strong>我的用法</strong>
+          Claude 擅長長文分析和架構規劃；Cursor 在你的專案資料夾裡寫程式；Gemini 跟 Google Docs / Sheets 整合最順。同一個任務，用錯工具會事倍功半。
+        </div>
+      </div>
+    </div>
+
+    <!-- S8: TIP 2 -->
+    <div class="slide s-tip-single" id="s8" style="left:6420px;top:145px">
+      <div class="si">
+        <div class="lbl">跟 AI 相處的心法</div>
+        <div class="tip-header">
+          <span class="tip-num-big">02 / 06</span>
+          <div class="tip-title-big">不懂就問，術業有專攻</div>
+        </div>
+        <p class="tip-body">AI 不懂台灣 EMT 的法規、不懂 OHCA 現場的真實壓力、不懂指揮官在 MCI 裡的心理負荷。這些是你的專業，AI 學不來。</p>
+        <div class="example-box">
+          <strong>角色分工</strong>
+          你提供「現實感」，AI 提供「執行力」。EMT-P 判斷這個處置流程對不對——AI 負責把它寫成程式或文字。
+        </div>
+      </div>
+    </div>
+
+    <!-- S9: TIP 3 -->
+    <div class="slide s-tip-single" id="s9" style="left:7220px;top:145px">
+      <div class="si">
+        <div class="lbl">跟 AI 相處的心法</div>
+        <div class="tip-header">
+          <span class="tip-num-big">03 / 06</span>
+          <div class="tip-title-big">一開始講清楚，討論好再動手</div>
+        </div>
+        <p class="tip-body">這是我踩過最多坑的地方。跟 AI 說「幫我做一個報名系統」，它做出來的東西可能完全不是你要的——這叫做鬼打牆。</p>
+        <div class="example-box">
+          <strong>正確姿勢</strong>
+          「誰用？在什麼情境？要有哪些欄位？付費還是免費？手機還是電腦？」先花 10 分鐘討論清楚，省下後面 3 小時的來回修改。
+        </div>
+      </div>
+    </div>
+
+    <!-- S10: TIP 4 -->
+    <div class="slide s-tip-single" id="s10" style="left:8020px;top:145px">
+      <div class="si">
+        <div class="lbl">跟 AI 相處的心法</div>
+        <div class="tip-header">
+          <span class="tip-num-big">04 / 06</span>
+          <div class="tip-title-big">你的專業你最懂，要自己判斷</div>
+        </div>
+        <p class="tip-body">AI 會給你答案，但答案不一定對。它不會告訴你它錯了。特別是臨床判斷、法規解釋、倫理決策——那是你的責任，AI 只是參考。</p>
+        <div class="example-box">
+          <strong>真實案例</strong>
+          我請 AI 列台灣 EMT-P 的執業法規，它給的條文是對的，但沒有更新到最新修法版本。永遠要自己驗證一次。
+        </div>
+      </div>
+    </div>
+
+    <!-- S11: TIP 5 -->
+    <div class="slide s-tip-single" id="s11" style="left:8820px;top:145px">
+      <div class="si">
+        <div class="lbl">跟 AI 相處的心法</div>
+        <div class="tip-header">
+          <span class="tip-num-big">05 / 06</span>
+          <div class="tip-title-big">使用者的想法最重要</div>
+        </div>
+        <p class="tip-body">工具做出來是給人用的，不是給 AI 看的。做完一定要讓真正會用的人試用，聽他們說哪裡不對、哪裡不順。好不好用不是你說了算。</p>
+        <div class="example-box">
+          <strong>實際教訓</strong>
+          我做的 USafe 校園應變 App，第一版讓護理師試用，她說「這個按鈕我找不到」——這句話比任何設計理論都有價值。
+        </div>
+      </div>
+    </div>
+
+    <!-- S12: TIP 6 -->
+    <div class="slide s-tip-single" id="s12" style="left:9620px;top:145px">
+      <div class="si">
+        <div class="lbl">跟 AI 相處的心法</div>
+        <div class="tip-header">
+          <span class="tip-num-big">06 / 06</span>
+          <div class="tip-title-big">不要為了 AI 而 AI</div>
+        </div>
+        <p class="tip-body">AI 工具一直在出新的，你學不完，也不需要學完。你只需要找到那幾個讓你工作效率提升 10 倍的工具，把它們用熟。其他的，等你真的需要再說。</p>
+        <div class="example-box">
+          <strong>我的清單</strong>
+          Claude（思考 + 寫作 + 架構）、Cursor（程式開發）、Gemini（Google 生態整合）——就這三個，已經夠用。
+        </div>
+      </div>
+    </div>
+
+    <!-- S13: EMS × AI -->
+    <div class="slide s-two" id="s13" style="left:10460px;top:160px">
+      <div class="si">
+        <div class="lbl">協作 · 取代 · 還是？</div>
+        <div class="title-sm">EMS 跟 AI，到底怎麼發展？</div>
+        <div class="two-body">
+          <div class="col l">
+            <div class="col-lbl l">AI 能做的</div>
+            <div class="ci">⚡ 輔助派遣決策</div>
+            <div class="ci">⚡ 整理出勤紀錄</div>
+            <div class="ci">⚡ 生成訓練情境</div>
+            <div class="ci">⚡ 分析出勤數據</div>
+            <div class="ci">⚡ 撰寫研究摘要</div>
+          </div>
+          <div class="col r">
+            <div class="col-lbl r">AI 做不到的</div>
+            <div class="ci">🔴 現場判斷傷患狀況</div>
+            <div class="ci">🔴 建立跟病患的信任</div>
+            <div class="ci">🔴 混亂中的人道抉擇</div>
+            <div class="ci">🔴 承擔臨床責任</div>
+            <div class="ci">🔴 你積累的現場直覺</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S14: CLOSE -->
+    <div class="slide s-close" id="s14" style="left:11380px;top:130px">
+      <div class="close-deco"></div>
+      <div class="si" style="justify-content:space-between">
+        <div>
+          <div class="lbl">收尾</div>
+          <p style="font-size:11px;color:var(--muted);font-style:italic">— 義大利文 · 米開朗基羅</p>
+        </div>
+        <div>
+          <p class="motto"><span class="it">Ancora</span><br><span class="it">imparo.</span></p>
+          <p class="motto-translation">「我仍在學習。」</p>
+          <p class="motto-attr">Monash University 校訓 · 終身學習的姿態</p>
+        </div>
+        <div>
+          <p class="motto-note">AI 時代不是要你學會所有工具——<br>是保持這個姿態，願意嘗試，從錯誤裡繼續前進。</p>
+          <div class="close-btns">
+            <div class="btn-ep">📅 下集 7/13 · AI 幫你挖出研究題目</div>
+            <a class="btn-meet" href="https://meet.google.com/spv-snwj-hyv" target="_blank">▶ 加入 Meet</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /cv -->
+</div><!-- /wrap -->
+
+<div id="mm" onclick="toggleOV()" title="全覽">
+  <div id="mm-lbl">全局地圖 · 點擊全覽</div>
+  <div id="mm-track"></div>
+</div>
+<div id="counter">1 / 15</div>
+<div id="hint">
+  <span class="hk">← →</span>前後
+  <span class="hk">Space</span>下一段
+  <span class="hk">F</span>全螢幕
+  <span class="hk">O</span>全覽
+  <span class="hk">滾輪</span>縮放
+</div>
+
+<script>
+const SLIDES=[
+  {id:'s0',label:'封面'},
+  {id:'s1',label:'黃仁勳引言'},
+  {id:'s2',label:'核心問題'},
+  {id:'s3',label:'第一階段'},
+  {id:'s4',label:'第二階段'},
+  {id:'s5',label:'第三階段'},
+  {id:'s6',label:'核心轉變'},
+  {id:'s7',label:'心法 01'},
+  {id:'s8',label:'心法 02'},
+  {id:'s9',label:'心法 03'},
+  {id:'s10',label:'心法 04'},
+  {id:'s11',label:'心法 05'},
+  {id:'s12',label:'心法 06'},
+  {id:'s13',label:'EMS × AI'},
+  {id:'s14',label:'Ancora imparo'},
+];
+const EDGES=[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11],[11,12],[12,13],[13,14]];
+
+let cur=0,sc=1,tx=0,ty=0,isOV=false;
+const WRAP=document.getElementById('wrap');
+const CV=document.getElementById('cv');
+
+function drawEdges(){
+  const svg=document.getElementById('svg-lines');
+  svg.innerHTML='';
+  EDGES.forEach(([a,b])=>{
+    const ea=document.getElementById(SLIDES[a].id);
+    const eb=document.getElementById(SLIDES[b].id);
+    const ax=parseInt(ea.style.left)+ea.offsetWidth;
+    const ay=parseInt(ea.style.top)+ea.offsetHeight/2;
+    const bx=parseInt(eb.style.left);
+    const by=parseInt(eb.style.top)+eb.offsetHeight/2;
+    const mx=(ax+bx)/2;
+    const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d',`M${ax},${ay} C${mx},${ay} ${mx},${by} ${bx},${by}`);
+    path.setAttribute('fill','none');
+    path.setAttribute('stroke','rgba(10,147,150,0.22)');
+    path.setAttribute('stroke-width','1.5');
+    path.setAttribute('stroke-dasharray','5 4');
+    svg.appendChild(path);
+  });
+}
+
+function applyT(anim=true){
+  CV.style.transition=anim?'transform .72s cubic-bezier(.25,.46,.45,.94)':'none';
+  CV.style.transform=`scale(${sc}) translate(${tx}px,${ty}px)`;
+  updateMM();
+  document.getElementById('prog').style.width=(SLIDES.length>1?(cur/(SLIDES.length-1)*100):0)+'%';
+  document.getElementById('counter').textContent=`${cur+1} / ${SLIDES.length}`;
+}
+
+function focusSlide(idx,anim=true){
+  if(isOV)exitOV();
+  cur=idx;
+  const el=document.getElementById(SLIDES[idx].id);
+  const ww=WRAP.offsetWidth, wh=WRAP.offsetHeight;
+  const sw=el.offsetWidth,   sh=el.offsetHeight;
+  const sl=parseInt(el.style.left), st=parseInt(el.style.top);
+  const pad=60;
+  const ns=Math.min((ww-pad*2)/sw,(wh-pad*2)/sh,1.2);
+  sc=ns;
+  tx=ww/(2*sc)-(sl+sw/2);
+  ty=wh/(2*sc)-(st+sh/2);
+  applyT(anim);
+  document.getElementById('btn-p').disabled=cur===0;
+  document.getElementById('btn-n').disabled=cur===SLIDES.length-1;
+}
+
+function next(){if(cur<SLIDES.length-1)focusSlide(cur+1)}
+function prev(){if(cur>0)focusSlide(cur-1)}
+
+// OVERVIEW
+function toggleOV(){isOV?exitOV():enterOV()}
+function enterOV(){
+  isOV=true;
+  document.body.classList.add('ov');
+  document.getElementById('btn-ov').classList.add('active');
+  const usedW=12140+660, usedH=560;
+  const ww=WRAP.offsetWidth, wh=WRAP.offsetHeight;
+  const pad=50;
+  sc=Math.min((ww-pad*2)/usedW,(wh-pad*2)/usedH);
+  tx=pad/sc;
+  ty=wh/(2*sc)-(155+usedH/2);
+  applyT();
+  SLIDES.forEach((s,i)=>{
+    const el=document.getElementById(s.id);
+    el.classList.add('clickable');
+    el.onclick=()=>focusSlide(i);
+  });
+}
+function exitOV(){
+  isOV=false;
+  document.body.classList.remove('ov');
+  document.getElementById('btn-ov').classList.remove('active');
+  SLIDES.forEach(s=>{
+    const el=document.getElementById(s.id);
+    el.classList.remove('clickable');
+    el.onclick=null;
+  });
+  focusSlide(cur);
+}
+
+// FULLSCREEN — fit slide after FS
+function toggleFS(){
+  if(!document.fullscreenElement){
+    document.documentElement.requestFullscreen().catch(()=>{});
+  } else {
+    document.exitFullscreen();
+  }
+}
+document.addEventListener('fullscreenchange',()=>{
+  const btn=document.getElementById('btn-fs');
+  btn.textContent=document.fullscreenElement?'✕ 離開全螢幕':'⛶ 全螢幕';
+  setTimeout(()=>{ isOV?enterOV():focusSlide(cur,false); },150);
+});
+
+// MINIMAP
+function updateMM(){
+  const track=document.getElementById('mm-track');
+  track.innerHTML='';
+  const tw=160, th=28;
+  const totalW=12800, totalH=700;
+  const mx=tw/totalW, my=th/totalH;
+  SLIDES.forEach((s,i)=>{
+    const el=document.getElementById(s.id);
+    const sl=parseInt(el.style.left), st=parseInt(el.style.top);
+    const sw=el.offsetWidth, sh=el.offsetHeight;
+    const nd=document.createElement('div');
+    nd.className='mm-nd';
+    nd.style.cssText=`left:${sl*mx}px;top:${(st-130)*my}px;width:${Math.max(3,sw*mx)}px;height:${Math.max(3,sh*my)}px;`;
+    if(i===cur) nd.style.background='rgba(233,196,106,.9)';
+    track.appendChild(nd);
+  });
+}
+
+// PAN
+let drag={on:false,sx:0,sy:0,otx:0,oty:0};
+WRAP.addEventListener('mousedown',e=>{
+  if(e.target.closest('.slide')&&!isOV)return;
+  drag={on:true,sx:e.clientX,sy:e.clientY,otx:tx,oty:ty};
+  WRAP.classList.add('grabbing');
+});
+window.addEventListener('mousemove',e=>{
+  if(!drag.on)return;
+  tx=drag.otx+(e.clientX-drag.sx)/sc;
+  ty=drag.oty+(e.clientY-drag.sy)/sc;
+  applyT(false);
+});
+window.addEventListener('mouseup',()=>{drag.on=false;WRAP.classList.remove('grabbing')});
+
+// WHEEL ZOOM
+WRAP.addEventListener('wheel',e=>{
+  e.preventDefault();
+  const f=e.deltaY<0?1.1:0.909;
+  const ns=Math.max(0.1,Math.min(2.5,sc*f));
+  const rect=WRAP.getBoundingClientRect();
+  const px=(e.clientX-rect.left)/sc-tx;
+  const py=(e.clientY-rect.top)/sc-ty;
+  tx=(e.clientX-rect.left)/ns-px;
+  ty=(e.clientY-rect.top)/ns-py;
+  sc=ns;
+  applyT(false);
+},{passive:false});
+
+// TOUCH
+let touch={on:false,sx:0,sy:0,otx:0,oty:0};
+WRAP.addEventListener('touchstart',e=>{
+  if(e.touches.length===1)touch={on:true,sx:e.touches[0].clientX,sy:e.touches[0].clientY,otx:tx,oty:ty};
+},{passive:true});
+WRAP.addEventListener('touchmove',e=>{
+  if(!touch.on||e.touches.length!==1)return;
+  e.preventDefault();
+  tx=touch.otx+(e.touches[0].clientX-touch.sx)/sc;
+  ty=touch.oty+(e.touches[0].clientY-touch.sy)/sc;
+  applyT(false);
+},{passive:false});
+WRAP.addEventListener('touchend',()=>{touch.on=false});
+
+// KEYS
+window.addEventListener('keydown',e=>{
+  if(['INPUT','TEXTAREA'].includes(e.target.tagName))return;
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();next()}
+  if(e.key==='ArrowLeft'){e.preventDefault();prev()}
+  if(e.key==='f'||e.key==='F')toggleFS();
+  if(e.key==='o'||e.key==='O')toggleOV();
+  if(e.key==='Escape'&&isOV)exitOV();
+  if(e.key==='Home')focusSlide(0);
+  if(e.key==='End')focusSlide(SLIDES.length-1);
+});
+
+// INIT
+window.addEventListener('load',()=>{
+  drawEdges();
+  focusSlide(0,false);
+  setTimeout(()=>document.getElementById('hint').classList.add('gone'),5500);
+});
+window.addEventListener('resize',()=>{
+  if(isOV)enterOV(); else focusSlide(cur,false);
+});
+</script>
+</body>
+</html>
