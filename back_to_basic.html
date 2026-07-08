@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>學會課程排課系統</title>
+<style>
+  :root {
+    --ink: #16302e;
+    --ink-soft: #4a6360;
+    --line: #dde4e2;
+    --bg: #f6f8f7;
+    --card: #ffffff;
+    --teal: #0e6b62;
+    --teal-dark: #094e47;
+    --teal-tint: #e3f1ee;
+    --green: #1c8a53;
+    --green-tint: #e6f5ec;
+    --red: #c23a3a;
+    --red-tint: #fbeaea;
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Microsoft JhengHei", "PingFang TC", -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+  header {
+    background: var(--teal-dark);
+    color: #fff;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  header h1 { font-size: 18px; font-weight: 500; margin: 0; letter-spacing: 0.3px; }
+  header .sub { font-size: 12px; opacity: 0.75; margin-top: 2px; }
+  .btn {
+    border: none; cursor: pointer; border-radius: 8px;
+    padding: 10px 18px; font-size: 14px; font-weight: 500;
+    font-family: inherit; transition: opacity 0.15s;
+  }
+  .btn:hover { opacity: 0.88; }
+  .btn-primary { background: #fff; color: var(--teal-dark); }
+  .btn-teal { background: var(--teal); color: #fff; }
+  .btn-outline { background: transparent; border: 1px solid var(--line); color: var(--ink); }
+  .btn-danger { background: var(--red); color: #fff; }
+  .btn-ghost { background: transparent; color: var(--ink-soft); }
+
+  .container { max-width: 1080px; margin: 0 auto; padding: 24px 20px 60px; }
+
+  .tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+  .tab {
+    padding: 9px 20px; border-radius: 999px; font-size: 14px; font-weight: 500;
+    cursor: pointer; border: 1px solid var(--line); background: var(--card); color: var(--ink-soft);
+  }
+  .tab.active { background: var(--teal); color: #fff; border-color: var(--teal); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 14px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    cursor: pointer;
+    transition: box-shadow 0.15s, transform 0.15s;
+    position: relative;
+  }
+  .card:hover { box-shadow: 0 4px 14px rgba(20,50,45,0.08); transform: translateY(-2px); }
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+  .card-title { font-size: 15px; font-weight: 500; color: var(--ink); }
+  .light {
+    width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; margin-top: 4px;
+  }
+  .light.green { background: var(--green); box-shadow: 0 0 0 3px var(--green-tint); }
+  .light.red { background: var(--red); box-shadow: 0 0 0 3px var(--red-tint); }
+  .meta { font-size: 12.5px; color: var(--ink-soft); margin-top: 8px; display: flex; gap: 6px; align-items: center; }
+  .names {
+    margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px;
+  }
+  .pill {
+    font-size: 12px; padding: 3px 10px; border-radius: 999px;
+    background: var(--teal-tint); color: var(--teal-dark);
+  }
+  .pill.empty { background: var(--red-tint); color: var(--red); }
+  .count-badge { font-size: 12px; color: var(--ink-soft); margin-top: 8px; }
+
+  .empty-state { text-align: center; padding: 60px 20px; color: var(--ink-soft); font-size: 14px; }
+
+  /* Modal */
+  .overlay {
+    display: none; position: fixed; inset: 0; background: rgba(15,35,32,0.45);
+    align-items: center; justify-content: center; z-index: 999; padding: 16px;
+  }
+  .overlay.show { display: flex; }
+  .modal {
+    background: var(--card); border-radius: 16px; width: 100%; max-width: 560px;
+    max-height: 88vh; overflow-y: auto; padding: 24px;
+  }
+  .modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+  .modal-head h2 { font-size: 17px; font-weight: 500; margin: 0; }
+  .close-x { cursor: pointer; font-size: 20px; color: var(--ink-soft); background: none; border: none; }
+
+  label { display: block; font-size: 13px; color: var(--ink-soft); margin: 12px 0 5px; }
+  input[type=text], input[type=date], input[type=time], input[type=number], input[type=url], select, textarea {
+    width: 100%; padding: 9px 12px; border: 1px solid var(--line); border-radius: 8px;
+    font-size: 14px; font-family: inherit; background: #fcfdfd;
+  }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .instructor-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 13.5px;
+  }
+  .instructor-row:last-child { border-bottom: none; }
+  .status-tag { font-size: 11.5px; padding: 2px 8px; border-radius: 999px; }
+  .status-tag.yes { background: var(--green-tint); color: var(--green); }
+  .status-tag.no { background: var(--red-tint); color: var(--red); }
+  .status-tag.pending { background: #f0efe8; color: var(--ink-soft); }
+  .row-actions { display: flex; gap: 6px; }
+  .icon-btn { background: none; border: none; cursor: pointer; color: var(--ink-soft); font-size: 12px; }
+  .icon-btn:hover { color: var(--red); }
+
+  .add-instructor-row { display: flex; gap: 8px; margin-top: 10px; }
+  .add-instructor-row select { flex: 1; }
+
+  .modal-actions { display: flex; justify-content: space-between; margin-top: 22px; gap: 10px; }
+  .modal-actions .right { display: flex; gap: 8px; }
+
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    background: var(--ink); color: #fff; padding: 10px 20px; border-radius: 8px;
+    font-size: 13px; opacity: 0; transition: opacity 0.25s; z-index: 1200; pointer-events: none;
+  }
+  .toast.show { opacity: 1; }
+
+  .loading-spin {
+    width: 22px; height: 22px; border: 3px solid var(--line); border-top-color: var(--teal);
+    border-radius: 50%; margin: 40px auto; animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>學會課程排課系統</h1>
+    <div class="sub">Taiwan Society of Paramedicine</div>
+  </div>
+  <button class="btn btn-primary" onclick="openCreateModal()">＋ 新增開課</button>
+</header>
+
+<div class="container">
+  <div class="tabs">
+    <div class="tab active" data-tab="pending" onclick="switchTab('pending')">待執行課程</div>
+    <div class="tab" data-tab="done" onclick="switchTab('done')">已完成課程</div>
+  </div>
+
+  <div id="listArea">
+    <div class="loading-spin"></div>
+  </div>
+</div>
+
+<!-- 課程詳細 / 編輯 Modal -->
+<div class="overlay" id="courseOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="modalTitle">課程詳細資料</h2>
+      <button class="close-x" onclick="closeModal('courseOverlay')">✕</button>
+    </div>
+
+    <label>課程名稱</label>
+    <input type="text" id="f_title">
+
+    <div class="row2">
+      <div>
+        <label>日期</label>
+        <input type="date" id="f_date">
+      </div>
+      <div>
+        <label>需求指導員人數</label>
+        <input type="number" id="f_target" min="0">
+      </div>
+    </div>
+
+    <div class="row2">
+      <div>
+        <label>開始時間</label>
+        <input type="time" id="f_start">
+      </div>
+      <div>
+        <label>結束時間</label>
+        <input type="time" id="f_end">
+      </div>
+    </div>
+
+    <label>地點</label>
+    <input type="text" id="f_location">
+
+    <div class="row2">
+      <div>
+        <label>預估學員數</label>
+        <input type="number" id="f_students" min="0">
+      </div>
+      <div>
+        <label>參考資料連結</label>
+        <input type="url" id="f_link">
+      </div>
+    </div>
+
+    <label style="margin-top:20px;">指導員名單</label>
+    <div id="instructorList"></div>
+    <div class="add-instructor-row">
+      <select id="addInstructorSelect"></select>
+      <button class="btn btn-outline" onclick="addInstructor()">加派</button>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-danger" onclick="deleteCourse()">刪除課程</button>
+      <div class="right">
+        <button class="btn btn-ghost" onclick="closeModal('courseOverlay')">取消</button>
+        <button class="btn btn-teal" onclick="saveCourse()">儲存變更</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 新增開課 Modal -->
+<div class="overlay" id="createOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h2>新增開課</h2>
+      <button class="close-x" onclick="closeModal('createOverlay')">✕</button>
+    </div>
+
+    <label>課程名稱</label>
+    <input type="text" id="c_title">
+
+    <div class="row2">
+      <div>
+        <label>日期</label>
+        <input type="date" id="c_date">
+      </div>
+      <div>
+        <label>需求指導員人數</label>
+        <input type="number" id="c_target" min="0" value="2">
+      </div>
+    </div>
+
+    <div class="row2">
+      <div>
+        <label>開始時間</label>
+        <input type="time" id="c_start" value="09:00">
+      </div>
+      <div>
+        <label>結束時間</label>
+        <input type="time" id="c_end" value="17:00">
+      </div>
+    </div>
+
+    <label>地點</label>
+    <input type="text" id="c_location">
+
+    <div class="row2">
+      <div>
+        <label>預估學員數</label>
+        <input type="number" id="c_students" min="0">
+      </div>
+      <div>
+        <label>參考資料連結</label>
+        <input type="url" id="c_link">
+      </div>
+    </div>
+
+    <p style="font-size:12.5px; color:var(--ink-soft); margin-top:14px;">
+      建立後會立即寄送意願調查信給講師名冊中的所有指導員。
+    </p>
+
+    <div class="modal-actions">
+      <div></div>
+      <div class="right">
+        <button class="btn btn-ghost" onclick="closeModal('createOverlay')">取消</button>
+        <button class="btn btn-teal" onclick="submitCreate()">建立並發送調查</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // ⚠️ 部署 GAS 網頁應用程式後，把 /exec 網址貼在這裡
+  const API_URL = "https://script.google.com/macros/s/AKfycbyU6GUmPhuJUPanwl8vI3r48i6WA77TwFnEb2MUvetEhuECgh8sbPVMvi10DhcxAZgq/exec";
+
+  let allCourses = [];
+  let currentTab = 'pending';
+  let currentCourseId = null;
+  let instructorRoster = [];
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadCourses();
+    loadInstructorRoster();
+  });
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2400);
+  }
+
+  function switchTab(tab) {
+    currentTab = tab;
+    document.querySelectorAll('.tab').forEach(el => el.classList.toggle('active', el.dataset.tab === tab));
+    render();
+  }
+
+  async function apiGet(action, params = {}) {
+    const qs = new URLSearchParams({ action, ...params }).toString();
+    const res = await fetch(`${API_URL}?${qs}`);
+    return res.json();
+  }
+
+  async function apiPost(body) {
+    // 用 text/plain 避免觸發 CORS 預檢請求 (Apps Script 不支援 OPTIONS)
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(body)
+    });
+    return res.json();
+  }
+
+  async function loadCourses() {
+    document.getElementById('listArea').innerHTML = '<div class="loading-spin"></div>';
+    const data = await apiGet('listCourses');
+    if (data.error) { showToast(data.error); return; }
+    allCourses = data;
+    render();
+  }
+
+  async function loadInstructorRoster() {
+    instructorRoster = await apiGet('listInstructors');
+  }
+
+  function render() {
+    const list = allCourses
+      .filter(c => c.status === currentTab)
+      .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    const area = document.getElementById('listArea');
+    if (list.length === 0) {
+      area.innerHTML = `<div class="empty-state">目前沒有${currentTab === 'pending' ? '待執行' : '已完成'}的課程</div>`;
+      return;
+    }
+
+    area.innerHTML = `<div class="grid">${list.map(courseCardHtml).join('')}</div>`;
+  }
+
+  function courseCardHtml(c) {
+    const d = new Date(c.date);
+    const dateStr = d.toLocaleDateString('zh-TW', { month: '2-digit', day: '2-digit' });
+    const timeStr = d.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit', hour12: false });
+    const namesHtml = c.confirmedInstructors.length
+      ? c.confirmedInstructors.map(n => `<span class="pill">${n}</span>`).join('')
+      : `<span class="pill empty">尚無人回覆可接課</span>`;
+
+    return `
+      <div class="card" onclick="openDetailModal('${c.id}')">
+        <div class="card-top">
+          <div class="card-title">${c.title}</div>
+          <div class="light ${c.light}"></div>
+        </div>
+        <div class="meta">📅 ${dateStr}（${timeStr}）　📍 ${c.location || '未填寫'}</div>
+        <div class="names">${namesHtml}</div>
+        <div class="count-badge">已確認 ${c.confirmedCount} / 需求 ${c.targetCount} 人</div>
+      </div>
+    `;
+  }
+
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('show');
+  }
+
+  // ===== 詳細 / 編輯 =====
+  async function openDetailModal(id) {
+    currentCourseId = id;
+    const c = await apiGet('getCourse', { id });
+    if (c.error) { showToast(c.error); return; }
+
+    document.getElementById('modalTitle').textContent = c.title;
+    document.getElementById('f_title').value = c.title;
+    const d = new Date(c.date);
+    document.getElementById('f_date').value = d.toISOString().split('T')[0];
+    document.getElementById('f_start').value = d.toTimeString().slice(0, 5);
+    document.getElementById('f_end').value = new Date(c.endDate).toTimeString().slice(0, 5);
+    document.getElementById('f_location').value = c.location || '';
+    document.getElementById('f_students').value = c.studentCount || '';
+    document.getElementById('f_link').value = c.link || '';
+    document.getElementById('f_target').value = c.targetCount || 0;
+
+    renderInstructorList(c.instructors || []);
+    populateInstructorSelect(c.instructors || []);
+
+    document.getElementById('courseOverlay').classList.add('show');
+  }
+
+  function renderInstructorList(instructors) {
+    const el = document.getElementById('instructorList');
+    if (!instructors.length) {
+      el.innerHTML = `<div style="font-size:13px; color:var(--ink-soft); padding:8px 0;">尚無講師紀錄</div>`;
+      return;
+    }
+    el.innerHTML = instructors.map(ins => {
+      const tagClass = ins.reply === '可接課' ? 'yes' : (ins.reply === '不可接課' ? 'no' : 'pending');
+      return `
+        <div class="instructor-row">
+          <span>${ins.name} <span class="status-tag ${tagClass}">${ins.reply}</span></span>
+          <div class="row-actions">
+            <button class="icon-btn" onclick="toggleInstructor('${ins.name}', '可接課')">標為可接課</button>
+            <button class="icon-btn" onclick="toggleInstructor('${ins.name}', '不可接課')">標為不可接課</button>
+            <button class="icon-btn" onclick="removeInstructor('${ins.name}')">移除</button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function populateInstructorSelect(existing) {
+    const existingNames = existing.map(e => e.name);
+    const options = instructorRoster
+      .filter(i => !existingNames.includes(i.name))
+      .map(i => `<option value="${i.name}">${i.name}</option>`).join('');
+    document.getElementById('addInstructorSelect').innerHTML = options || '<option value="">（無可加派人員）</option>';
+  }
+
+  async function addInstructor() {
+    const name = document.getElementById('addInstructorSelect').value;
+    if (!name) return;
+    const res = await apiPost({ action: 'addInstructor', cId: currentCourseId, iName: name });
+    if (res.error) { showToast(res.error); return; }
+    showToast('已加派講師');
+    await openDetailModal(currentCourseId);
+    await loadCourses();
+  }
+
+  async function removeInstructor(name) {
+    if (!confirm(`確定要移除 ${name} 嗎？`)) return;
+    const res = await apiPost({ action: 'removeInstructor', cId: currentCourseId, iName: name });
+    if (res.error) { showToast(res.error); return; }
+    showToast('已移除講師');
+    await openDetailModal(currentCourseId);
+    await loadCourses();
+  }
+
+  async function toggleInstructor(name, status) {
+    const res = await apiPost({ action: 'setInstructorStatus', cId: currentCourseId, iName: name, status });
+    if (res.error) { showToast(res.error); return; }
+    await openDetailModal(currentCourseId);
+    await loadCourses();
+  }
+
+  async function saveCourse() {
+    const data = {
+      title: document.getElementById('f_title').value,
+      date: document.getElementById('f_date').value,
+      startTime: document.getElementById('f_start').value,
+      endTime: document.getElementById('f_end').value,
+      location: document.getElementById('f_location').value,
+      studentCount: document.getElementById('f_students').value,
+      link: document.getElementById('f_link').value,
+      targetCount: document.getElementById('f_target').value
+    };
+    const res = await apiPost({ action: 'updateCourse', id: currentCourseId, data });
+    if (res.error) { showToast(res.error); return; }
+    showToast('已儲存變更');
+    closeModal('courseOverlay');
+    loadCourses();
+  }
+
+  async function deleteCourse() {
+    if (!confirm('確定要刪除這堂課程嗎？此動作無法復原。')) return;
+    const res = await apiPost({ action: 'deleteCourse', id: currentCourseId });
+    if (res.error) { showToast(res.error); return; }
+    showToast('已刪除課程');
+    closeModal('courseOverlay');
+    loadCourses();
+  }
+
+  // ===== 新增開課 =====
+  function openCreateModal() {
+    ['c_title', 'c_date', 'c_location', 'c_students', 'c_link'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('c_start').value = '09:00';
+    document.getElementById('c_end').value = '17:00';
+    document.getElementById('c_target').value = 2;
+    document.getElementById('createOverlay').classList.add('show');
+  }
+
+  async function submitCreate() {
+    const data = {
+      title: document.getElementById('c_title').value,
+      date: document.getElementById('c_date').value,
+      startTime: document.getElementById('c_start').value,
+      endTime: document.getElementById('c_end').value,
+      location: document.getElementById('c_location').value,
+      studentCount: document.getElementById('c_students').value,
+      link: document.getElementById('c_link').value,
+      targetCount: document.getElementById('c_target').value
+    };
+    if (!data.title || !data.date) { showToast('請填寫課程名稱與日期'); return; }
+
+    const res = await apiPost({ action: 'createCourse', data });
+    if (res.error) { showToast(res.error); return; }
+    showToast('課程已建立，意願調查已寄出');
+    closeModal('createOverlay');
+    loadCourses();
+  }
+</script>
+
+</body>
+</html>
