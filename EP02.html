@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EP02 · AI × EMS｜AI 幫你從臨床經驗挖出研究題目</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@400;700;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#08131F;
+  --navy2:#0D1F35;
+  --teal:#0A9396;
+  --teal-light:#94D2BD;
+  --amber:#E9C46A;
+  --white:#FFFFFF;
+  --slate:#8FA3B8;
+  --muted:#4A6278;
+}
+
+html,body{
+  width:100%;height:100%;
+  overflow:hidden;
+  background:var(--navy);
+  font-family:'Noto Sans TC',sans-serif;
+  color:var(--white);
+}
+
+/* ── SLIDES CONTAINER ── */
+#deck{
+  width:100%;height:100%;
+  position:relative;
+}
+
+/* ── SINGLE SLIDE ── */
+.slide{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:80px 120px;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .45s ease;
+  text-align:center;
+}
+.slide.active{
+  opacity:1;
+  pointer-events:all;
+}
+
+/* left-aligned slides */
+.slide.left{
+  align-items:flex-start;
+  text-align:left;
+}
+
+/* ── AMBIENT BG decorations ── */
+.slide::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+}
+.slide > *{ position:relative;z-index:1; }
+
+/* teal glow top-left */
+.glow-tl::before{
+  background:radial-gradient(ellipse at 0% 0%, rgba(10,147,150,.12) 0%, transparent 60%);
+}
+/* amber glow bottom-right */
+.glow-br::before{
+  background:radial-gradient(ellipse at 100% 100%, rgba(233,196,106,.08) 0%, transparent 55%);
+}
+/* teal glow center */
+.glow-c::before{
+  background:radial-gradient(ellipse at 50% 50%, rgba(10,147,150,.1) 0%, transparent 65%);
+}
+/* red-blue strobe hint */
+.glow-ems::before{
+  background:
+    radial-gradient(ellipse at 90% 90%, rgba(255,50,50,.1) 0%, transparent 40%),
+    radial-gradient(ellipse at 10% 90%, rgba(40,120,255,.1) 0%, transparent 40%);
+}
+
+/* ── TYPOGRAPHY ── */
+.eyebrow{
+  font-size:13px;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--teal);margin-bottom:20px;
+  display:flex;align-items:center;gap:10px;
+}
+.eyebrow::before{
+  content:'';width:32px;height:2px;background:var(--teal);flex-shrink:0;
+}
+
+.title-hero{
+  font-family:'Noto Serif TC',serif;
+  font-size:72px;font-weight:900;
+  line-height:1.1;letter-spacing:-.02em;
+  color:var(--white);margin-bottom:28px;
+}
+.title-hero .acc{color:var(--teal)}
+.title-hero .acc2{color:var(--amber)}
+
+.title-section{
+  font-family:'Noto Serif TC',serif;
+  font-size:52px;font-weight:900;
+  line-height:1.15;color:var(--white);
+  margin-bottom:24px;
+}
+.title-section .acc{color:var(--teal)}
+.title-section .acc2{color:var(--amber)}
+
+.title-slide{
+  font-family:'Noto Serif TC',serif;
+  font-size:42px;font-weight:700;
+  line-height:1.25;color:var(--white);
+  margin-bottom:20px;
+}
+
+.body-lg{
+  font-size:22px;color:rgba(255,255,255,.75);
+  line-height:1.75;max-width:800px;
+}
+.body-md{
+  font-size:18px;color:rgba(255,255,255,.7);
+  line-height:1.8;
+}
+.body-sm{
+  font-size:15px;color:var(--slate);
+  line-height:1.7;
+}
+
+/* ── DIVIDER ── */
+.divider{
+  width:60px;height:3px;
+  background:linear-gradient(90deg,var(--teal),var(--amber));
+  border-radius:2px;margin:28px 0;
+}
+.divider.center{margin:28px auto}
+
+/* ── QUOTE BLOCK ── */
+.quote-block{
+  border-left:4px solid var(--teal);
+  padding:24px 36px;
+  background:rgba(10,147,150,.07);
+  border-radius:0 16px 16px 0;
+  max-width:820px;
+  text-align:left;
+}
+.quote-block .q-text{
+  font-family:'Noto Serif TC',serif;
+  font-size:28px;font-weight:400;
+  color:var(--white);line-height:1.7;
+  margin-bottom:12px;
+}
+.quote-block .q-text strong{color:var(--teal);font-weight:700}
+.quote-block .q-src{
+  font-size:13px;color:var(--slate);letter-spacing:.05em;
+}
+
+/* ── PROMPT CARD ── */
+.prompt-card{
+  background:rgba(10,147,150,.06);
+  border:1px solid rgba(10,147,150,.35);
+  border-radius:16px;
+  padding:32px 40px;
+  max-width:860px;
+  width:100%;
+  text-align:left;
+  box-shadow:0 0 40px rgba(10,147,150,.1);
+}
+.prompt-label{
+  font-size:11px;font-weight:700;letter-spacing:.14em;
+  color:var(--teal);text-transform:uppercase;
+  margin-bottom:16px;display:flex;align-items:center;gap:8px;
+}
+.prompt-label::before{
+  content:'▶';font-size:9px;
+}
+.prompt-text{
+  font-family:'JetBrains Mono',monospace;
+  font-size:18px;color:rgba(255,255,255,.88);
+  line-height:1.8;
+}
+.prompt-text .blank{
+  display:inline-block;
+  border-bottom:2px solid var(--amber);
+  min-width:120px;color:var(--amber);
+  font-style:italic;padding:0 4px;
+}
+.prompt-hint{
+  margin-top:14px;font-size:13px;color:var(--slate);font-style:italic;
+}
+
+/* ── METHOD CARD ── */
+.method-card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;
+  padding:24px 28px;
+  text-align:left;
+  transition:border-color .2s,background .2s;
+}
+.method-card:hover{
+  background:rgba(10,147,150,.08);
+  border-color:rgba(10,147,150,.3);
+}
+.method-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;font-weight:700;
+  color:var(--amber);letter-spacing:.1em;
+  margin-bottom:10px;
+}
+.method-title{
+  font-size:20px;font-weight:700;color:var(--white);
+  margin-bottom:6px;line-height:1.3;
+}
+.method-desc{
+  font-size:14px;color:var(--slate);line-height:1.6;
+}
+
+/* ── TABLE ── */
+.barrier-table{
+  width:100%;max-width:860px;
+  border-collapse:collapse;
+}
+.barrier-table th{
+  font-size:12px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--teal);
+  padding:12px 20px;border-bottom:1px solid rgba(10,147,150,.3);
+  text-align:left;
+}
+.barrier-table td{
+  padding:16px 20px;
+  font-size:17px;line-height:1.55;
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.barrier-table td:first-child{color:rgba(255,255,255,.55);font-style:italic}
+.barrier-table td:last-child{color:rgba(255,255,255,.85);font-weight:500}
+.barrier-table tr:last-child td{border-bottom:none}
+
+/* ── BIG STAT ── */
+.big-stat{
+  font-family:'JetBrains Mono',monospace;
+  font-size:120px;font-weight:700;
+  color:var(--teal);line-height:1;
+  letter-spacing:-.04em;
+}
+.big-stat-label{
+  font-size:22px;color:rgba(255,255,255,.6);
+  margin-top:8px;letter-spacing:.04em;
+}
+
+/* ── TIPS INLINE ── */
+.tip-row{
+  display:flex;align-items:flex-start;gap:16px;
+  padding:16px 0;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.tip-row:last-child{border-bottom:none}
+.tip-icon{
+  font-size:22px;flex-shrink:0;margin-top:2px;
+}
+.tip-body{}
+.tip-title-sm{font-size:18px;font-weight:700;color:var(--white);margin-bottom:4px}
+.tip-desc-sm{font-size:14px;color:var(--slate);line-height:1.6}
+
+/* ── TAKEAWAY CARD ── */
+.takeaway{
+  background:linear-gradient(135deg,rgba(10,147,150,.15),rgba(233,196,106,.08));
+  border:1px solid rgba(10,147,150,.3);
+  border-radius:20px;
+  padding:48px 60px;
+  max-width:900px;
+  text-align:center;
+}
+.takeaway-text{
+  font-family:'Noto Serif TC',serif;
+  font-size:32px;font-weight:700;
+  color:var(--white);line-height:1.6;
+  margin-bottom:20px;
+}
+.takeaway-text .acc{color:var(--teal)}
+.takeaway-text .acc2{color:var(--amber)}
+
+/* ── GRID LAYOUTS ── */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;width:100%;max-width:1000px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;width:100%;max-width:1100px}
+
+/* ── NAV ── */
+#nav{
+  position:fixed;top:0;left:0;right:0;
+  height:52px;z-index:100;
+  background:rgba(8,19,31,.85);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(10,147,150,.12);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 28px;
+}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-dot{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 6px var(--teal)}
+.nav-title{font-size:13px;font-weight:600;color:rgba(255,255,255,.8);letter-spacing:.03em}
+.nav-ep{font-size:11px;color:var(--muted)}
+.nav-btns{display:flex;gap:6px}
+.nb{
+  padding:5px 14px;border-radius:16px;
+  border:1px solid rgba(10,147,150,.22);
+  background:rgba(10,147,150,.07);
+  cursor:pointer;font-family:'Noto Sans TC',sans-serif;
+  font-size:12px;color:var(--teal-light);
+  transition:all .18s;
+}
+.nb:hover{background:var(--teal);color:#fff;border-color:var(--teal)}
+.nb:disabled{opacity:.3;pointer-events:none}
+
+/* ── DOTS ── */
+#dots{
+  position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
+  display:flex;gap:8px;z-index:100;
+}
+.dot{
+  width:8px;height:8px;border-radius:50%;
+  background:rgba(255,255,255,.2);
+  cursor:pointer;transition:all .25s;border:none;padding:0;
+}
+.dot.active{background:var(--teal);width:24px;border-radius:4px}
+
+/* ── SLIDE NUMBER ── */
+#slide-num{
+  position:fixed;bottom:24px;right:28px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;color:var(--muted);z-index:100;
+}
+
+/* ── FULLSCREEN BTN ── */
+#fs-btn{
+  position:fixed;top:0;right:0;
+  width:52px;height:52px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;z-index:101;
+  color:var(--muted);font-size:16px;
+  background:none;border:none;
+  transition:color .18s;
+}
+#fs-btn:hover{color:var(--teal)}
+
+/* slide padding for nav */
+.slide{padding-top:100px;padding-bottom:80px}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-brand">
+    <div class="nav-dot"></div>
+    <span class="nav-title">AI × EMS 帶狀節目</span>
+    <span class="nav-ep">EP 02 · 7/13</span>
+  </div>
+  <div class="nav-btns">
+    <button class="nb" id="btn-p" onclick="go(-1)">← 上一頁</button>
+    <button class="nb" id="btn-n" onclick="go(1)">下一頁 →</button>
+  </div>
+</nav>
+
+<button id="fs-btn" onclick="toggleFS()" title="全螢幕 F">⛶</button>
+
+<div id="deck">
+
+  <!-- ─── S0: HERO ─── -->
+  <div class="slide glow-ems active">
+    <div class="eyebrow">EP 02 · AI × EMS 帶狀節目 · 7/13</div>
+    <h1 class="title-hero">
+      AI 幫你從<br>
+      <span class="acc">臨床經驗</span><br>
+      挖出研究題目
+    </h1>
+    <div class="divider center"></div>
+    <p class="body-lg">研究不是從 PICO 開始的<br>是從你的<strong style="color:var(--amber)">現場疑問</strong>開始的</p>
+  </div>
+
+  <!-- ─── S1: 你不是研究員，但你有最好的素材 ─── -->
+  <div class="slide glow-tl">
+    <div class="eyebrow">開場破題</div>
+    <h2 class="title-section">你每天看到的東西<br><span class="acc">學者一輩子看不到</span></h2>
+    <div class="divider center"></div>
+    <p class="body-lg">你不需要懂統計<br>不需要有資料庫<br>不需要是教授<br><br>你需要的只有一件事——<br><strong style="color:var(--amber)">把心裡那個「奇怪，為什麼會這樣？」說出來</strong></p>
+  </div>
+
+  <!-- ─── S2: 真正的障礙 ─── -->
+  <div class="slide glow-c">
+    <div class="eyebrow">為什麼 EMT 不做研究？</div>
+    <h2 class="title-section">不是能力問題<br><span class="acc2">是心理問題</span></h2>
+    <div class="divider center"></div>
+    <table class="barrier-table">
+      <tr>
+        <th>你說的</th>
+        <th>真正的意思</th>
+      </tr>
+      <tr>
+        <td>「我不懂統計」</td>
+        <td>「我不知道從哪裡開始」</td>
+      </tr>
+      <tr>
+        <td>「我沒有時間」</td>
+        <td>「我怕做了沒有結果」</td>
+      </tr>
+      <tr>
+        <td>「我的觀察不夠格」</td>
+        <td>「我怕被笑」</td>
+      </tr>
+      <tr>
+        <td>「要 IRB 很麻煩」</td>
+        <td>「我不知道流程」</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ─── S3: AI解決的是什麼 ─── -->
+  <div class="slide glow-tl">
+    <div class="quote-block">
+      <p class="q-text">AI 解決的不是統計問題——<br>是<strong>「不知道從哪裡開始」</strong>的問題。</p>
+      <p class="q-src">EP 02 核心觀點</p>
+    </div>
+  </div>
+
+  <!-- ─── S4: 五個方法 overview ─── -->
+  <div class="slide glow-c">
+    <div class="eyebrow">五個方法</div>
+    <h2 class="title-section">沒有頭緒的救護員<br><span class="acc">怎麼跟 AI 發想題目</span></h2>
+    <div class="divider center"></div>
+    <div class="grid-3" style="max-width:1000px">
+      <div class="method-card">
+        <div class="method-num">METHOD 01</div>
+        <div class="method-title">從現場疑問進去</div>
+        <div class="method-desc">最自然的起點</div>
+      </div>
+      <div class="method-card">
+        <div class="method-num">METHOD 02</div>
+        <div class="method-title">從重複的事進去</div>
+        <div class="method-desc">為什麼一直遇到？</div>
+      </div>
+      <div class="method-card">
+        <div class="method-num">METHOD 03</div>
+        <div class="method-title">從缺口進去</div>
+        <div class="method-desc">應該有但沒有</div>
+      </div>
+      <div class="method-card">
+        <div class="method-num">METHOD 04</div>
+        <div class="method-title">從角色進去</div>
+        <div class="method-desc">你的位置決定你看到什麼</div>
+      </div>
+      <div class="method-card">
+        <div class="method-num">METHOD 05</div>
+        <div class="method-title">讓 AI 反問你</div>
+        <div class="method-desc">最適合完全沒頭緒</div>
+      </div>
+      <div class="method-card" style="background:rgba(10,147,150,.1);border-color:rgba(10,147,150,.3)">
+        <div class="method-num" style="color:var(--teal)">BONUS</div>
+        <div class="method-title">讓 AI 扮演顧問</div>
+        <div class="method-desc">降低對話門檻</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── S5: 方法一 ─── -->
+  <div class="slide glow-tl left" style="padding-left:160px">
+    <div class="eyebrow">Method 01</div>
+    <h2 class="title-slide">從<span style="color:var(--teal)">現場疑問</span>進去</h2>
+    <p class="body-md" style="color:var(--slate);margin-bottom:32px">最自然的起點。你工作裡罵過什麼？覺得哪個流程很爛？</p>
+    <div class="prompt-card">
+      <div class="prompt-label">Prompt 直接複製貼上</div>
+      <div class="prompt-text">
+        我是台灣現職 EMT，我覺得<span class="blank">＿＿＿</span>這件事很有問題，<br>
+        幫我把這個感覺變成一個<strong style="color:var(--teal-light)">可以研究的問題</strong>。
+      </div>
+      <div class="prompt-hint">💡 把你真實的現場疑問填進去就好，不需要任何學術語言</div>
+    </div>
+  </div>
+
+  <!-- ─── S6: 方法二 ─── -->
+  <div class="slide glow-br left" style="padding-left:160px">
+    <div class="eyebrow">Method 02</div>
+    <h2 class="title-slide">從<span style="color:var(--teal)">重複發生的事</span>進去</h2>
+    <p class="body-md" style="color:var(--slate);margin-bottom:32px">「為什麼這種 case 我一直遇到？」重複出現的現象，就是研究的訊號。</p>
+    <div class="prompt-card">
+      <div class="prompt-label">Prompt 直接複製貼上</div>
+      <div class="prompt-text">
+        我出勤時常常遇到<span class="blank">＿＿＿</span>，<br>
+        這個現象有沒有可能被研究？<br>
+        <strong style="color:var(--teal-light)">台灣有人做過嗎？</strong>
+      </div>
+      <div class="prompt-hint">💡 追問「台灣有沒有人做過」，可以快速找到研究缺口</div>
+    </div>
+  </div>
+
+  <!-- ─── S7: 方法三 ─── -->
+  <div class="slide glow-tl left" style="padding-left:160px">
+    <div class="eyebrow">Method 03</div>
+    <h2 class="title-slide">從<span style="color:var(--teal)">「應該有但沒有」</span>進去</h2>
+    <p class="body-md" style="color:var(--slate);margin-bottom:32px">工具、流程、訓練、資源——現場缺什麼，就是研究的空白。</p>
+    <div class="prompt-card">
+      <div class="prompt-label">Prompt 直接複製貼上</div>
+      <div class="prompt-text">
+        台灣 EMS 目前缺乏<span class="blank">＿＿＿</span>，<br>
+        這個缺口有沒有研究價值？<br>
+        <strong style="color:var(--teal-light)">可以怎麼設計研究？</strong>
+      </div>
+      <div class="prompt-hint">💡 「缺乏什麼」是最容易被忽略、也最有本土研究價值的切入點</div>
+    </div>
+  </div>
+
+  <!-- ─── S8: 方法四 ─── -->
+  <div class="slide glow-br left" style="padding-left:160px">
+    <div class="eyebrow">Method 04</div>
+    <h2 class="title-slide">從<span style="color:var(--teal)">自己的角色</span>進去</h2>
+    <p class="body-md" style="color:var(--slate);margin-bottom:32px">新人、老手、指揮官、教官——你的位置決定你看到別人看不到的東西。</p>
+    <div class="prompt-card">
+      <div class="prompt-label">Prompt 直接複製貼上</div>
+      <div class="prompt-text">
+        我做 EMS <span class="blank">＿＿</span> 年，<br>
+        我覺得新人和老手最大的差距在<span class="blank">＿＿＿</span>，<br>
+        <strong style="color:var(--teal-light)">這可以研究嗎？研究對象要怎麼選？</strong>
+      </div>
+      <div class="prompt-hint">💡 你的資歷本身就是研究視角，不同年資看到不同的問題</div>
+    </div>
+  </div>
+
+  <!-- ─── S9: 方法五 ─── -->
+  <div class="slide glow-tl left" style="padding-left:160px">
+    <div class="eyebrow">Method 05 · 最推薦</div>
+    <h2 class="title-slide">讓 <span style="color:var(--teal)">AI 反問你</span></h2>
+    <p class="body-md" style="color:var(--slate);margin-bottom:32px">完全沒頭緒時最好用。讓 AI 引導你找到你自己都不知道自己有的答案。</p>
+    <div class="prompt-card">
+      <div class="prompt-label">Prompt 直接複製貼上</div>
+      <div class="prompt-text">
+        我是台灣現職救護員，我想做研究但<strong style="color:var(--amber)">完全不知道從哪裡開始</strong>，<br>
+        請問我幾個問題，幫我找出一個<strong style="color:var(--teal-light)">適合我的研究題目</strong>。
+      </div>
+      <div class="prompt-hint">💡 現場 DEMO 最佳選擇——觀眾看到 AI 開始問問題，畫面很生動</div>
+    </div>
+  </div>
+
+  <!-- ─── S10: 跟AI互動的技巧 ─── -->
+  <div class="slide glow-c left" style="padding-left:160px">
+    <div class="eyebrow">讓對話更順的技巧</div>
+    <h2 class="title-slide">跟 AI 說話的<span style="color:var(--teal)">有效說法</span></h2>
+    <div class="divider"></div>
+    <div style="width:100%;max-width:900px;display:flex;flex-direction:column;gap:0">
+      <div class="tip-row">
+        <div class="tip-icon">🎓</div>
+        <div class="tip-body">
+          <div class="tip-title-sm">叫 AI 扮演顧問</div>
+          <div class="tip-desc-sm">「你現在是我的研究指導老師，我是沒有研究經驗的台灣 EMT，用我聽得懂的話跟我說話。」</div>
+        </div>
+      </div>
+      <div class="tip-row">
+        <div class="tip-icon">✂️</div>
+        <div class="tip-body">
+          <div class="tip-title-sm">叫 AI 縮小範圍</div>
+          <div class="tip-desc-sm">「這個題目太大了，幫我縮小到一個碩士生一年內可以完成的規模。」</div>
+        </div>
+      </div>
+      <div class="tip-row">
+        <div class="tip-icon">📊</div>
+        <div class="tip-body">
+          <div class="tip-title-sm">叫 AI 評估可行性</div>
+          <div class="tip-desc-sm">「這個研究對一個沒有研究資源的臨床人員來說，實際上做得到嗎？難度是什麼？」</div>
+        </div>
+      </div>
+      <div class="tip-row">
+        <div class="tip-icon">🔍</div>
+        <div class="tip-body">
+          <div class="tip-title-sm">叫 AI 找台灣缺口</div>
+          <div class="tip-desc-sm">「這個主題在台灣的研究現況是什麼？跟國外比有什麼缺口？」⚠️ 引用前自己查一次</div>
+        </div>
+      </div>
+      <div class="tip-row">
+        <div class="tip-icon">🔄</div>
+        <div class="tip-body">
+          <div class="tip-title-sm">叫 AI 簡化</div>
+          <div class="tip-desc-sm">「你說的太複雜了，用一個現場救護員能理解的方式重新解釋一次。」</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── S11: DEMO ─── -->
+  <div class="slide glow-ems">
+    <div class="eyebrow">現場 Demo</div>
+    <h2 class="title-section"><span class="acc">從一句現場疑問</span><br>到研究題目</h2>
+    <div class="divider center"></div>
+    <div class="prompt-card" style="text-align:left">
+      <div class="prompt-label">備用題目（今天用這個）</div>
+      <div class="prompt-text" style="font-size:20px;color:rgba(255,255,255,.9)">
+        「我發現夜班救護員出完勤回到站之後情緒很差，<br>但沒有人處理這件事。」
+      </div>
+    </div>
+    <div style="margin-top:24px;display:flex;gap:16px;flex-wrap:wrap;justify-content:center">
+      <div style="padding:12px 20px;background:rgba(10,147,150,.1);border:1px solid rgba(10,147,150,.25);border-radius:10px;font-size:14px;color:var(--teal-light)">① 貼進 Claude</div>
+      <div style="padding:12px 20px;background:rgba(10,147,150,.1);border:1px solid rgba(10,147,150,.25);border-radius:10px;font-size:14px;color:var(--teal-light)">② 看 PICO 自動出現</div>
+      <div style="padding:12px 20px;background:rgba(10,147,150,.1);border:1px solid rgba(10,147,150,.25);border-radius:10px;font-size:14px;color:var(--teal-light)">③ 追問台灣研究現況</div>
+      <div style="padding:12px 20px;background:rgba(10,147,150,.1);border:1px solid rgba(10,147,150,.25);border-radius:10px;font-size:14px;color:var(--teal-light)">④ 問「我做得到嗎？」</div>
+    </div>
+  </div>
+
+  <!-- ─── S12: 帶走一件事 ─── -->
+  <div class="slide glow-c">
+    <div class="eyebrow">帶走這一件事</div>
+    <div class="takeaway">
+      <p class="takeaway-text">
+        下次你在現場覺得<br>
+        「<span class="acc">奇怪，為什麼會這樣？</span>」<br><br>
+        把那句話打進 Claude。<br><br>
+        <span class="acc2">就這樣，研究就開始了。</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- ─── S13: 送出去的 Prompt ─── -->
+  <div class="slide glow-tl">
+    <div class="eyebrow">帶回家的 Prompt</div>
+    <h2 class="title-slide" style="margin-bottom:32px">你的第一個<span style="color:var(--teal)">研究 Prompt</span></h2>
+    <div class="prompt-card" style="max-width:780px">
+      <div class="prompt-label">複製這個，今天就可以用</div>
+      <div class="prompt-text" style="font-size:20px;line-height:2">
+        我是台灣現職 EMT，<br>
+        我在工作裡一直覺得<span class="blank">＿＿＿</span>很奇怪，<br>
+        幫我把這個變成一個<strong style="color:var(--teal-light)">研究問題</strong>。
+      </div>
+    </div>
+    <p class="body-sm" style="margin-top:20px">⚠️ AI 給的文獻可能有幻覺，引用前務必自行驗證</p>
+  </div>
+
+  <!-- ─── S14: CLOSE ─── -->
+  <div class="slide glow-ems">
+    <div class="eyebrow">下集預告</div>
+    <h2 class="title-section" style="margin-bottom:16px">
+      EP 03 · <span class="acc">7/20</span>
+    </h2>
+    <p class="body-lg" style="margin-bottom:40px">AI 協助問卷設計與資料分析</p>
+    <div class="divider center"></div>
+    <p class="body-md" style="color:var(--slate);margin-bottom:32px">每週一 12:50–13:30　Google Meet　免費，無需報名</p>
+    <a href="https://meet.google.com/spv-snwj-hyv" target="_blank"
+      style="padding:16px 36px;background:var(--teal);border-radius:12px;font-size:16px;font-weight:700;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:8px">
+      ▶ 加入 Meet
+    </a>
+  </div>
+
+</div><!-- /deck -->
+
+<div id="dots"></div>
+<div id="slide-num">1 / 15</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const total  = slides.length;
+let cur = 0;
+
+// build dots
+const dotsEl = document.getElementById('dots');
+slides.forEach((_,i)=>{
+  const d = document.createElement('button');
+  d.className='dot'+(i===0?' active':'');
+  d.onclick=()=>goTo(i);
+  dotsEl.appendChild(d);
+});
+
+function goTo(n){
+  if(n<0||n>=total) return;
+  slides[cur].classList.remove('active');
+  dotsEl.children[cur].classList.remove('active');
+  cur=n;
+  slides[cur].classList.add('active');
+  dotsEl.children[cur].classList.add('active');
+  document.getElementById('slide-num').textContent=`${cur+1} / ${total}`;
+  document.getElementById('btn-p').disabled=cur===0;
+  document.getElementById('btn-n').disabled=cur===total-1;
+}
+
+function go(d){ goTo(cur+d) }
+
+// keyboard
+window.addEventListener('keydown',e=>{
+  if(['INPUT','TEXTAREA'].includes(e.target.tagName)) return;
+  if(e.key==='ArrowRight'||e.key===' '){ e.preventDefault(); go(1) }
+  if(e.key==='ArrowLeft'){ e.preventDefault(); go(-1) }
+  if(e.key==='f'||e.key==='F') toggleFS();
+  if(e.key==='Home') goTo(0);
+  if(e.key==='End') goTo(total-1);
+});
+
+// touch swipe
+let tx0=0;
+document.addEventListener('touchstart',e=>{ tx0=e.touches[0].clientX },{passive:true});
+document.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-tx0;
+  if(Math.abs(dx)>50){ go(dx<0?1:-1) }
+});
+
+// fullscreen
+function toggleFS(){
+  if(!document.fullscreenElement){
+    document.documentElement.requestFullscreen().catch(()=>{});
+  } else {
+    document.exitFullscreen();
+  }
+}
+document.addEventListener('fullscreenchange',()=>{
+  document.getElementById('fs-btn').textContent=document.fullscreenElement?'✕':'⛶';
+});
+
+// init
+goTo(0);
+</script>
+</body>
+</html>
