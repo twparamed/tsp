@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EP03 · AI × EMS｜AI 協助研究設計與資料分析</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@400;700;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#08131F;
+  --teal:#0A9396;
+  --teal-light:#94D2BD;
+  --amber:#E9C46A;
+  --white:#FFFFFF;
+  --slate:#8FA3B8;
+  --muted:#4A6278;
+}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--navy);font-family:'Noto Sans TC',sans-serif;color:var(--white)}
+
+/* ── SLIDES ── */
+#deck{width:100%;height:100%;position:relative}
+.slide{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  padding:100px 140px 80px;
+  opacity:0;pointer-events:none;
+  transition:opacity .4s ease;
+  text-align:center;
+}
+.slide.active{opacity:1;pointer-events:all}
+.slide.left{align-items:flex-start;text-align:left}
+
+/* glows */
+.slide::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:0}
+.slide > *{position:relative;z-index:1}
+.glow-tl::before{background:radial-gradient(ellipse at 0% 0%,rgba(10,147,150,.12) 0%,transparent 60%)}
+.glow-br::before{background:radial-gradient(ellipse at 100% 100%,rgba(233,196,106,.08) 0%,transparent 55%)}
+.glow-c::before{background:radial-gradient(ellipse at 50% 50%,rgba(10,147,150,.1) 0%,transparent 65%)}
+.glow-ems::before{background:radial-gradient(ellipse at 90% 90%,rgba(255,50,50,.1) 0%,transparent 40%),radial-gradient(ellipse at 10% 90%,rgba(40,120,255,.1) 0%,transparent 40%)}
+
+/* ── TYPE ── */
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:'';width:32px;height:2px;background:var(--teal);flex-shrink:0}
+.title-hero{font-family:'Noto Serif TC',serif;font-size:68px;font-weight:900;line-height:1.1;letter-spacing:-.02em;color:var(--white);margin-bottom:28px}
+.title-hero .acc{color:var(--teal)}
+.title-hero .acc2{color:var(--amber)}
+.title-section{font-family:'Noto Serif TC',serif;font-size:50px;font-weight:900;line-height:1.15;color:var(--white);margin-bottom:24px}
+.title-section .acc{color:var(--teal)}
+.title-section .acc2{color:var(--amber)}
+.title-slide{font-family:'Noto Serif TC',serif;font-size:40px;font-weight:700;line-height:1.25;color:var(--white);margin-bottom:20px}
+.body-lg{font-size:22px;color:rgba(255,255,255,.75);line-height:1.8;max-width:800px}
+.body-md{font-size:18px;color:rgba(255,255,255,.7);line-height:1.8}
+.body-sm{font-size:14px;color:var(--slate);line-height:1.7}
+.divider{width:60px;height:3px;background:linear-gradient(90deg,var(--teal),var(--amber));border-radius:2px;margin:24px 0}
+.divider.center{margin:24px auto}
+
+/* ── PROMPT CARD ── */
+.prompt-card{
+  background:rgba(10,147,150,.06);border:1px solid rgba(10,147,150,.35);
+  border-radius:16px;padding:32px 40px;max-width:880px;width:100%;
+  text-align:left;box-shadow:0 0 40px rgba(10,147,150,.1);
+}
+.prompt-label{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--teal);text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.prompt-label::before{content:'▶';font-size:9px}
+.prompt-text{font-family:'JetBrains Mono',monospace;font-size:17px;color:rgba(255,255,255,.88);line-height:1.85}
+.prompt-text .blank{display:inline-block;border-bottom:2px solid var(--amber);min-width:100px;color:var(--amber);font-style:italic;padding:0 4px}
+.prompt-hint{margin-top:14px;font-size:13px;color:var(--slate);font-style:italic}
+
+/* ── TWO COL CARDS ── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;width:100%;max-width:980px}
+.col-card{
+  padding:28px 32px;border-radius:16px;
+  display:flex;flex-direction:column;gap:10px;
+  text-align:left;
+}
+.col-card.dark{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+.col-card.teal{background:rgba(10,147,150,.07);border:1px solid rgba(10,147,150,.25)}
+.col-card-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.col-card-label.l{color:var(--slate)}
+.col-card-label.r{color:var(--teal)}
+.col-item{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:rgba(255,255,255,.75);line-height:1.6}
+.col-item-icon{flex-shrink:0;font-size:16px;margin-top:1px}
+
+/* ── METHOD LIST ── */
+.method-list{display:flex;flex-direction:column;gap:16px;width:100%;max-width:860px}
+.method-row{
+  display:flex;gap:20px;align-items:flex-start;
+  padding:20px 24px;border-radius:14px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);
+  text-align:left;transition:all .22s;
+}
+.method-row:hover{background:rgba(10,147,150,.08);border-color:rgba(10,147,150,.25)}
+.method-badge{
+  font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;
+  color:var(--teal);background:rgba(10,147,150,.12);
+  padding:4px 9px;border-radius:6px;white-space:nowrap;flex-shrink:0;margin-top:3px;
+  border:1px solid rgba(10,147,150,.2);
+}
+.method-name{font-size:18px;font-weight:700;color:var(--white);margin-bottom:4px;line-height:1.3}
+.method-desc{font-size:13px;color:var(--slate);line-height:1.6}
+
+/* ── QUOTE ── */
+.quote-block{
+  border-left:4px solid var(--teal);padding:24px 36px;
+  background:rgba(10,147,150,.07);border-radius:0 16px 16px 0;
+  max-width:820px;text-align:left;
+}
+.quote-block .q-text{font-family:'Noto Serif TC',serif;font-size:27px;font-weight:400;color:var(--white);line-height:1.7;margin-bottom:12px}
+.quote-block .q-text strong{color:var(--teal);font-weight:700}
+.quote-block .q-src{font-size:13px;color:var(--slate);letter-spacing:.05em}
+
+/* ── STAT CARDS ── */
+.stat-row{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+.stat-card{
+  padding:32px 40px;border-radius:18px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  min-width:200px;text-align:center;
+}
+.stat-num{font-family:'JetBrains Mono',monospace;font-size:64px;font-weight:700;color:var(--teal);line-height:1;letter-spacing:-.03em}
+.stat-label{font-size:14px;color:var(--slate);margin-top:8px;line-height:1.5}
+
+/* ── CHAT BUBBLE ── */
+.chat-wrap{display:flex;flex-direction:column;gap:14px;width:100%;max-width:820px;text-align:left}
+.chat-bubble{padding:16px 22px;border-radius:14px;font-size:15px;line-height:1.7;max-width:90%}
+.chat-bubble.user{background:rgba(10,147,150,.15);border:1px solid rgba(10,147,150,.3);align-self:flex-end;color:rgba(255,255,255,.9)}
+.chat-bubble.ai{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);align-self:flex-start;color:rgba(255,255,255,.8)}
+.chat-role{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.chat-role.user{color:var(--teal)}
+.chat-role.ai{color:var(--slate)}
+
+/* ── TAKEAWAY ── */
+.takeaway{
+  background:linear-gradient(135deg,rgba(10,147,150,.15),rgba(233,196,106,.08));
+  border:1px solid rgba(10,147,150,.3);border-radius:20px;
+  padding:48px 60px;max-width:860px;text-align:center;
+}
+.takeaway-text{font-family:'Noto Serif TC',serif;font-size:30px;font-weight:700;color:var(--white);line-height:1.65;margin-bottom:20px}
+.takeaway-text .acc{color:var(--teal)}
+.takeaway-text .acc2{color:var(--amber)}
+
+/* ── CUE TO ACTION ── */
+.cta-box{
+  background:rgba(233,196,106,.06);border:1px solid rgba(233,196,106,.25);
+  border-radius:14px;padding:20px 28px;max-width:880px;width:100%;
+  text-align:left;margin-top:20px;
+}
+.cta-label{font-size:10px;font-weight:700;letter-spacing:.14em;color:var(--amber);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.cta-label::before{content:'★';font-size:10px}
+.cta-text{font-size:14px;color:rgba(255,255,255,.7);line-height:1.7}
+
+/* ── NAV ── */
+#nav{position:fixed;top:0;left:0;right:0;height:52px;z-index:100;background:rgba(8,19,31,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(10,147,150,.12);display:flex;align-items:center;justify-content:space-between;padding:0 28px}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-dot{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 6px var(--teal)}
+.nav-title{font-size:13px;font-weight:600;color:rgba(255,255,255,.8);letter-spacing:.03em}
+.nav-ep{font-size:11px;color:var(--muted)}
+.nav-btns{display:flex;gap:6px}
+.nb{padding:5px 14px;border-radius:16px;border:1px solid rgba(10,147,150,.22);background:rgba(10,147,150,.07);cursor:pointer;font-family:'Noto Sans TC',sans-serif;font-size:12px;color:var(--teal-light);transition:all .18s}
+.nb:hover{background:var(--teal);color:#fff;border-color:var(--teal)}
+.nb:disabled{opacity:.3;pointer-events:none}
+#fs-btn{position:fixed;top:0;right:0;width:52px;height:52px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:101;color:var(--muted);font-size:16px;background:none;border:none;transition:color .18s}
+#fs-btn:hover{color:var(--teal)}
+
+/* ── DOTS ── */
+#dots{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:100}
+.dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;transition:all .25s;border:none;padding:0}
+.dot.active{background:var(--teal);width:24px;border-radius:4px}
+#slide-num{position:fixed;bottom:24px;right:28px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);z-index:100}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-brand">
+    <div class="nav-dot"></div>
+    <span class="nav-title">AI × EMS 帶狀節目</span>
+    <span class="nav-ep">EP 03 · 7/20</span>
+  </div>
+  <div class="nav-btns">
+    <button class="nb" id="btn-p" onclick="go(-1)">← 上一頁</button>
+    <button class="nb" id="btn-n" onclick="go(1)">下一頁 →</button>
+  </div>
+</nav>
+<button id="fs-btn" onclick="toggleFS()" title="F">⛶</button>
+<div id="deck">
+
+  <!-- S0 HERO -->
+  <div class="slide glow-ems active">
+    <div class="eyebrow">EP 03 · AI × EMS 帶狀節目 · 7/20</div>
+    <h1 class="title-hero">AI 協助<br><span class="acc">研究設計</span><br>與<span class="acc2">資料分析</span></h1>
+    <div class="divider center"></div>
+    <p class="body-lg">不用精通統計<br>也能讓數字說話</p>
+  </div>
+
+  <!-- S1 你已經有題目了，然後呢 -->
+  <div class="slide glow-tl">
+    <div class="eyebrow">從上週到這週</div>
+    <h2 class="title-section">你已經有<span class="acc">研究題目</span>了<br>然後呢？</h2>
+    <div class="divider center"></div>
+    <p class="body-lg">
+      題目有了，接下來三個大問題：<br><br>
+      <strong style="color:var(--amber)">① 要用什麼研究方法？</strong><br>
+      <strong style="color:var(--teal)">② 問卷要怎麼設計？</strong><br>
+      <strong style="color:rgba(255,255,255,.8)">③ 收到資料後要怎麼分析？</strong>
+    </p>
+  </div>
+
+  <!-- S2 研究設計選擇 -->
+  <div class="slide glow-c">
+    <div class="eyebrow">研究設計</div>
+    <h2 class="title-section">先讓 AI 幫你<br><span class="acc">選研究方法</span></h2>
+    <div class="divider center"></div>
+    <div class="method-list">
+      <div class="method-row">
+        <span class="method-badge">橫斷式問卷</span>
+        <div>
+          <div class="method-name">快、低成本、適合初探</div>
+          <div class="method-desc">想知道「現況是什麼」——台灣 EMT 的心理健康盛行率、職安傷害頻率</div>
+        </div>
+      </div>
+      <div class="method-row">
+        <span class="method-badge">Delphi 共識法</span>
+        <div>
+          <div class="method-name">建立台灣本土指引</div>
+          <div class="method-desc">想知道「專家同不同意」——EMS AI 導入指標、院前處置標準建立</div>
+        </div>
+      </div>
+      <div class="method-row">
+        <span class="method-badge">質性訪談</span>
+        <div>
+          <div class="method-name">探索「為什麼」</div>
+          <div class="method-desc">想深入理解——EMT 為什麼不通報職業傷害、家屬在場的心理影響</div>
+        </div>
+      </div>
+      <div class="method-row">
+        <span class="method-badge">準實驗設計</span>
+        <div>
+          <div class="method-name">評估訓練介入效果</div>
+          <div class="method-desc">想知道「做了有沒有用」——模擬訓練對 CPR 品質的影響</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S3 Prompt 研究設計 -->
+  <div class="slide glow-br left" style="padding-left:160px">
+    <div class="eyebrow">Cue to Action · 01</div>
+    <h2 class="title-slide">讓 AI 推薦<span style="color:var(--teal)">研究方法</span></h2>
+    <p class="body-md" style="color:var(--slate);margin-bottom:28px">把你的研究題目貼進去，請 AI 分析哪種方法最適合你的情況</p>
+    <div class="prompt-card">
+      <div class="prompt-label">現在可以試試看</div>
+      <div class="prompt-text">
+        我的研究問題是：<span class="blank">＿＿＿</span><br>
+        我是現職 EMT，沒有研究助理，時間有限。<br>
+        幫我推薦<strong style="color:var(--teal-light)">最適合的研究方法</strong>，<br>
+        說明優缺點與我的情況下的可行性。
+      </div>
+      <div class="prompt-hint">💡 告訴 AI 你的限制，它的建議才會貼近現實</div>
+    </div>
+    <div class="cta-box">
+      <div class="cta-label">現在就試</div>
+      <div class="cta-text">打開 Claude，把你上週想到的研究題目貼進去跑跑看——方法推薦通常 30 秒內出來</div>
+    </div>
+  </div>
+
+  <!-- S4 問卷設計 AI能做 vs 你要決定 -->
+  <div class="slide glow-tl">
+    <div class="eyebrow">問卷設計</div>
+    <h2 class="title-section">AI 幫你設計問卷<br><span class="acc">但這些要你決定</span></h2>
+    <div class="divider center"></div>
+    <div class="two-col">
+      <div class="col-card teal">
+        <div class="col-card-label r">AI 可以幫你做</div>
+        <div class="col-item"><span class="col-item-icon">⚡</span>根據 PICO 生成題項初稿</div>
+        <div class="col-item"><span class="col-item-icon">⚡</span>建議已驗證的現成量表</div>
+        <div class="col-item"><span class="col-item-icon">⚡</span>檢核題目邏輯一致性</div>
+        <div class="col-item"><span class="col-item-icon">⚡</span>英文量表中文化翻譯</div>
+        <div class="col-item"><span class="col-item-icon">⚡</span>建議填答說明與同意書措辭</div>
+      </div>
+      <div class="col-card dark">
+        <div class="col-card-label l">你需要自己判斷</div>
+        <div class="col-item"><span class="col-item-icon">🔴</span>這題在臨床上有沒有意義？</div>
+        <div class="col-item"><span class="col-item-icon">🔴</span>受試者看得懂嗎？</div>
+        <div class="col-item"><span class="col-item-icon">🔴</span>會不會有社會期許偏誤？</div>
+        <div class="col-item"><span class="col-item-icon">🔴</span>IRB 敏感題項的處理</div>
+        <div class="col-item"><span class="col-item-icon">🔴</span>最終題數與填答時間</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S5 Prompt 問卷設計 -->
+  <div class="slide glow-br left" style="padding-left:160px">
+    <div class="eyebrow">Cue to Action · 02</div>
+    <h2 class="title-slide">讓 AI 幫你<span style="color:var(--teal)">生成問卷初稿</span></h2>
+    <p class="body-md" style="color:var(--slate);margin-bottom:28px">不需要從空白開始——AI 給你草稿，你負責用臨床眼光篩選</p>
+    <div class="prompt-card">
+      <div class="prompt-label">現在可以試試看</div>
+      <div class="prompt-text">
+        我要研究<span class="blank">＿＿＿</span>（研究題目），<br>
+        研究對象是台灣現職 EMT。<br>
+        請幫我設計一份<strong style="color:var(--teal-light)">問卷初稿</strong>，<br>
+        包含基本資料、主要變項，<br>
+        並建議有沒有已驗證的現成量表可以用。
+      </div>
+      <div class="prompt-hint">💡 拿到草稿後，請你身邊的同事看一眼「你看得懂嗎？」——比任何設計理論都有用</div>
+    </div>
+  </div>
+
+  <!-- S6 資料分析 -->
+  <div class="slide glow-c">
+    <div class="eyebrow">資料分析</div>
+    <h2 class="title-section">跟 AI<span class="acc">對話</span>就能做<br>不需要先學統計</h2>
+    <div class="divider center"></div>
+    <div class="chat-wrap">
+      <div class="chat-bubble user">
+        <div class="chat-role user">你</div>
+        我有一份 486 筆的 EMT 心理健康問卷，幫我描述這份資料的基本特性
+      </div>
+      <div class="chat-bubble ai">
+        <div class="chat-role ai">Claude</div>
+        好的，根據您的資料：平均年齡 31.2 歲（SD=6.8），男性佔 72.3%，工作年資中位數 5 年……情緒耗竭分量表平均 28.4 分（SD=8.1）
+      </div>
+      <div class="chat-bubble user">
+        <div class="chat-role user">你</div>
+        不同工作年資的情緒耗竭分數有沒有差異？幫我用適合的統計方法檢驗
+      </div>
+      <div class="chat-bubble ai">
+        <div class="chat-role ai">Claude</div>
+        建議使用 Kruskal-Wallis 檢定（因資料非常態分布）。以下是 Python 程式碼……結果顯示 p=.003，年資 &gt;10 年組分數顯著較高
+      </div>
+    </div>
+  </div>
+
+  <!-- S7 分析的正確姿勢 -->
+  <div class="slide glow-tl">
+    <div class="eyebrow">重要提醒</div>
+    <div class="quote-block">
+      <p class="q-text">
+        AI 可以跑統計、解釋數字——<br>
+        但<strong>分析邏輯你要懂</strong>，<br>
+        <strong>臨床意義你要判斷</strong>。<br>
+        AI 是助手，不是負責人。
+      </p>
+      <p class="q-src">EP 03 核心提醒</p>
+    </div>
+  </div>
+
+  <!-- S8 出勤之後數據 -->
+  <div class="slide glow-c">
+    <div class="eyebrow">實際案例分享</div>
+    <h2 class="title-section">「<span class="acc">出勤之後</span>」調查<br>AI 輔助的歷程</h2>
+    <div class="divider center"></div>
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-num">486</div>
+        <div class="stat-label">有效問卷份數</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3</div>
+        <div class="stat-label">AI 協助的主要步驟<br>設計・分析・報告</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2</div>
+        <div class="stat-label">跨國比較基準<br>澳洲 Beyond Blue</div>
+      </div>
+    </div>
+    <p class="body-sm" style="margin-top:28px;max-width:700px">
+      問卷設計：AI 幫忙選量表、生成中文題項<br>
+      資料分析：AI 生成 R 程式碼、解釋 SEM 結果<br>
+      報告撰寫：AI 協助結構化呈現，人工確認每個數字
+    </p>
+  </div>
+
+  <!-- S9 Prompt 資料分析 -->
+  <div class="slide glow-br left" style="padding-left:160px">
+    <div class="eyebrow">Cue to Action · 03</div>
+    <h2 class="title-slide">讓 AI 幫你<span style="color:var(--teal)">分析資料</span></h2>
+    <p class="body-md" style="color:var(--slate);margin-bottom:28px">有 Excel 就可以開始——不需要先裝統計軟體</p>
+    <div class="prompt-card">
+      <div class="prompt-label">現在可以試試看</div>
+      <div class="prompt-text">
+        我有一份 EMS 問卷的原始資料（Excel）。<br>
+        請先<strong style="color:var(--teal-light)">描述這份資料的基本特性</strong>，<br>
+        然後告訴我：<span class="blank">＿＿＿</span>這兩個變項<br>
+        之間有沒有關聯？用什麼統計方法最適合？
+      </div>
+      <div class="prompt-hint">⚠️ 記得：數字正確性和臨床解釋永遠是你的責任，AI 可能算錯</div>
+    </div>
+    <div class="cta-box">
+      <div class="cta-label">沒有資料也可以試</div>
+      <div class="cta-text">把你假設的情境告訴 AI，請它示範分析流程——理解流程比學軟體操作更重要</div>
+    </div>
+  </div>
+
+  <!-- S10 三個步驟總整理 -->
+  <div class="slide glow-tl">
+    <div class="eyebrow">本集總整理</div>
+    <h2 class="title-section">三個步驟<br><span class="acc">AI 都能幫你</span></h2>
+    <div class="divider center"></div>
+    <div class="method-list" style="max-width:780px">
+      <div class="method-row">
+        <span class="method-badge">STEP 01</span>
+        <div>
+          <div class="method-name">選研究方法</div>
+          <div class="method-desc">把題目和你的限制告訴 AI，請它分析各方法的優缺點與可行性</div>
+        </div>
+      </div>
+      <div class="method-row">
+        <span class="method-badge">STEP 02</span>
+        <div>
+          <div class="method-name">設計問卷</div>
+          <div class="method-desc">AI 生成初稿，你用臨床眼光篩選，找同事試填確認看不看得懂</div>
+        </div>
+      </div>
+      <div class="method-row">
+        <span class="method-badge">STEP 03</span>
+        <div>
+          <div class="method-name">分析資料</div>
+          <div class="method-desc">貼資料給 AI，對話式推進——描述性統計、比較、相關性，一步一步來</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S11 帶走一件事 -->
+  <div class="slide glow-c">
+    <div class="eyebrow">帶走這一件事</div>
+    <div class="takeaway">
+      <p class="takeaway-text">
+        研究不需要<span class="acc2">一次做完</span>。<br><br>
+        今天選好方法，<br>
+        下週設計問卷，<br>
+        收到資料再分析。<br><br>
+        每一步都有 <span class="acc">AI 陪你走</span>。
+      </p>
+    </div>
+  </div>
+
+  <!-- S12 CLOSE -->
+  <div class="slide glow-ems">
+    <div class="eyebrow">下集預告</div>
+    <h2 class="title-section" style="margin-bottom:16px">EP 04 · <span class="acc">7/27</span></h2>
+    <p class="body-lg" style="margin-bottom:40px">AI 幫你寫出會被接受的摘要</p>
+    <div class="divider center"></div>
+    <p class="body-md" style="color:var(--slate);margin-bottom:32px">每週一 12:50–13:30　Google Meet　免費，無需報名</p>
+    <a href="https://meet.google.com/spv-snwj-hyv" target="_blank"
+      style="padding:16px 36px;background:var(--teal);border-radius:12px;font-size:16px;font-weight:700;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:8px">
+      ▶ 加入 Meet
+    </a>
+  </div>
+
+</div><!-- /deck -->
+
+<div id="dots"></div>
+<div id="slide-num">1 / 13</div>
+
+<script>
+const slides=document.querySelectorAll('.slide');
+const total=slides.length;
+let cur=0;
+const dotsEl=document.getElementById('dots');
+slides.forEach((_,i)=>{
+  const d=document.createElement('button');
+  d.className='dot'+(i===0?' active':'');
+  d.onclick=()=>goTo(i);
+  dotsEl.appendChild(d);
+});
+function goTo(n){
+  if(n<0||n>=total)return;
+  slides[cur].classList.remove('active');
+  dotsEl.children[cur].classList.remove('active');
+  cur=n;
+  slides[cur].classList.add('active');
+  dotsEl.children[cur].classList.add('active');
+  document.getElementById('slide-num').textContent=`${cur+1} / ${total}`;
+  document.getElementById('btn-p').disabled=cur===0;
+  document.getElementById('btn-n').disabled=cur===total-1;
+}
+function go(d){goTo(cur+d)}
+window.addEventListener('keydown',e=>{
+  if(['INPUT','TEXTAREA'].includes(e.target.tagName))return;
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();go(1)}
+  if(e.key==='ArrowLeft'){e.preventDefault();go(-1)}
+  if(e.key==='f'||e.key==='F')toggleFS();
+  if(e.key==='Home')goTo(0);
+  if(e.key==='End')goTo(total-1);
+});
+let tx0=0;
+document.addEventListener('touchstart',e=>{tx0=e.touches[0].clientX},{passive:true});
+document.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-tx0;
+  if(Math.abs(dx)>50)go(dx<0?1:-1);
+});
+function toggleFS(){
+  if(!document.fullscreenElement){document.documentElement.requestFullscreen().catch(()=>{})}
+  else{document.exitFullscreen()}
+}
+document.addEventListener('fullscreenchange',()=>{
+  document.getElementById('fs-btn').textContent=document.fullscreenElement?'✕':'⛶';
+});
+goTo(0);
+</script>
+</body>
+</html>
